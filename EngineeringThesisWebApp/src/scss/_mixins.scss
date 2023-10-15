@@ -1,0 +1,26 @@
+@mixin font($font, $size, $weight, $color) {
+    font-family: $font;
+    font-size: $size;
+    font-weight:$weight;
+    color: $color;
+  }
+  
+  .title {
+    @include font($ssp, 40px, bold, $titlegray);
+  }
+
+  .title21{
+    @include font($ssp, 21px, bold, $titlegray);
+  }
+
+  .text {
+    @include font($ssp, 16px, normal, $textgray);
+  }
+
+  
+  ::placeholder{
+    @include font($formfont, 14px, normal, $bordertext)
+  }
+
+ 
+

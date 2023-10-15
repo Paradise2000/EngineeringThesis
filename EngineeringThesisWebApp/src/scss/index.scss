@@ -1,5 +1,63 @@
 @import "_variables";
+@import "_mixins";
 
-h1 {
-    color: $color1;
+/* breakpoint responsywność */
+@media screen and (min-width: 960px){
+    .col-one-third{            /* . dla klas */     
+        width: 33.3333%;
+        float: left;
+    }
+
+    .col-two-third{            /* . dla klas */     
+        width: 66.6666%;
+        float: left;
+    }
+    
+    .col-half{
+        width: 50%;
+        float: left;
+    }
 }
+
+section{
+    clear: both;
+    padding: 90px 0 90px 0;      /* góra, prawo, dół, lewo */
+    /* lub padding:90px 0;  wtedy 90px góra, dół i 0 prawo, lewo */
+    overflow:auto;
+}
+
+.container{
+    max-width: 1040px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-text{
+    text-align: center;
+}
+
+.attraction{
+    border: thin solid $bordergray;
+}
+
+.button{
+    display: inline-block;
+    padding: 8px 20px;
+    margin: 16px 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+}
+
+.grade-icon-7 {
+	width: 24px;
+	height: 24px;
+	background: #72bb53;
+}
+
+
+
+
