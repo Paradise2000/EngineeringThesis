@@ -64,7 +64,7 @@ namespace EngineeringThesisAPI.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Attractions");
+                    b.ToTable("Attractions", (string)null);
                 });
 
             modelBuilder.Entity("EngineeringThesisAPI.Entities.Comment", b =>
@@ -98,7 +98,7 @@ namespace EngineeringThesisAPI.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("EngineeringThesisAPI.Entities.User", b =>
@@ -126,7 +126,7 @@ namespace EngineeringThesisAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("EngineeringThesisAPI.Entities.Attraction", b =>
