@@ -1,4 +1,5 @@
-﻿using EngineeringThesisAPI.DTOs.Account;
+﻿using AutoMapper;
+using EngineeringThesisAPI.DTOs.Account;
 using EngineeringThesisAPI.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,29 +12,25 @@ namespace EngineeringThesisAPI.Controllers
 {
     [Route("api/account")]
     [ApiController]
-    public class AccountController : Controller
+    public class AccountController : ControllerBase
     {
         private readonly EngineeringThesisDbContext _context;
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly AuthenticationSettings _authenticationSettings;
+        private readonly IMapper _mapper;
 
-        public AccountController(EngineeringThesisDbContext context, IPasswordHasher<User> passwordHasher, AuthenticationSettings authenticationSettings)
+        public AccountController(EngineeringThesisDbContext context, IPasswordHasher<User> passwordHasher, AuthenticationSettings authenticationSettings, IMapper mapper)
         {
             _context = context;
             _passwordHasher = passwordHasher;
             _authenticationSettings = authenticationSettings;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
         public IActionResult RegisterUser([FromBody]RegisterUserDto dto)
         {
-            var user = new User()
-            {
-                NickName = dto.NickName,
-                Email = dto.Email,
-                Password = dto.Password,
-                Enabled = true
-            };
+            var user = _mapper.Map<User>(dto);
 
             var hashedPassword = _passwordHasher.HashPassword(user, dto.Password);
             user.Password = hashedPassword;
