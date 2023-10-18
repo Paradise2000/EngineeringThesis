@@ -9,7 +9,20 @@ using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using System.Text;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
+
+//CORS policy
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin().AllowAnyHeader();
+                      });
+});
 
 // Add services to the container.
 
@@ -84,6 +97,7 @@ builder.Services.AddScoped<IUserIdProvider, UserIdProvider>();
 //Automapper setup
 builder.Services.AddAutoMapper(typeof(Program));
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -96,6 +110,8 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
