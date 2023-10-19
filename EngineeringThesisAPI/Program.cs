@@ -8,6 +8,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using EngineeringThesisAPI.DTOs.Attraction;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -96,6 +99,9 @@ builder.Services.AddScoped<IUserIdProvider, UserIdProvider>();
 
 //Automapper setup
 builder.Services.AddAutoMapper(typeof(Program));
+
+//Autovalidation setup
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 
 var app = builder.Build();
