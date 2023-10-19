@@ -9,16 +9,18 @@
   </head>
   <body>
     <main>
+      <section class="attraction-form">
         <h1 class="title center-text">Dodaj nową atrakcję</h1>
-        <section class="attraction-form">
+        
+          
+          <form>
           <div class="container">
-           <form>
             <div class="col-half">
-              <input type="text" id="place" name="place" placeholder="miejscowość" required><br>
-              <input type="text" id="attraction-name" name="attraction-name" placeholder="nazwa atrakcji" required><br>
+              <input type="text" class="text-input" placeholder="miejscowość" required><br>
+              <input type="text" class="text-input" placeholder="nazwa atrakcji" required><br>
               <label for="duration">Czas trawania</label>
-              <input type="time" id="duration" name="duration" required><br>
-              <input list="categories" placeholder="kategoria" required>
+              <input type="time" id="duration" name="duration" class="text-input" required><br>
+              <input list="categories" class="text-input" placeholder="kategoria" required>
               <datalist id="categories">
                 <option value="zabytki">
                 <option value="gastronomia">
@@ -27,23 +29,27 @@
                 <option value="adrenalina">
                 <option value="inne">
               </datalist><br>
-              <input type="number" id="cost" name="cost" placeholder="koszt atrakcji" min="0.00" max="10000.00" step="0.01" required/><br>
+              <input type="number" id="cost" name="cost" class="text-input" placeholder="koszt atrakcji" min="0.00" max="10000.00" step="0.01" required/><br>
               <input type="file" name="photo" value="Dodaj zdjęcie" required><br>
             </div>
             <div class="col-half">
-              <textarea id="description" name="description" rows="10" cols="30" required></textarea><br>
+              <textarea id="description" name="description" class="text-area" required></textarea><br>
             </div>
+          </div>
+          <div class="container">
             <div class="col-half">
               <p class="title21">Zaznacz atrakcję na mapie</p>
             </div>
-            <div class="col-half">
-              <input type="search" placeholder="Szukaj po nazwie">
-              <input type="submit" value="Znajdź adres">
+            <div class="col-half row">
+              <input type="search" class="text-input" placeholder="Szukaj po nazwie">
+              <input type="submit" class="button" value="Znajdź adres">
             </div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d9735.270624227334!2d16.921744184913837!3d52.409980885495216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sStary%20Rynek!5e0!3m2!1spl!2spl!4v1682072265799!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-           </form> 
           </div>
+          <div class="container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d9735.270624227334!2d16.921744184913837!3d52.409980885495216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sStary%20Rynek!5e0!3m2!1spl!2spl!4v1682072265799!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          </form> 
+          
         </section>
     </main>
   </body>

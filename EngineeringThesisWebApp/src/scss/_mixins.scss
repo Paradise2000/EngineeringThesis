@@ -17,10 +17,20 @@
     @include font($ssp, 16px, normal, $textgray);
   }
 
-  
+  .text14{
+    @include font($formfont, 14px, normal, $bordertext)
+  }
+
+  .infofont{
+    @include font($info, 14, normal, $infoblack);
+	text-align: left;
+  }
+
   ::placeholder{
     @include font($formfont, 14px, normal, $bordertext)
   }
 
+  
+  
  
 

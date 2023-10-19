@@ -11,8 +11,8 @@
     <main>
         <h1 class="title center-text">Dokąd wybierzesz się tym razem?</h1>
         <section>
-            <div class="container">
-                <input list="place2" placeholder="miejscowość">
+            <div class="container row">
+                <input list="place2" class="text-input" placeholder="miejscowość">
                     <datalist id="place2">
                         <option value="lista">
                         <option value="istniejących">
@@ -20,7 +20,7 @@
                         <option value="w">
                         <option value="bazie">
                     </datalist>
-                <input list="categories" placeholder="kategoria">
+                <input list="categories" class="text-input" placeholder="kategoria">
                     <datalist id="categories">
                         <option value="zabytki">
                         <option value="gastronomia">
@@ -29,31 +29,25 @@
                         <option value="adrenalina">
                         <option value="inne">
                     </datalist>
-                <input type="time"><br>
-                <input type="number" id="cost" name="cost" placeholder="koszt atrakcji" min="0.00" max="10000.00" step="0.01"/><br>
-                <input type="search" placeholder="Szukaj po nazwie">
-                <input type="submit" value="Szukaj">
+                <input type="time" class="text-input"><br>
+                <input type="number" class="text-input" id="cost" name="cost" placeholder="koszt atrakcji" min="0.00" max="10000.00" step="0.01"/><br>
+                <input type="search" class="text-input" placeholder="Szukaj po nazwie">
+                <input type="submit" class="button" value="Szukaj">
             </div>
+        </section>
 
-            <div class="container">
+        <section class="attraction-container">
+            <div class="container attraction-container">
                 <div class="attraction">
                     <div class="col-one-third">
-                        <img src="images/image.PNG" alt="Obrazek zastępczy" />
+                        <img src="../images/image.PNG" alt="Obrazek zastępczy" />
                     </div>
                     <div class="col-two-third">
-                        <div class="col-two-third">
-                            <div class="col-one-third">
-                                <p>Poznań</p>
-                            </div>
-                            <div class="col-one-third">
-                                <p>3h</p>
-                            </div>
-                            <div class="col-one-third">
-                                <p>0zł</p>
-                            </div>
-                        </div>
-                        <div class="col-one-third">
-                            <p>zabytki</p>
+                        <div class="info">
+                            <div class="info element-info"><img src="../images/marker.png" class="icon"><p>Poznań</p></div>
+                            <div class="info element-info"><img src="../images/stopwatch.png" class="icon"><p>3h</p></div>
+                            <div class="info element-info"><img src="../images/piggy-bank.png" class="icon"><p>0zł</p></div>
+                            <div><input type="submit" class="category" value="zabytki"></div>
                         </div>
                         <h3>Stary Rynek</h3><br>
                         <p>Główny plac miejski w Poznaniu wytyczony ok. 1253 roku jako centralne miejsce miasta lokacyjnego.Jest kwadratem o boku długości 141 metrów, a z każdej ze ścian wychodzą trzy ulice, z czego dwie skrajne z narożników. Znajduje się na Starym Mieście, w ramach osiedla administracyjnego Stare Miasto. </p>
@@ -61,25 +55,35 @@
                 </div>
             </div>
 
-            <div class="container">
+            <div class="container attraction-container">
                 <div class="attraction">
                     <div class="col-one-third">
-                        <img src="images/img.PNG" alt="Obrazek zastępczy" />
+                        <img src="../images/image.PNG" alt="Obrazek zastępczy" />
                     </div>
                     <div class="col-two-third">
-                        <div class="col-two-third">
-                            <div class="col-one-third">
-                                <p>Poznań</p>
-                            </div>
-                            <div class="col-one-third">
-                                <p>3h</p>
-                            </div>
-                            <div class="col-one-third">
-                                <p>0zł</p>
-                            </div>
+                        <div class="info">
+                            <div class="info element-info"><img src="../images/marker.png" class="icon"><p>Poznań</p></div>
+                            <div class="info element-info"><img src="../images/stopwatch.png" class="icon"><p>3h</p></div>
+                            <div class="info element-info"><img src="../images/piggy-bank.png" class="icon"><p>0zł</p></div>
+                            <div><input type="submit" class="category" value="zabytki"></div>
                         </div>
-                        <div class="col-one-third">
-                            <p>zabytki</p>
+                        <h3>Stary Rynek</h3><br>
+                        <p>Główny plac miejski w Poznaniu wytyczony ok. 1253 roku jako centralne miejsce miasta lokacyjnego.Jest kwadratem o boku długości 141 metrów, a z każdej ze ścian wychodzą trzy ulice, z czego dwie skrajne z narożników. Znajduje się na Starym Mieście, w ramach osiedla administracyjnego Stare Miasto. </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container attraction-container">
+                <div class="attraction">
+                    <div class="col-one-third">
+                        <img src="../images/image.PNG" alt="Obrazek zastępczy" />
+                    </div>
+                    <div class="col-two-third">
+                        <div class="info">
+                            <div class="info element-info"><img src="../images/marker.png" class="icon"><p>Poznań</p></div>
+                            <div class="info element-info"><img src="../images/stopwatch.png" class="icon"><p>3h</p></div>
+                            <div class="info element-info"><img src="../images/piggy-bank.png" class="icon"><p>0zł</p></div>
+                            <div><input type="submit" class="category" value="zabytki"></div>
                         </div>
                         <h3>Stary Rynek</h3><br>
                         <p>Główny plac miejski w Poznaniu wytyczony ok. 1253 roku jako centralne miejsce miasta lokacyjnego.Jest kwadratem o boku długości 141 metrów, a z każdej ze ścian wychodzą trzy ulice, z czego dwie skrajne z narożników. Znajduje się na Starym Mieście, w ramach osiedla administracyjnego Stare Miasto. </p>
