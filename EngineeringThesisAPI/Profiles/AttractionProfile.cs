@@ -10,6 +10,7 @@ namespace EngineeringThesisAPI.Profiles
         public AttractionProfile()
         {
             CreateMap<CreateAttractionDto, Attraction>();
+            CreateMap<AddCommentDto, Comment>();
         }
     }
 }

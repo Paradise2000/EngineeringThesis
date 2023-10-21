@@ -4,6 +4,7 @@ using EngineeringThesisAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EngineeringThesisAPI.Migrations
 {
     [DbContext(typeof(EngineeringThesisDbContext))]
-    partial class EngineeringThesisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231021192831_ChangeFileEntity1")]
+    partial class ChangeFileEntity1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,36 +104,6 @@ namespace EngineeringThesisAPI.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("EngineeringThesisAPI.Entities.FilePath", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("AddTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("AttractionId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AttractionId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("FilePaths");
-                });
-
             modelBuilder.Entity("EngineeringThesisAPI.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -189,26 +162,9 @@ namespace EngineeringThesisAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("EngineeringThesisAPI.Entities.FilePath", b =>
-                {
-                    b.HasOne("EngineeringThesisAPI.Entities.Attraction", "Attraction")
-                        .WithMany("Photos")
-                        .HasForeignKey("AttractionId");
-
-                    b.HasOne("EngineeringThesisAPI.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Attraction");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("EngineeringThesisAPI.Entities.Attraction", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Photos");
                 });
 
             modelBuilder.Entity("EngineeringThesisAPI.Entities.User", b =>
