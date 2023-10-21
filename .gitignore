@@ -1,6 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/csharp,aspnetcore,sass,react,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=csharp,aspnetcore,sass,react,node
 
+EngineeringThesisAPI/FileLocalStorage/*
 EngineeringThesisWebApp/css/
 
 ### ASPNETCore ###
