@@ -1,3 +1,9 @@
+
+var token = "TOKEN_PLACE";
+var FileDeleteEndpoint = "https://localhost:7002/api/File/delete";
+const PostAttractionEndpoint = 'https://localhost:7002/api/attraction/create';
+var MainPhotoName;
+
 var map = L.map('map').setView([52, 19], 5);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -63,10 +69,14 @@ document.getElementById('form').addEventListener('submit', function(e) {
         MapError.textContent = "";
     }
 
-    if(isValid) {
-        const url = 'https://localhost:7002/api/attraction/create';
-        const token = '';
+    if(MainPhotoName == null) {
+        MainPhotoError.textContent = "Wybierz zdjęcie główne";
+        isValid = false;
+    } else {
+        MapError.textContent = "";
+    }
 
+    if(isValid) {
         const jsonData = JSON.stringify({
             city: document.getElementById('city').value,
             duration: document.getElementById('duration').value + ":00",
@@ -78,7 +88,7 @@ document.getElementById('form').addEventListener('submit', function(e) {
             coordinateZ: parseFloat(16)
         });
 
-        fetch(url, {
+        fetch(PostAttractionEndpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -93,3 +103,56 @@ document.getElementById('form').addEventListener('submit', function(e) {
     }
     
   });
+
+  
+Dropzone.autoDiscover = false;
+const myDropzone = new Dropzone("#my-awesome-dropzone", {
+    paramName: "file",
+    maxFilesize: 5,
+    addRemoveLinks: true,
+    acceptedFiles: 'image/jpeg,image/jpg,image/png',
+    dictDefaultMessage: "Przeciągnij zdjęcia lub kliknij tutaj",
+
+    sending: function(file, xhr, formData) {
+        xhr.setRequestHeader("Authorization", "Bearer " + token);
+    },
+
+    success: function(file, response) {
+
+        console.log("WYSŁANO");
+        file.newFileName = response;
+        file.previewElement.addEventListener("click", function () {
+
+            var previews = document.querySelectorAll(".dz-preview");
+            $(previews).find(".caption").remove();
+            $(file.previewElement).append(`<p class="caption">Zdjęcie główne</p>`);
+
+            MainPhotoName = file.newFileName;
+
+            console.log("Wybrane zdjęcie główne: ", file.name);
+        });
+    },
+
+    removedfile: function(file) {
+
+        if(MainPhotoName == file.newFileName) {
+            MainPhotoName = null;
+        }
+
+        fetch(`${FileDeleteEndpoint}/${file.newFileName}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          }
+        })
+        .then(response => {
+          file.previewElement.remove();
+          console.log(response);
+        })
+        .catch(error => {
+          console.error('Wystąpił błąd:', error);
+        });
+    }
+
+});

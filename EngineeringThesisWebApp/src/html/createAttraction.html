@@ -13,6 +13,11 @@
      <script src="../../node_modules/leaflet/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
+
+     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
+     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
   </head>
   <body>
     <h1 class="title">Dodaj nową atrakcję</h1>
@@ -40,6 +45,13 @@
               <div class="error" id="descriptionError" style="color: red;"></div>
             </div>
 
+          </div>
+
+          <div class="flex-container2">
+            <div>
+              <div action="https://localhost:7002/api/File/upload" class="dropzone" id="my-awesome-dropzone"></div>
+              <div class="error" id="MainPhotoError" style="color: red;"></div>
+            </div>      
           </div>
 
           <div class="flex-container2">
