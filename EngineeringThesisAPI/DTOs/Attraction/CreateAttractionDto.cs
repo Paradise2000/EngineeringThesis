@@ -10,5 +10,6 @@
         public double CoordinateX { get; set; }
         public double CoordinateY { get; set; }
         public double CoordinateZ { get; set; }
+        public List<string> ?ImagesPaths { get; set; }
     }
 }

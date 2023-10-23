@@ -42,6 +42,20 @@ namespace EngineeringThesisAPI.Controllers
             _context.Attractions.Add(attraction);
             _context.SaveChanges();
 
+            foreach(var file in dto.ImagesPaths)
+            {
+                var record = _context.FilePaths.FirstOrDefault(r => r.FileName == file && r.UserId == _userIdProvider.GetUserId());
+
+                if (record == null)
+                {
+                    return BadRequest("File name error, Attraction added but without photos");
+                }
+
+                record.AttractionId = attraction.Id;
+            }
+
+            _context.SaveChanges();
+
             return Ok();
         }
 
