@@ -3,11 +3,12 @@ using EngineeringThesisAPI.Services.UserIdProvider;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.IO;
 
 namespace EngineeringThesisAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/file")]
     [ApiController]
     public class FileController : ControllerBase
     {
@@ -52,6 +53,30 @@ namespace EngineeringThesisAPI.Controllers
             }
 
             return Ok(filePath.FileName);
+        }
+
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var path = Path.Combine(_env.ContentRootPath, "FileLocalStorage", id);
+
+            var file = await _context.FilePaths.FirstOrDefaultAsync(x => x.FileName == id);
+
+            if(file != null)
+            {
+                _context.FilePaths.Remove(file);
+
+                if (System.IO.File.Exists(path))
+                {
+                    //System.IO.File.Delete(path);
+                }
+
+                return Ok("File deleted with path: " + path);
+            }
+            else
+            {
+                return BadRequest("File not found");
+            }
         }
 
         [HttpGet("download/{id}")]
