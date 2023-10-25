@@ -56,7 +56,7 @@ section {
 }
 
 .attraction-form {
-  background-image: url(../images/mapa.jpg);
+  background-image: url(":src/images/mapa.jpg");
   background-size: cover; /* Dostosuj wielkość obrazka do sekcji */
   background-position: center; /* Wyśrodkuj obrazek */
   background-color: #cbe8ba;
