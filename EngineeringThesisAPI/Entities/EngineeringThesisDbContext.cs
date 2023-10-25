@@ -12,6 +12,7 @@ namespace EngineeringThesisAPI.Entities
         public DbSet<User> Users { get; set; }
         public DbSet<Attraction> Attractions { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<FilePath> FilePaths { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

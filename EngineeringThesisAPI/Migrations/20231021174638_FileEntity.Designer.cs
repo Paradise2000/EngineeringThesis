@@ -4,6 +4,7 @@ using EngineeringThesisAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EngineeringThesisAPI.Migrations
 {
     [DbContext(typeof(EngineeringThesisDbContext))]
-    partial class EngineeringThesisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231021174638_FileEntity")]
+    partial class FileEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,13 +104,11 @@ namespace EngineeringThesisAPI.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("EngineeringThesisAPI.Entities.FilePath", b =>
+            modelBuilder.Entity("EngineeringThesisAPI.Entities.File", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("AddTime")
                         .HasColumnType("datetime2");
@@ -115,7 +116,7 @@ namespace EngineeringThesisAPI.Migrations
                     b.Property<int?>("AttractionId")
                         .HasColumnType("int");
 
-                    b.Property<string>("FileName")
+                    b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -128,7 +129,7 @@ namespace EngineeringThesisAPI.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FilePaths");
+                    b.ToTable("Files");
                 });
 
             modelBuilder.Entity("EngineeringThesisAPI.Entities.User", b =>
@@ -189,7 +190,7 @@ namespace EngineeringThesisAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("EngineeringThesisAPI.Entities.FilePath", b =>
+            modelBuilder.Entity("EngineeringThesisAPI.Entities.File", b =>
                 {
                     b.HasOne("EngineeringThesisAPI.Entities.Attraction", "Attraction")
                         .WithMany("Photos")
