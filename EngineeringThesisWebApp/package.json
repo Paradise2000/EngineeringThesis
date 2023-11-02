@@ -12,5 +12,13 @@
     "gulp": "^4.0.2",
     "gulp-sass": "^5.1.0",
     "sass": "^1.69.0"
+  },
+  "dependencies": {
+    "dropzone": "^6.0.0-beta.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "jquery": "^3.7.1",
+    "leaflet": "^1.9.4",
+    "paginationjs": "^2.6.0"
   }
 }

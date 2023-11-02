@@ -11,6 +11,10 @@ namespace EngineeringThesisAPI.Profiles
         {
             CreateMap<CreateAttractionDto, Attraction>();
             CreateMap<AddCommentDto, Comment>();
+            CreateMap<Category, GetCategoriesDto>();
+            CreateMap<Attraction, GetAttractionsDto>()
+                .ForMember(a => a.CategoryName, b => b.MapFrom(c => c.Category.Name))
+                .ForMember(a => a.MainImagePath, b => b.MapFrom(c => c.Photos.FirstOrDefault(r => r.Id == c.MainPhotoId).FileName));
         }
     }
 }

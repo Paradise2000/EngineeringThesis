@@ -4,6 +4,7 @@ using EngineeringThesisAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EngineeringThesisAPI.Migrations
 {
     [DbContext(typeof(EngineeringThesisDbContext))]
-    partial class EngineeringThesisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231030215922_CategoryEntity")]
+    partial class CategoryEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,9 +56,6 @@ namespace EngineeringThesisAPI.Migrations
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("time");
 
-                    b.Property<int>("MainPhotoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -89,39 +89,7 @@ namespace EngineeringThesisAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Zabytki"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Gastronomia"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Przyroda"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Muzeum"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Adrenalina"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Inne"
-                        });
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("EngineeringThesisAPI.Entities.Comment", b =>
