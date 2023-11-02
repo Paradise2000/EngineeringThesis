@@ -56,7 +56,8 @@ section {
 }
 
 .attraction-form {
-  background-image: url(":src/images/mapa.jpg");
+  background-image: url("../src/images/map.PNG");
+  /*background: linear-gradient( rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5) ),url("../src/images/mapa2.jpg") no-repeat;*/
   background-size: cover; /* Dostosuj wielkość obrazka do sekcji */
   background-position: center; /* Wyśrodkuj obrazek */
   background-color: #cbe8ba;
@@ -104,6 +105,18 @@ section {
   float: left;*/
 }
 
+.banner {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+  padding: 50px 0 50px 0;
+  /*flex-basis: 100%;*/
+}
+
 .info {
   display: flex;
   flex-wrap: wrap;
@@ -134,7 +147,7 @@ section {
   justify-items: center;
   align-items: center;
   padding: 5% 5% 7% 5%;
-  background-color: #cbe8ba;
+  /*background-color: $footfont;*/
 }
 
 /*DODATKI DO KONTENERÓW (DIV)*/
