@@ -28,7 +28,7 @@ namespace EngineeringThesisAPI.Controllers
         {
             var supportedTypes = new[] { ".jpg", ".jpeg", ".png" };
             var fileName = Path.GetFileName(file.FileName);
-            var fileExtension = Path.GetExtension(fileName);
+            var fileExtension = Path.GetExtension(fileName).ToLower();
 
             if (!supportedTypes.Contains(fileExtension))
             {
@@ -65,10 +65,11 @@ namespace EngineeringThesisAPI.Controllers
             if(file != null)
             {
                 _context.FilePaths.Remove(file);
+                _context.SaveChanges();
 
                 if (System.IO.File.Exists(path))
                 {
-                    //System.IO.File.Delete(path);
+                    System.IO.File.Delete(path);
                 }
 
                 return Ok("File deleted with path: " + path);
