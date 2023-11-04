@@ -1,3 +1,5 @@
+import Cookies from "../../node_modules/js-cookie/dist/js.cookie.min.mjs";
+
 var LoginEndpoint = "https://localhost:7002/api/account/login";
 
 const EmailField = document.getElementById('email');
@@ -48,7 +50,9 @@ document.getElementById('form').addEventListener('submit', function(e) {
             ServerError.innerHTML = "";
             return response.text();
         })
-        .then(data => console.log(data))
+        .then((data) => {
+            Cookies.set('TokenJWT', data, { expires: 7, secure: true, sameSite: 'strict' });
+        })
     }
 
 });
