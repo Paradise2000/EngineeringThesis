@@ -1,14 +1,20 @@
-import { isUserLogged } from "../../services/authService.js";
+import { isUserLogged, getJWTtoken } from "../../services/authService.js";
 
-var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJleHAiOjE3MDAwODg0NjMsImlzcyI6IkVuZ2luZWVyaW5nVGhlc2lzIiwiYXVkIjoiRW5naW5lZXJpbmdUaGVzaXMifQ.x9aNOIEg9Y29Y4QY0eq98_cB3i_o8fFxH8UDHvhANmE";
+var token;
 var FileDeleteEndpoint = "https://localhost:7002/api/File/delete";
 const PostAttractionEndpoint = 'https://localhost:7002/api/attraction/create';
 var PhotosPaths = [];
 var MainPhotoName;
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
 
-    isUserLogged("logowanie.html");
+    if(await isUserLogged() === true) {
+        $("#menu").load("menu_zal.html");
+    } else {
+        window.location.href = "logowanie.html";
+    }
+
+    token = getJWTtoken();
 
     fetch('https://localhost:7002/api/attraction/getCategories', {
         headers: {

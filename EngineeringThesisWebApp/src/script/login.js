@@ -1,4 +1,11 @@
 import Cookies from "../../node_modules/js-cookie/dist/js.cookie.min.mjs";
+import { isUserLogged } from "../../services/authService.js";
+
+if(isUserLogged() === true) {
+    window.location.href = "index.html";
+} else {
+    $("#menu").load("menu_nzal.html");
+}
 
 var LoginEndpoint = "https://localhost:7002/api/account/login";
 
@@ -52,6 +59,7 @@ document.getElementById('form').addEventListener('submit', function(e) {
         })
         .then((data) => {
             Cookies.set('TokenJWT', data, { expires: 7, secure: true, sameSite: 'strict' });
+            window.location.href = "index.html";
         })
     }
 
