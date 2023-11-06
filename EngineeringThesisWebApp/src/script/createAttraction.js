@@ -1,8 +1,28 @@
+import { isUserLogged } from "../../services/authService.js";
 
-var token = "TOKEN_PLACE";
+var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJleHAiOjE3MDAwODg0NjMsImlzcyI6IkVuZ2luZWVyaW5nVGhlc2lzIiwiYXVkIjoiRW5naW5lZXJpbmdUaGVzaXMifQ.x9aNOIEg9Y29Y4QY0eq98_cB3i_o8fFxH8UDHvhANmE";
 var FileDeleteEndpoint = "https://localhost:7002/api/File/delete";
 const PostAttractionEndpoint = 'https://localhost:7002/api/attraction/create';
+var PhotosPaths = [];
 var MainPhotoName;
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    isUserLogged("logowanie.html");
+
+    fetch('https://localhost:7002/api/attraction/getCategories', {
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    })
+    .then(response => response.json())
+    .then(dataFromAPI => {
+        var select = $('#categories');
+        $.each(dataFromAPI, function (index, item) {
+            select.append('<option value="' + item.name + '" id="' + item.id + '">' + item.name + '</option>');
+        });
+    })
+});
 
 var map = L.map('map').setView([52, 19], 5);
 
@@ -81,11 +101,14 @@ document.getElementById('form').addEventListener('submit', function(e) {
             city: document.getElementById('city').value,
             duration: document.getElementById('duration').value + ":00",
             price: parseFloat(document.getElementById('price').value),
+            categoryId: parseFloat($('#categories').find(':selected').attr('id')),
             name: document.getElementById('name').value,
             description: document.getElementById('description').value,
             coordinateX: parseFloat(lat),
             coordinateY: parseFloat(lng),
-            coordinateZ: parseFloat(16)
+            coordinateZ: parseFloat(16),
+            imagesPaths: PhotosPaths,
+            mainImagePath: MainPhotoName
         });
 
         fetch(PostAttractionEndpoint, {
@@ -118,9 +141,11 @@ const myDropzone = new Dropzone("#my-awesome-dropzone", {
     },
 
     success: function(file, response) {
-
+        
         console.log("WYSŁANO");
         file.newFileName = response;
+        PhotosPaths.push(file.newFileName);
+
         file.previewElement.addEventListener("click", function () {
 
             var previews = document.querySelectorAll(".dz-preview");
@@ -134,6 +159,9 @@ const myDropzone = new Dropzone("#my-awesome-dropzone", {
     },
 
     removedfile: function(file) {
+        PhotosPaths = PhotosPaths.filter(function(element) {
+            return element !== file.newFileName;
+        });
 
         if(MainPhotoName == file.newFileName) {
             MainPhotoName = null;

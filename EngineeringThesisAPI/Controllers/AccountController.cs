@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using EngineeringThesisAPI.DTOs.Account;
 using EngineeringThesisAPI.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -77,5 +79,14 @@ namespace EngineeringThesisAPI.Controllers
             return Ok(tokenHandler.WriteToken(token));
 
         }
+
+        [HttpGet("isUserLogged")]
+        [Authorize]
+        public IActionResult IsUserLogged()
+        {
+            return Ok();
+        }
+
+
     }
 }

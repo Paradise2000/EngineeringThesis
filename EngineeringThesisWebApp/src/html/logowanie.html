@@ -14,21 +14,26 @@
               <h1 class="title center-text">Zaloguj się i rusz w kolejną przygodę</h1>
             
               
-              <form>
-              <div class="container column">
-                  <input type="email" class="text-input margin" placeholder="e-mail" required><br>
-                  <input type="password" class="text-input margin" placeholder="hasło" required><br>
-                  <div>
-                    <input type="button" class="button button2 margin" value="Zarejestruj się">
-                    <input type="button" class="button margin" value="Zaloguj się">
+              <form id="form">
+                <div class="container column">
+                    <input type="text" id="email" class="text-input margin" placeholder="e-mail">
+                    <div id="emailError" style="color: red;"></div>
 
-                  </div>
+                    <input type="password" id="password" class="text-input margin" placeholder="hasło">
+                    <div id="passwordError" style="color: red;"></div>
+                    <div>
+                      <input type="button" class="button button2 margin" value="Zarejestruj się">
+                      <input type="submit" class="button margin" value="Zaloguj się">
+                    </div>
+
+                    <div id="serverError" style="color: red;"></div>
                 </div>
-              
               </form> 
             </div>
         </section>
       
     </main>
+
+    <script type="module" src="../script/login.js"></script>
   </body>
 </html>

@@ -12,8 +12,13 @@
         public double CoordinateY { get; set; }
         public double CoordinateZ { get; set; }
 
+        public int MainPhotoId { get; set; }
+
         public int UserId { get; set; }
         public User User { get; set; }
+
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
         public ICollection<FilePath> Photos { get; set; }
