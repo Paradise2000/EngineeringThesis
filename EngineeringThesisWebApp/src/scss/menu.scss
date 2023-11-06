@@ -1,0 +1,68 @@
+@import "_variables";
+
+header{
+    background-color: $white;
+}
+
+header::after{
+    content: '';
+    display: table;
+    clear:both;
+}
+
+.menu{
+ width: 80%;
+ margin: 0 auto;
+}
+
+.logo{
+    float: left;
+}
+
+nav{
+    float:right;
+}
+
+nav ul{
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    align-items: center;
+}
+
+nav li{
+    display: inline-block;
+    padding-top: 15px;
+}
+
+
+nav ul li:not(:last-child):not(:nth-last-child(2))::after {
+    content: "";
+    display: inline-block;
+    width: 1px; /* Szerokość linii pionowej */
+    height: 30px; /* Wysokość linii pionowej */
+    background-color: $categorycolor; /* Kolor linii pionowej */
+    margin-left: 35px; /* Dostosuj odstęp między linią a tekstem */
+    margin-right: 35px; /* Dostosuj odstęp między linią a tekstem */
+    vertical-align: middle;
+
+}
+
+
+nav a {
+    color: $titlegray;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.icon {
+	width: 30px;
+	height: 30px;
+    padding: 0 0 0 70px;
+    vertical-align: middle;
+
+}
+
+
+
