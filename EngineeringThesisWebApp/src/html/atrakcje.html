@@ -17,8 +17,17 @@
   </head>
   <body>
     <main>
-        <h1 class="title center-text">Dokąd wybierzesz się tym razem?</h1>
-        <section>
+
+        <div class="banner" style="background-image: url('../images/map.PNG');">
+            <h1 class="title center-text">Dokąd wybierzesz się tym razem?</h1>
+            <p class="text">Nie czekaj i już teraz odkrywaj nowe miejsca!<br>Carpe diem!</p>
+            <div>
+                <input type="button" class="button margin" value="Stwórz plan">
+                <input type="button" class="button button2 margin" value="Wyszukaj" onclick="window.location.href='#wyszukaj'">
+            </div>
+        </div>
+
+        <section id="wyszukaj">
             <div class="row-column">
                 <input list="place2" class="text-input margin" placeholder="miejscowość">
                     <datalist id="place2">
