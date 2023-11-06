@@ -11,18 +11,10 @@ export const logout = (redirectPath) => {
     window.location.href = redirectPath;
 }
 
-export async function isUserLogged() {
+export function isUserLogged() {
     const token = Cookies.get('TokenJWT');
 
-    const response = await fetch(isUserLoggedEndpoint, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        }
-    });
-
-    if (response.status === 200) {
+    if (token != undefined) {
         return true;
     } else {
         return false;

@@ -1,12 +1,10 @@
 import { isUserLogged } from "../../services/authService.js";
 
-document.addEventListener("DOMContentLoaded", async function() {
-    if(await isUserLogged() === true) {
-      $("#menu").load("menu_zal.html");
-    } else {
-      $("#menu").load("menu_nzal.html");
-    }
-})
+if(isUserLogged() == true) {
+    $("#menu").load("menu_zal.html");
+  } else {
+    $("#menu").load("menu_nzal.html");
+}
 
 $('#pagination-container').pagination({
     dataSource: 'https://localhost:7002/api/attraction/get',

@@ -6,9 +6,9 @@ const PostAttractionEndpoint = 'https://localhost:7002/api/attraction/create';
 var PhotosPaths = [];
 var MainPhotoName;
 
-document.addEventListener("DOMContentLoaded", async function() {
+document.addEventListener("DOMContentLoaded", function() {
 
-    if(await isUserLogged() === true) {
+    if(isUserLogged() == true) {
         $("#menu").load("menu_zal.html");
     } else {
         window.location.href = "logowanie.html";
