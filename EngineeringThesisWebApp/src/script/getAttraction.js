@@ -2,7 +2,7 @@ $('#pagination-container').pagination({
     dataSource: 'https://localhost:7002/api/attraction/get',
     locator: 'items',
     totalNumberLocator: function (response) {
-        return response.totalPages;
+        return response.totalPages * 5;
     },
     alias: {
         pageNumber: 'pageIndex',
