@@ -1,13 +1,13 @@
 import { isUserLogged } from "../../services/authService.js";
 
 if(isUserLogged() == true) {
-    $("#menu").load("menu_zal.html");
+    $("#menu").load("menu_logged.html");
   } else {
-    $("#menu").load("menu_nzal.html");
+    $("#menu").load("menu_unlogged.html");
 }
 
 $('#pagination-container').pagination({
-    dataSource: 'https://localhost:7002/api/attraction/get',
+    dataSource: 'https://localhost:7002/api/attraction/getAttractions',
     locator: 'items',
     totalNumberLocator: function (response) {
         return response.totalPages * 5;
@@ -23,7 +23,7 @@ $('#pagination-container').pagination({
         data.forEach(function(item) {
             let newAttraction = `
                 <div class="container attraction-container">
-                    <div class="attraction">
+                    <div onclick="window.location.href='getAttractionDetails.html?id=${item.id}'" class="attraction" style="cursor: pointer;">
                         <div class="col-one-third">
                             <img src="https://localhost:7002/api/file/download/${item.mainImagePath}"/>
                         </div>
