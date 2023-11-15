@@ -9,9 +9,9 @@ var MainPhotoName;
 document.addEventListener("DOMContentLoaded", function() {
 
     if(isUserLogged() == true) {
-        $("#menu").load("menu_zal.html");
+        $("#menu").load("menu_logged.html");
     } else {
-        window.location.href = "logowanie.html";
+        window.location.href = "login.html";
     }
 
     token = getJWTtoken();

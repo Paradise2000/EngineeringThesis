@@ -84,7 +84,7 @@ namespace EngineeringThesisAPI.Controllers
             return Ok(categories);
         }
 
-        [HttpGet("get")]
+        [HttpGet("getAttractions")]
         public ActionResult<PaginationModel<GetAttractionsDto>> GetAttractions(int pageIndex, int pageSize)
         {
             var attractions = _mapper.Map<List<GetAttractionsDto>>(
@@ -93,6 +93,33 @@ namespace EngineeringThesisAPI.Controllers
                 .Include(r => r.Photos));
 
             var paginatedList = PaginationModel<GetAttractionsDto>.Create(attractions, pageIndex, pageSize);
+
+            return Ok(paginatedList);
+        }
+
+        [HttpGet("getAttraction")]
+        public ActionResult<GetAttractionDto> GetAttraction(int id)
+        {
+            var attraction = _context.Attractions
+                .Include(r => r.Category)
+                .Include(r => r.Photos)
+                .Include(r => r.Comments)
+                .FirstOrDefault(r => r.Id == id);
+
+            var result = _mapper.Map<GetAttractionDto>(attraction);
+
+            return result;
+        }
+
+        [HttpGet("getComment")]
+        public IActionResult GetComments(int attractionId, int pageIndex, int pageSize)
+        {
+            var comments = _mapper.Map<List<GetCommentDto>>(
+                _context.Comments
+                .Include(r => r.User)
+                .Where(w => w.AttractionId == attractionId));
+
+            var paginatedList = PaginationModel<GetCommentDto>.Create(comments, pageIndex, pageSize);
 
             return Ok(paginatedList);
         }

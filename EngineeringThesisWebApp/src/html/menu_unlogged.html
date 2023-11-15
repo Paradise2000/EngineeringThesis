@@ -16,23 +16,13 @@
             <nav>
                 <ul>
                     <li><a href="./index.html">Strona główna</a></li>
-                    <li><a href="./atrakcje.html">Atrakcje</a></li>
-                    <li><a href="./createAttraction.html">Dodaj atrakcję</a></li>
-                    <li><a id="logout">Wyloguj się</a></li>
-                    <li><a href="./panelUzytkownika.html"><img src="/src/images/user.png" class="icon"></a></li>
+                    <li><a href="./getAttractions.html">Atrakcje</a></li>
+                    <li><a href="./login.html">Zaloguj się</a></li>
+                    <li><a href="./login.html"><img src="/src/images/user(2).png" class="icon"></a></li>
                 </ul>
             </nav>
 
         </div>
     </header>
   </body>
-
-  <script type="module">
-    import { logout } from "../../services/authService.js";
-
-    document.getElementById("logout").addEventListener("click", function() {
-      logout("logowanie.html");
-    });
-  </script>
-
 </html>
