@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+      <!--  <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>My Website</title>
+        <link rel="stylesheet" href="/css/menu.css">
+    <!-- jak to podpiąć pod to żeby łapało dane z insex.css-->
+      </head>
+      <body>
+        <header>
+            <div class="menu">
+                <img src="/src/images/logo.PNG" class="logo">
+                <link rel="stylesheet" href="/css/menu.css">
+    
+                <nav>
+                    <ul>
+                        <li><a href="./index.html">Strona główna</a></li>
+                        <li><a href="./atrakcje.html">Atrakcje</a></li>
+                        <li><a href="./aboutus.html">O nas</a></li>
+                        <li><a href="./createAttraction.html">Dodaj atrakcję</a></li>
+                        <li><a id="logout">Wyloguj się</a></li>
+                        <li><a href="./panelUzytkownika.html"><img src="/src/images/user.png" class="icon"></a></li>
+                    </ul>
+                </nav>
+    
+            </div>
+        </header>
+      </body>
+    
+      <script type="module">
+        import { logout } from "../../services/authService.js";
+    
+        document.getElementById("logout").addEventListener("click", function() {
+          logout("logowanie.html");
+        });
+      </script>
+    
+    </html>
+
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+<style>
+    
+
+body {
+  
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(210, 31, 31, 0.2);
+  margin: 8px;
+}
+
+.about-section {
+  padding: 50px;
+  text-align: center;
+  background-color: #40a25b;
+  color: white;
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both; 
+  display: table;
+}
+
+.title {
+  color: grey;
+}
+
+.button {
+    .button {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #04AA6D;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+}
+
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="about-section">
+  <h1>O nas</h1>
+  <p>Kilka tekstów o tym kim jesteśmy i co robimy.</p>
+  <p>uga buga.</p>
+</div>
+
+<h2 style="text-align:center">Nasz zespół</h2>
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <img src="/w3images/team1.jpg" alt="Natalia Szyszka" style="width:100%">
+      <div class="container">
+        <h2>Natalia Szyszka</h2>
+        <p class="title">Mózg operacji</p>
+        <p> lorem ipsum ipsum lorem.</p>
+        <p>natalia@natalia.com</p>
+        <p><button class="button">Kontakt</button></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <img src="/w3images/team2.jpg" alt="Mikołaj świetlk" style="width:100%">
+      <div class="container">
+        <h2>Mikołaj Swietlik</h2>
+        <p class="title">Back End</p>
+        <p>lorem ipsum ipsum lorem.</p>
+        <p>mikołaj@mikołaj.com</p>
+        <p><button class="button">kontakt</button></p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+      <img src="/src/images/alexa.JPG" alt="aleksandra niedziela" style="width:100%">
+      <div class="container">
+        <h2>aleksandra niedziela</h2>
+        <p class="title">pseudo front end</p>
+        <p>potato potato</p>
+        <p>alexa@alexa.com</p>
+        <button class="button">Kontakt</button>
+        
+        <!-- <p><button class="button">kontakt</button></p> -->
+        </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

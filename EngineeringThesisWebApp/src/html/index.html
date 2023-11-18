@@ -16,11 +16,96 @@
 
     <main>
      
-      <h1> Tu będzie strona główna</h1>
-      
-    </main>
+   
+      <!--pierwszy baner-->
+      <div id="menu"></div>
 
-  </body>
+      <div class="banner" style="background-image: url('../images/banner1iph.png');">
+          <h1 class="title center-text">Z nami stworzysz niezapomniane wrażenia</h1>
+          <p class="text">Witaj w serwisie, który pozwoli Ci odkryć niezwukłe atrakcje i zakątki pięknych miast.<br>Jesteśmy tu, abyś mógł stworzyć swój własny, unikalny plan zwiedzania, dostosowany do Twoich zainteresowań i preferencji.</p>
+          <div>
+              <input type="button" class="button margin" value="Stwórz plan">
+              <input type="button" class="button button2 margin" value="Co Jeszcze" onclick="window.location.href='#wyszukaj'">
+          </div>
+      </div>
+      <style>
+        /*-- drugi baner */
+        /* Tutaj wklej cały Twój istniejący CSS */
+
+        /* Dodaj niestandardowy styl dla kolumn */
+       
+    
+      </style>
+</head>
+<body>
+
+    <section class="attraction-form">
+        <div class="container">
+            <!-- Pierwsza kolumna -->
+            <div class="column">
+                <img src="/src/images/celebration (1).png" alt="Zdjęcie 1">
+                <div class="title title21">Twój świat, Twoje atrakcje</div>
+                <div class="text text14">Znajdź coś dla siebie w naszej bazie atrakcji. Czegoś brakuje? Dodaj swoje miejsca.</div>
+            </div>
+
+            <!-- Druga kolumna -->
+            <div class="column">
+                <img src="/src/images/person-standing.png" alt="Zdjęcie 2">
+                <div class="title title21">Ty tu rządzisz</div>
+                <div class="text text14">Stwórz swój własny plan wycieczki dostosowany do Twoich możliwości i zainteresowań. </div>
+            </div>
+
+            <!-- Trzecia kolumna -->
+            <div class="column">
+                <img src="/src/images/idea-exchange.png" alt="Zdjęcie 3">
+                <div class="title title21">Dziel się z innymi</div>
+                <div class="text text14">Chcesz? Podziel się z nami swoim planem. Możesz też czerpać inspirację od innych.</div>
+            </div>
+        </div>
+    </section>
+
+
+    </main>
+    <style>
+      /* trzeci baner*/ 
+      
+  </style>
+</head>
+<body>
+
+  <section class="attraction-form">
+      <div class="container">
+          <!-- Baner -->
+          <div class="banner-container">
+              <!-- Tekst po lewej -->
+              
+              <div class="banner-text">
+                  <div class="title title21">Wszystko to z pasji do podróżowania.</div>
+                  <div class="text text14">Serwis został stworzony orzez podróżników dla podróżników. Z doświadczenia wiemy, że często planowanie podróży może być męczące i wymaga odwiedzenia wielu stron internetowych czy wertowania przewodników.<br> Naszą ideą jest ułatwienie tego procesu tak, by sprawiał on przyjemność. Jednocześnie pragniemy, by pasja podróżowania rozbudziła się w naszych użytkownikach, dlatego zachęcami by inspirować się nawzajem, dzieląc się swoimi planami.</div>
+              </div>
+              <!-- Zdjęcie po prawej -->
+             <div class="banner-image"> 
+                  <img src="/src/images/travel-map.png"Zdjęcie banera"> 
+              </div>
+          </div>
+      </div> 
+  </section>
+
+  <!-- czwarty baner -->
+  
+</style>
+</head>
+<body>
+    <div class="banner">
+        <h1>Centralny baner</h1>
+        <p>Planowanie podróży to jak komponowanie symfonii. Wybierasz różne dźwięki i elementy, aby stworzyć harmonię i piekno. Każdy szczegół ma znaczenie, tworząc niepowtarzalne doświadczenie.</p>
+        
+    </div>
+</body>
+
+
+<!-- piaty baner na mape-->
+  </body> 
 
   <script type="module">
     import { isUserLogged } from "../../services/authService.js";
@@ -32,5 +117,9 @@
         $("#menu").load("menu_nzal.html");
       }
     })
+
+
+
+    
   </script>
 </html>

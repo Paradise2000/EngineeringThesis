@@ -343,3 +343,94 @@ img {
     margin: 10px 0;
   }
 }
+/* próba baner 2*/ 
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  width: 33.3333%;
+  padding: 20px;
+}
+
+.column img {
+  max-width: 20%;
+  height: auto;
+}
+
+.column .title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #444444;
+}
+
+.column .text {
+  font-size: 16px;
+  font-weight: normal;
+  color: #7a7a7a;
+}
+/* baner 3 próba */ 
+.banner-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  padding: 50px 0;
+}
+
+.banner-text {
+  flex: 1;
+  max-width: 50%;
+  padding-right: 20px; /* Dodaj odstęp między tekstem a obrazem */
+}
+
+.banner-text .title {
+  font-size: 40px;
+  font-weight: bold;
+  color: #444444;
+}
+
+.banner-text .text {
+  font-size: 16px;
+  font-weight: normal;
+  color: #7a7a7a;
+}
+
+.banner-image {
+  flex: 1;
+  max-width: 50%;
+}
+
+.banner-image img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+/* drugi banerek */ 
+
+        .column {
+            text-align: center;
+            flex: 1;
+            margin: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            background: none; /* Zmiana tła na "none" */
+        }
+
+        .title {
+            font-size: 21px;
+            margin-top: 10px;
+        }
+
+        .text {
+            font-size: 14px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px; /* Dodano zaokrąglenie dla obrazków */
+        }
+    
