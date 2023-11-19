@@ -104,9 +104,19 @@ namespace EngineeringThesisAPI.Controllers
                 .Include(r => r.Category)
                 .Include(r => r.Photos)
                 .Include(r => r.Comments)
-                .FirstOrDefault(r => r.Id == id);
+                .FirstOrDefault(r => r.Id == id);          
 
             var result = _mapper.Map<GetAttractionDto>(attraction);
+
+            if(_userIdProvider.IsUserLogged())
+            {
+                var userComment = _context.Comments.FirstOrDefault(r => r.UserId == _userIdProvider.GetUserId() && r.AttractionId == id);
+
+                if (userComment != null)
+                {
+                    result.UserComment = _mapper.Map<GetCommentDto>(userComment);
+                }
+            }
 
             return result;
         }

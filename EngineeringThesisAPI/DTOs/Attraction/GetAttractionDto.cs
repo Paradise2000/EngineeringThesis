@@ -18,6 +18,7 @@
         public int NumberOf3StarReviews { get; set; }
         public int NumberOf2StarReviews { get; set; }
         public int NumberOf1StarReviews { get; set; }
+        public GetCommentDto UserComment { get; set; }
         public List<string> ImagePaths { get; set; }
     }
 }
