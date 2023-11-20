@@ -85,14 +85,31 @@ namespace EngineeringThesisAPI.Controllers
         }
 
         [HttpGet("getAttractions")]
-        public ActionResult<PaginationModel<GetAttractionsDto>> GetAttractions(int pageIndex, int pageSize)
+        public ActionResult<PaginationModel<GetAttractionsDto>> GetAttractions(int pageIndex, int pageSize,
+            string? City, int? CategoryId, string? Name)
         {
-            var attractions = _mapper.Map<List<GetAttractionsDto>>(
+            var attractions =
                 _context.Attractions
                 .Include(r => r.Category)
-                .Include(r => r.Photos));
+                .Include(r => r.Photos)
+                .AsQueryable();
 
-            var paginatedList = PaginationModel<GetAttractionsDto>.Create(attractions, pageIndex, pageSize);
+            if(!string.IsNullOrEmpty(City)) 
+            {
+                attractions = attractions.Where(a => a.City.ToLower().Contains(City.ToLower()));
+            }
+
+            if(CategoryId.HasValue) 
+            {
+                attractions = attractions.Where(a => a.CategoryId == CategoryId);
+            }
+
+            if(!string.IsNullOrEmpty(Name))
+            {
+                attractions = attractions.Where(a => a.Name.ToLower().Contains(Name.ToLower()));
+            }
+
+            var paginatedList = PaginationModel<GetAttractionsDto>.Create(_mapper.Map<List<GetAttractionsDto>>(attractions), pageIndex, pageSize);
 
             return Ok(paginatedList);
         }
