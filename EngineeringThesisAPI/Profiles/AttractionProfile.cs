@@ -12,6 +12,7 @@ namespace EngineeringThesisAPI.Profiles
             CreateMap<CreateAttractionDto, Attraction>();
             CreateMap<AddCommentDto, Comment>()
                 .ForMember(a => a.Date, b => b.MapFrom(c => DateTime.Now));
+            CreateMap<UpdateCommentDto, Comment>();
             CreateMap<Comment, GetCommentDto>()
                 .ForMember(a => a.Author, b => b.MapFrom(c => c.User.NickName));      
             CreateMap<Category, GetCategoriesDto>();

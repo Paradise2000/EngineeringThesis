@@ -24,15 +24,18 @@ namespace EngineeringThesisAPI.Controllers
         private readonly IMapper _mapper;
         private readonly IUserIdProvider _userIdProvider;
         private readonly IValidator<AddCommentDto> _validatorAddCommentDto;
+        private readonly IValidator<UpdateCommentDto> _validatorUpdateCommentDto;
 
-        public AttractionController(EngineeringThesisDbContext context, IMapper mapper, IUserIdProvider userIdProvider, IValidator<AddCommentDto> AddCommentDto)
+        public AttractionController(EngineeringThesisDbContext context, IMapper mapper, IUserIdProvider userIdProvider, IValidator<AddCommentDto> AddCommentDto, IValidator<UpdateCommentDto> validatorUpdateCommentDto)
         {
             _context = context;
             _mapper = mapper;
             _userIdProvider = userIdProvider;
             _validatorAddCommentDto = AddCommentDto;
+            _validatorUpdateCommentDto = validatorUpdateCommentDto;
         }
 
+        [Authorize]
         [HttpPost("create")]
         public IActionResult CreateAttraction([FromBody]CreateAttractionDto dto)
         {
@@ -151,6 +154,7 @@ namespace EngineeringThesisAPI.Controllers
             return Ok(paginatedList);
         }
 
+        [Authorize]
         [HttpPost("addComment")]
         public IActionResult AddComment([FromBody]AddCommentDto dto)
         {
@@ -165,6 +169,52 @@ namespace EngineeringThesisAPI.Controllers
             comment.UserId = _userIdProvider.GetUserId();
 
             _context.Comments.Add(comment);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPut("updateComment")]
+        public IActionResult UpdateComment([FromBody]UpdateCommentDto dto)
+        {
+            var commentValidation = _validatorUpdateCommentDto.Validate(dto);
+
+            if(!commentValidation.IsValid) 
+            {
+                return BadRequest(new ValidationErrorModel<UpdateCommentDto>(commentValidation));
+            }
+
+            var comment = _context.Comments
+                .FirstOrDefault(r => r.UserId == _userIdProvider.GetUserId() && r.AttractionId == dto.AttractionId);
+
+            if(comment != null)
+            {
+                comment.Title = dto.Title;
+                comment.Rating = dto.Rating;
+                comment.Description = dto.Description;
+                _context.SaveChanges();
+            } else
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpDelete("deleteComment/{AttractionId}")]
+        public IActionResult DeleteComment(int AttractionId)
+        {
+            var comment = _context.Comments
+                .FirstOrDefault(r => r.UserId == _userIdProvider.GetUserId() && r.AttractionId == AttractionId);
+
+            if(comment == null)
+            {
+                return BadRequest("No comment to delete");
+            }
+
+            _context.Comments.Remove(comment);
             _context.SaveChanges();
 
             return Ok();

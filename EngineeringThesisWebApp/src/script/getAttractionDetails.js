@@ -1,5 +1,5 @@
 import { isUserLogged, getJWTtoken } from "../../services/authService.js";
-import {getStars, getDate, opinionForm, getHour} from "../../services/functionService.js"
+import {getStars, generateStarRating, getDate, opinionForm, getHour} from "../../services/functionService.js"
 
 var token = getJWTtoken();
 
@@ -24,9 +24,7 @@ fetch(`https://localhost:7002/api/attraction/getAttraction?id=${urlParams.get('i
         $('#category').val(dataFromAPI.categoryName);
         $('#title').html(dataFromAPI.name);
         
-        for(i=0; i < dataFromAPI.avgReview; i++) {
-            $('#avgReview').append('<img src="../images/star.png" class="star">');
-        }
+        $('#avgReview').append(getStars(dataFromAPI.avgReview));
 
         dataFromAPI.imagePaths.forEach(function(path, index) {
             $('#slideshow').append(
@@ -81,18 +79,84 @@ fetch(`https://localhost:7002/api/attraction/getAttraction?id=${urlParams.get('i
         if(isUserLogged() == true) {
             if(dataFromAPI.userComment != null) {
                 $('#opinion').toggle();
-                $('#useropinion-container').prepend(`
+
+                var UserComment = `
                     <div class="attraction column margin">
                         <div class="info">
                             <h1 class="title21">Twoja opinia</h1>
+                            <input type="button" class="button margin" id="commentEditButton" value="Edytuj/Usuń komentarz">
                             <div class="align-right"><input type="submit" class="category" value="Napisano ${getDate(dataFromAPI.userComment.date)}"></div>
                         </div>
-                        <div class="info stars">
+                        <div id="commentRatingChange" class="info stars">
                             ${getStars(dataFromAPI.userComment.rating, '<img src="../images/star.png" class="star">')}
                         </div>
-                        <p class="text14">${dataFromAPI.userComment.description}</p>
-                    </div>`
-                );
+                        <p id="commentDescriptionChange" class="text14">${dataFromAPI.userComment.description}</p>
+                    </div>`;
+
+                var isCommentEditing = false;
+
+                $('#useropinion-container').prepend(UserComment);
+                
+                function handleEditComment() {
+                    if (!isCommentEditing) {
+                        $('#commentRatingChange').html('');
+                        var selectedStars2 = generateStarRating("commentRatingChange", dataFromAPI.userComment.rating);
+                
+                        $('#commentDescriptionChange').replaceWith(`
+                            <textarea id="commentDescriptionChange" class="comment-area">${dataFromAPI.userComment.description}</textarea>
+                            <div class="info">
+                            <input type="button" class="button margin" id="commentUpdateButton" value="Edytuj komentarz">
+                            <input type="button" class="button margin" id="commentDeleteButton" value="Usuń komentarz">
+                            </div>`);
+                        
+                        $("#commentUpdateButton").on('click', function () {
+                            const jsonData = JSON.stringify({
+                                attractionId: urlParams.get('id'),
+                                title: "brak tytulu",
+                                rating: selectedStars2.selectedStars,
+                                description: $("#commentDescriptionChange").val(),
+                            });
+    
+                            fetch('https://localhost:7002/api/attraction/updateComment', {
+                                method: 'PUT',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${token}`
+                                },
+                                body: jsonData
+                                })
+                                .then(data => console.log(data))
+                                .catch(error => console.log(error))
+                        
+                                console.log(JSON.parse(jsonData));
+    
+                            location.reload();
+                        });
+
+                        $("#commentDeleteButton").on('click', function () {
+                            fetch(`https://localhost:7002/api/attraction/deleteComment/${urlParams.get('id')}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${token}`
+                                },
+                                });
+    
+                            location.reload();
+                        });
+                
+                        isCommentEditing = true;
+                    } else {
+                        $('#useropinion-container').html(UserComment);
+                
+                        isCommentEditing = false;
+
+                        $("#commentEditButton").on("click", handleEditComment);
+                    }
+                }
+                
+                $("#commentEditButton").on("click", handleEditComment);
+
             } else {
                 $("#opinion").html(
                     `<h1 class="title21" style="text-align: center;">Byłeś już tutaj?<br>Pomóż innym
@@ -100,21 +164,7 @@ fetch(`https://localhost:7002/api/attraction/getAttraction?id=${urlParams.get('i
                 <input type="button" class="button margin" id="commentButton" value="Dodaj opinię">`
                 );
 
-                var selectedStars;
-
-                for(var i=1; i<=5; i++) {
-                    $('#commentRating').append(`<img src="../images/star.png" style="filter: grayscale(1);" data-star="${i}" class="star">`);
-                }
-
-                $("#commentRating .star").on("click", function() {
-                    selectedStars = parseInt($(this).attr("data-star"));
-
-                    $("#commentRating .star").css("filter", "grayscale(1)");
-                    
-                    for (var i = 1; i <= selectedStars; i++) {
-                    $("#commentRating .star[data-star='" + i + "']").css("filter", "");
-                    }
-                });
+                var selectedStars2 = generateStarRating("commentRating", 0);
 
                 $("#commentButton").on('click', function () {
                     // Po kliknięciu przycisku pokaż sekcję komentarzy
@@ -123,11 +173,10 @@ fetch(`https://localhost:7002/api/attraction/getAttraction?id=${urlParams.get('i
 
                 $("#commentForm").on('submit', function(e) {
                     e.preventDefault();
-                    console.log(selectedStars);
 
                     let isValid = true;
 
-                    if(selectedStars >= 1 && selectedStars <= 5) {
+                    if(selectedStars2.selectedStars >= 1 && selectedStars2.selectedStars <= 5) {
                         $("#ratingError").html("");
                     } else {
                         $("#ratingError").html("Wybierz ilość gwiazdek między 1, a 5")
@@ -139,7 +188,7 @@ fetch(`https://localhost:7002/api/attraction/getAttraction?id=${urlParams.get('i
                         const jsonData = JSON.stringify({
                             attractionId: urlParams.get('id'),
                             title: "brak tytulu",
-                            rating: selectedStars,
+                            rating: selectedStars2.selectedStars,
                             description: $("#comment").val(),
                         });
 
