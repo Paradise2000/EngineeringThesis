@@ -25,14 +25,16 @@ namespace EngineeringThesisAPI.Controllers
         private readonly IUserIdProvider _userIdProvider;
         private readonly IValidator<AddCommentDto> _validatorAddCommentDto;
         private readonly IValidator<UpdateCommentDto> _validatorUpdateCommentDto;
+        private readonly IWebHostEnvironment _env;
 
-        public AttractionController(EngineeringThesisDbContext context, IMapper mapper, IUserIdProvider userIdProvider, IValidator<AddCommentDto> AddCommentDto, IValidator<UpdateCommentDto> validatorUpdateCommentDto)
+        public AttractionController(EngineeringThesisDbContext context, IMapper mapper, IUserIdProvider userIdProvider, IValidator<AddCommentDto> AddCommentDto, IValidator<UpdateCommentDto> validatorUpdateCommentDto, IWebHostEnvironment env)
         {
             _context = context;
             _mapper = mapper;
             _userIdProvider = userIdProvider;
             _validatorAddCommentDto = AddCommentDto;
             _validatorUpdateCommentDto = validatorUpdateCommentDto;
+            _env = env;
         }
 
         [Authorize]
@@ -42,12 +44,9 @@ namespace EngineeringThesisAPI.Controllers
             bool isMainPhotoPicked = false;
 
             var attraction = _mapper.Map<Attraction>(dto);
-
             attraction.UserId = _userIdProvider.GetUserId();
 
             _context.Attractions.Add(attraction);
-
-            _context.SaveChanges(); //rozwiązanie tymczasowe
 
             foreach (var file in dto.ImagesPaths)
             {
@@ -55,8 +54,7 @@ namespace EngineeringThesisAPI.Controllers
 
                 if (record == null)
                 {
-                    _context.Remove(attraction); //rozwiązanie tymczasowe
-                    return BadRequest("File name error");
+                    return BadRequest($"Photo with name ${file} not found");
                 }
 
                 if(file == dto.MainImagePath)
@@ -65,16 +63,82 @@ namespace EngineeringThesisAPI.Controllers
                     isMainPhotoPicked = true;
                 }
 
-                record.AttractionId = attraction.Id;
+                record.Attraction = attraction;
             }
 
             if(isMainPhotoPicked == false)
             {
-                _context.Remove(attraction); //rozwiązanie tymczasowe
-                return BadRequest("File name error");
+                return BadRequest("Main photo not found");
             }
 
             _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPut("updateAttraction")]
+        public IActionResult UpdateAttraction([FromBody]UpdateAttractionDto dto)
+        {
+            bool isMainPhotoPicked = false;
+
+            var attraction = _context.Attractions.FirstOrDefault(r => r.Id == dto.AttractionId && r.UserId == _userIdProvider.GetUserId());   
+            
+            if(attraction == null)
+            {
+                return BadRequest("the attraction does not exist or does not belong to this user");
+            }
+
+            foreach(var file in dto.ImagesPaths) 
+            {
+                var record = _context.FilePaths.FirstOrDefault(r => r.FileName == file && r.UserId == _userIdProvider.GetUserId());
+
+                if (record == null)
+                {
+                    return BadRequest("Photo not found");
+                }
+
+                if (file == dto.MainImagePath)
+                {
+                    attraction.MainPhotoId = record.Id;
+                    isMainPhotoPicked = true;
+                }
+
+                record.AttractionId = attraction.Id;
+            }
+
+            if (isMainPhotoPicked == false)
+            {
+                return BadRequest("Main photo not found");
+            }
+
+            attraction.City = dto.City;
+            attraction.Duration = dto.Duration;
+            attraction.Price = dto.Price;
+            attraction.CategoryId = dto.CategoryId;
+            attraction.Name = dto.Name;
+            attraction.Description = dto.Description;
+            attraction.CoordinateX = dto.CoordinateX;
+            attraction.CoordinateY = dto.CoordinateY;
+            attraction.CoordinateZ = dto.CoordinateZ;
+
+            var recordsToDelete = _context.FilePaths
+                .Where(r => !dto.ImagesPaths.Contains(r.FileName) && r.AttractionId == attraction.Id)
+                .ToList();
+
+            _context.FilePaths.RemoveRange(recordsToDelete);
+
+            _context.SaveChanges();
+
+            foreach (var record in recordsToDelete)
+            {
+                var path = Path.Combine(_env.ContentRootPath, "FileLocalStorage", record.FileName);
+
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+            }
 
             return Ok();
         }
