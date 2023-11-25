@@ -21,6 +21,10 @@
     @include font($ssp, 21px, bold, $titlegray);
   }
 
+  .text21{
+    @include font($formfont, 21px, normal, $textgray)
+  }
+
   .text {
     @include font($ssp, 16px, normal, $textgray);
   }
@@ -39,6 +43,10 @@
   }
 
   
-  
+  @media screen and (max-width: 480px){
+    .title{
+      font-size: 30px;
+    }
+}
  
 

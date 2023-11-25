@@ -27,6 +27,13 @@
   color: #444444;
 }
 
+.text21 {
+  font-family: Helvetica;
+  font-size: 21px;
+  font-weight: normal;
+  color: #7a7a7a;
+}
+
 .text {
   font-family: sans-serif;
   font-size: 16px;
@@ -56,6 +63,11 @@
   color: #c0c0c0;
 }
 
+@media screen and (max-width: 480px) {
+  .title {
+    font-size: 30px;
+  }
+}
 /*SEKCJE*/
 section {
   display: flex;
@@ -65,6 +77,18 @@ section {
   justify-content: center;
   align-items: center;
   padding: 90px 0 90px 0; /* góra, prawo, dół, lewo */
+  /* lub padding:90px 0;  wtedy 90px góra, dół i 0 prawo, lewo */
+  /*overflow:auto;*/
+}
+
+.section2 {
+  display: flex;
+  flex-direction: column;
+  /*flex-wrap: wrap;
+  clear: both;*/
+  justify-content: center;
+  align-items: center;
+  padding: 0 50px 0 50px; /* góra, prawo, dół, lewo */
   /* lub padding:90px 0;  wtedy 90px góra, dół i 0 prawo, lewo */
   /*overflow:auto;*/
 }
@@ -88,6 +112,18 @@ section {
   align-items: center;
   gap: 30px;
   /*flex-basis: 100%;*/
+}
+
+.container2 {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container2 h1 {
+  text-align: left;
 }
 
 .col-one-third { /* . dla klas */
@@ -119,6 +155,12 @@ section {
   float: left;*/
 }
 
+.col-half2 { /* . dla klas */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
 .banner {
   display: flex;
   flex-wrap: wrap;
@@ -129,6 +171,10 @@ section {
   gap: 5px;
   padding: 50px 0 50px 0;
   /*flex-basis: 100%;*/
+}
+
+.banner.user {
+  padding: 10px 0 10px 0;
 }
 
 .info {
@@ -147,6 +193,20 @@ section {
 
 .info h1 {
   margin: 0; /* Usuń domyślne marginesy dla nagłówków */
+}
+
+.info.panel {
+  align-items: stretch;
+  justify-content: center;
+}
+
+.info.panel2 {
+  justify-content: center;
+  text-align: center;
+}
+
+.icon-background, .text21 {
+  overflow-wrap: break-word;
 }
 
 .attraction {
@@ -180,6 +240,38 @@ section {
 .stars {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.user-option {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+  padding: 8px 8px 8px 8px;
+  max-width: 425px;
+  background: #DFEDD6;
+  border-color: rgba(0, 0, 0, 0);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 24px 24px 24px 24px;
+  flex: 1;
+}
+
+.icon-background {
+  width: 34px;
+  height: 34px;
+  padding: 8px 8px 8px 8px;
+  background: #72BB53;
+  border-radius: 20px 20px 20px 20px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*DODATKI DO KONTENERÓW (DIV)*/
@@ -246,7 +338,7 @@ section {
 
 /*PRZYCISKI*/
 .button {
-  /*width: 148px;*/
+  width: 148px;
   height: 40px;
   padding: 0px 15px 0px 15px;
   background: #72bb53;
@@ -275,9 +367,25 @@ img {
   object-fit: cover; /* Obrazek zostanie przycięty, ale zachowa proporcje */
 }
 
+.image {
+  min-width: auto;
+  min-height: auto;
+  width: 400px;
+  height: 400px; /* Zachowanie proporcji */
+  object-fit: cover; /* Obrazek zostanie przycięty, ale zachowa proporcje */
+  border-radius: 15px 15px 15px 15px;
+}
+
 .icon {
   width: 20px;
   height: 20px;
+  padding: 0;
+  /*background: #72bb53;*/
+}
+
+.icon-panel {
+  width: 34px;
+  height: 34px;
   padding: 0;
   /*background: #72bb53;*/
 }
@@ -365,6 +473,17 @@ img {
   text-align: left;
 }
 
+/*INNE*/
+hr {
+  width: 100%;
+  height: 0px;
+  opacity: 30%;
+  border-color: #CBE8BA;
+  border-width: 1px;
+  border-style: solid;
+  margin: 30px 0;
+}
+
 /*div p{
     flex: 1;
     background-color: #72bb53;
@@ -384,8 +503,26 @@ img {
   .attraction-container {
     padding: 0;
   }
+  .info.panel {
+    flex-direction: column;
+    align-items: center;
+  }
+  .info.panel .col-one-third {
+    width: 90%;
+  }
+  .info.panel .text21 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .info.panel .title21 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
 @media screen and (max-width: 480px) {
+  .section2 {
+    padding: 0;
+  }
   .container {
     flex-direction: column;
   }
@@ -410,6 +547,10 @@ img {
     width: max-content; /* Zachowanie proporcji */
     object-fit: cover; /* Obrazek zostanie przycięty, ale zachowa proporcje */
   }
+  .image {
+    width: 220vW;
+    height: auto;
+  }
   .row {
     flex-direction: row;
     align-items: center;
@@ -419,7 +560,7 @@ img {
     width: 80vW;
   }
   .text-input {
-    width: 80vW;
+    min-width: 90vW;
   }
   .row-column {
     flex-direction: column;
@@ -429,5 +570,18 @@ img {
   }
   .align-right {
     text-align: left;
+  }
+  .info.panel .info {
+    gap: 0;
+  }
+  .info.panel .full-width {
+    width: 90vW;
+  }
+  .info.panel .margin {
+    margin-top: 0;
+  }
+  .info.panel .text21 {
+    margin: 0;
+    font-size: 18px;
   }
 }
