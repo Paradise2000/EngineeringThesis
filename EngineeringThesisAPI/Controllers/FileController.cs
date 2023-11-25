@@ -62,6 +62,11 @@ namespace EngineeringThesisAPI.Controllers
 
             var file = await _context.FilePaths.FirstOrDefaultAsync(x => x.FileName == id);
 
+            if(await _context.Attractions.FirstOrDefaultAsync(r => r.Id == file.AttractionId && r.MainPhotoId == file.Id) != null)
+            {
+                return BadRequest("Cannot delete a photo assigned as main photo");
+            }
+
             if(file != null)
             {
                 _context.FilePaths.Remove(file);

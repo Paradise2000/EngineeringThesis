@@ -24,27 +24,29 @@ namespace EngineeringThesisAPI.Controllers
         private readonly IMapper _mapper;
         private readonly IUserIdProvider _userIdProvider;
         private readonly IValidator<AddCommentDto> _validatorAddCommentDto;
+        private readonly IValidator<UpdateCommentDto> _validatorUpdateCommentDto;
+        private readonly IWebHostEnvironment _env;
 
-        public AttractionController(EngineeringThesisDbContext context, IMapper mapper, IUserIdProvider userIdProvider, IValidator<AddCommentDto> AddCommentDto)
+        public AttractionController(EngineeringThesisDbContext context, IMapper mapper, IUserIdProvider userIdProvider, IValidator<AddCommentDto> AddCommentDto, IValidator<UpdateCommentDto> validatorUpdateCommentDto, IWebHostEnvironment env)
         {
             _context = context;
             _mapper = mapper;
             _userIdProvider = userIdProvider;
             _validatorAddCommentDto = AddCommentDto;
+            _validatorUpdateCommentDto = validatorUpdateCommentDto;
+            _env = env;
         }
 
+        [Authorize]
         [HttpPost("create")]
         public IActionResult CreateAttraction([FromBody]CreateAttractionDto dto)
         {
             bool isMainPhotoPicked = false;
 
             var attraction = _mapper.Map<Attraction>(dto);
-
             attraction.UserId = _userIdProvider.GetUserId();
 
             _context.Attractions.Add(attraction);
-
-            _context.SaveChanges(); //rozwiązanie tymczasowe
 
             foreach (var file in dto.ImagesPaths)
             {
@@ -52,8 +54,7 @@ namespace EngineeringThesisAPI.Controllers
 
                 if (record == null)
                 {
-                    _context.Remove(attraction); //rozwiązanie tymczasowe
-                    return BadRequest("File name error");
+                    return BadRequest($"Photo with name ${file} not found");
                 }
 
                 if(file == dto.MainImagePath)
@@ -62,16 +63,82 @@ namespace EngineeringThesisAPI.Controllers
                     isMainPhotoPicked = true;
                 }
 
-                record.AttractionId = attraction.Id;
+                record.Attraction = attraction;
             }
 
             if(isMainPhotoPicked == false)
             {
-                _context.Remove(attraction); //rozwiązanie tymczasowe
-                return BadRequest("File name error");
+                return BadRequest("Main photo not found");
             }
 
             _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPut("updateAttraction")]
+        public IActionResult UpdateAttraction([FromBody]UpdateAttractionDto dto)
+        {
+            bool isMainPhotoPicked = false;
+
+            var attraction = _context.Attractions.FirstOrDefault(r => r.Id == dto.AttractionId && r.UserId == _userIdProvider.GetUserId());   
+            
+            if(attraction == null)
+            {
+                return BadRequest("the attraction does not exist or does not belong to this user");
+            }
+
+            foreach(var file in dto.ImagesPaths) 
+            {
+                var record = _context.FilePaths.FirstOrDefault(r => r.FileName == file && r.UserId == _userIdProvider.GetUserId());
+
+                if (record == null)
+                {
+                    return BadRequest("Photo not found");
+                }
+
+                if (file == dto.MainImagePath)
+                {
+                    attraction.MainPhotoId = record.Id;
+                    isMainPhotoPicked = true;
+                }
+
+                record.AttractionId = attraction.Id;
+            }
+
+            if (isMainPhotoPicked == false)
+            {
+                return BadRequest("Main photo not found");
+            }
+
+            attraction.City = dto.City;
+            attraction.Duration = dto.Duration;
+            attraction.Price = dto.Price;
+            attraction.CategoryId = dto.CategoryId;
+            attraction.Name = dto.Name;
+            attraction.Description = dto.Description;
+            attraction.CoordinateX = dto.CoordinateX;
+            attraction.CoordinateY = dto.CoordinateY;
+            attraction.CoordinateZ = dto.CoordinateZ;
+
+            var recordsToDelete = _context.FilePaths
+                .Where(r => !dto.ImagesPaths.Contains(r.FileName) && r.AttractionId == attraction.Id)
+                .ToList();
+
+            _context.FilePaths.RemoveRange(recordsToDelete);
+
+            _context.SaveChanges();
+
+            foreach (var record in recordsToDelete)
+            {
+                var path = Path.Combine(_env.ContentRootPath, "FileLocalStorage", record.FileName);
+
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+            }
 
             return Ok();
         }
@@ -85,14 +152,31 @@ namespace EngineeringThesisAPI.Controllers
         }
 
         [HttpGet("getAttractions")]
-        public ActionResult<PaginationModel<GetAttractionsDto>> GetAttractions(int pageIndex, int pageSize)
+        public ActionResult<PaginationModel<GetAttractionsDto>> GetAttractions(int pageIndex, int pageSize,
+            string? City, int? CategoryId, string? Name)
         {
-            var attractions = _mapper.Map<List<GetAttractionsDto>>(
+            var attractions =
                 _context.Attractions
                 .Include(r => r.Category)
-                .Include(r => r.Photos));
+                .Include(r => r.Photos)
+                .AsQueryable();
 
-            var paginatedList = PaginationModel<GetAttractionsDto>.Create(attractions, pageIndex, pageSize);
+            if(!string.IsNullOrEmpty(City)) 
+            {
+                attractions = attractions.Where(a => a.City.ToLower().Contains(City.ToLower()));
+            }
+
+            if(CategoryId.HasValue) 
+            {
+                attractions = attractions.Where(a => a.CategoryId == CategoryId);
+            }
+
+            if(!string.IsNullOrEmpty(Name))
+            {
+                attractions = attractions.Where(a => a.Name.ToLower().Contains(Name.ToLower()));
+            }
+
+            var paginatedList = PaginationModel<GetAttractionsDto>.Create(_mapper.Map<List<GetAttractionsDto>>(attractions), pageIndex, pageSize);
 
             return Ok(paginatedList);
         }
@@ -104,9 +188,19 @@ namespace EngineeringThesisAPI.Controllers
                 .Include(r => r.Category)
                 .Include(r => r.Photos)
                 .Include(r => r.Comments)
-                .FirstOrDefault(r => r.Id == id);
+                .FirstOrDefault(r => r.Id == id);          
 
             var result = _mapper.Map<GetAttractionDto>(attraction);
+
+            if(_userIdProvider.IsUserLogged())
+            {
+                var userComment = _context.Comments.FirstOrDefault(r => r.UserId == _userIdProvider.GetUserId() && r.AttractionId == id);
+
+                if (userComment != null)
+                {
+                    result.UserComment = _mapper.Map<GetCommentDto>(userComment);
+                }
+            }
 
             return result;
         }
@@ -124,6 +218,7 @@ namespace EngineeringThesisAPI.Controllers
             return Ok(paginatedList);
         }
 
+        [Authorize]
         [HttpPost("addComment")]
         public IActionResult AddComment([FromBody]AddCommentDto dto)
         {
@@ -138,6 +233,52 @@ namespace EngineeringThesisAPI.Controllers
             comment.UserId = _userIdProvider.GetUserId();
 
             _context.Comments.Add(comment);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPut("updateComment")]
+        public IActionResult UpdateComment([FromBody]UpdateCommentDto dto)
+        {
+            var commentValidation = _validatorUpdateCommentDto.Validate(dto);
+
+            if(!commentValidation.IsValid) 
+            {
+                return BadRequest(new ValidationErrorModel<UpdateCommentDto>(commentValidation));
+            }
+
+            var comment = _context.Comments
+                .FirstOrDefault(r => r.UserId == _userIdProvider.GetUserId() && r.AttractionId == dto.AttractionId);
+
+            if(comment != null)
+            {
+                comment.Title = dto.Title;
+                comment.Rating = dto.Rating;
+                comment.Description = dto.Description;
+                _context.SaveChanges();
+            } else
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpDelete("deleteComment/{AttractionId}")]
+        public IActionResult DeleteComment(int AttractionId)
+        {
+            var comment = _context.Comments
+                .FirstOrDefault(r => r.UserId == _userIdProvider.GetUserId() && r.AttractionId == AttractionId);
+
+            if(comment == null)
+            {
+                return BadRequest("No comment to delete");
+            }
+
+            _context.Comments.Remove(comment);
             _context.SaveChanges();
 
             return Ok();
