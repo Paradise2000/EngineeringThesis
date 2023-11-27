@@ -69,6 +69,10 @@
   }
 }
 /*SEKCJE*/
+body {
+  margin: 0;
+}
+
 section {
   display: flex;
   flex-direction: column;
@@ -88,7 +92,7 @@ section {
   clear: both;*/
   justify-content: center;
   align-items: center;
-  padding: 0 50px 0 50px; /* góra, prawo, dół, lewo */
+  padding: 0 10vW 0 10vW; /* góra, prawo, dół, lewo */
   /* lub padding:90px 0;  wtedy 90px góra, dół i 0 prawo, lewo */
   /*overflow:auto;*/
 }
@@ -211,6 +215,16 @@ section {
 
 .attraction {
   display: flex;
+  width: 80vW;
+  border: thin solid #cccccc;
+  flex-direction: row;
+  padding: 2% 2% 2% 2%;
+  gap: 2%;
+  text-align: justify;
+}
+
+.comment {
+  display: flex;
   border: thin solid #cccccc;
   flex-direction: row;
   padding: 2% 2% 2% 2%;
@@ -224,6 +238,7 @@ section {
   flex-direction: column;
   padding: 2% 2% 2% 2%;
   text-align: justify;
+  align-items: center;
 }
 
 .form-container {
@@ -233,7 +248,7 @@ section {
   justify-content: center;
   justify-items: center;
   align-items: center;
-  padding: 5% 5% 7% 5%;
+  padding-bottom: 30px;
   /*background-color: $footfont;*/
 }
 
@@ -303,6 +318,7 @@ section {
   max-width: 100%;
   flex-direction: column;
   padding: 0 5% 0 5%;
+  align-content: center;
 }
 
 .category {
@@ -338,7 +354,7 @@ section {
 
 /*PRZYCISKI*/
 .button {
-  width: 148px;
+  width: fit-content;
   height: 40px;
   padding: 0px 15px 0px 15px;
   background: #72bb53;
@@ -363,16 +379,21 @@ section {
 /*OBRAZY*/
 img {
   max-width: 100%; /* Obrazek nie będzie większy niż jego oryginalny rozmiar */
-  height: auto; /* Zachowanie proporcji */
+  height: 400px;
+  object-fit: cover; /* Obrazek zostanie przycięty, ale zachowa proporcje */
+}
+
+.attraction-img {
+  width: 400px;
+  height: 315px;
   object-fit: cover; /* Obrazek zostanie przycięty, ale zachowa proporcje */
 }
 
 .image {
-  min-width: auto;
-  min-height: auto;
   width: 400px;
   height: 400px; /* Zachowanie proporcji */
   object-fit: cover; /* Obrazek zostanie przycięty, ale zachowa proporcje */
+  max-width: 100%; /* Obrazek nie będzie większy niż jego oryginalny rozmiar */
   border-radius: 15px 15px 15px 15px;
 }
 
@@ -430,7 +451,7 @@ img {
   margin: 10px; /* Dodaje odstępy między elementami */
 }
 
-.text-area {
+.text-area2 {
   box-sizing: border-box; /* Uwzględniaj padding i border w szerokości elementu */
   /*width: 332px;240
   height: 300px;*/
@@ -441,7 +462,26 @@ img {
   padding: 4px 8px 4px 8px;
   background: #ffffff;
   color: #c0c0c0;
-  border-color: #4c7a34;
+  border-color: #629c44;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 3px 3px 3px 3px;
+  font-family: "Helvetica";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.text-area {
+  box-sizing: border-box; /* Uwzględniaj padding i border w szerokości elementu */
+  /*width: 332px;240
+  height: 300px;*/
+  min-height: 180px;
+  padding: 4px 8px 4px 8px;
+  background: #ffffff;
+  color: #c0c0c0;
+  border-color: #629c44;
   border-width: 1px;
   border-style: solid;
   border-radius: 3px 3px 3px 3px;
@@ -484,6 +524,10 @@ hr {
   margin: 30px 0;
 }
 
+.map {
+  max-height: 400px;
+}
+
 /*div p{
     flex: 1;
     background-color: #72bb53;
@@ -502,6 +546,9 @@ hr {
   }
   .attraction-container {
     padding: 0;
+  }
+  .attraction.no-border {
+    border: none;
   }
   .info.panel {
     flex-direction: column;
@@ -541,15 +588,25 @@ hr {
   }
   .attraction {
     flex-direction: column;
+    width: auto;
+    border-left: none;
+    border-right: none;
   }
   img {
-    max-height: auto; /* Obrazek nie będzie większy niż jego oryginalny rozmiar */
+    height: auto; /* Obrazek nie będzie większy niż jego oryginalny rozmiar */
     width: max-content; /* Zachowanie proporcji */
     object-fit: cover; /* Obrazek zostanie przycięty, ale zachowa proporcje */
   }
   .image {
     width: 220vW;
     height: auto;
+  }
+  .attraction-img {
+    height: auto;
+    width: fit-content;
+    object-fit: cover;
+    min-height: 200px;
+    max-height: 200px;
   }
   .row {
     flex-direction: row;

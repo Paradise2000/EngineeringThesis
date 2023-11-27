@@ -81,7 +81,7 @@ fetch(`https://localhost:7002/api/attraction/getAttraction?id=${urlParams.get('i
                 $('#opinion').toggle();
 
                 var UserComment = `
-                    <div class="attraction column margin">
+                    <div class="comment column margin">
                         <div class="info">
                             <h1 class="title21">Twoja opinia</h1>
                             <input type="button" class="button margin" id="commentEditButton" value="Edytuj/Usuń komentarz">
@@ -232,7 +232,7 @@ $('#pagination-container').pagination({
 
         data.forEach(function(item) {
         $('#data-container').append(`
-            <div class="attraction column margin">
+            <div class="comment column margin">
                 <div class="info">
                     <img src="../images/image.PNG" class="profile" alt="Obrazek zastępczy" />
                     <h1 class="title21">${item.author}</h1>

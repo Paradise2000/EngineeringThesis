@@ -21,7 +21,7 @@ var paginationOptions = {
                 <div class="container attraction-container">
                     <div onclick="window.location.href='getAttractionDetails.html?id=${item.id}'" class="attraction" style="cursor: pointer;">
                         <div class="col-one-third">
-                            <img src="https://localhost:7002/api/file/download/${item.mainImagePath}"/>
+                            <img class="attraction-img" src="https://localhost:7002/api/file/download/${item.mainImagePath}"/>
                         </div>
                         <div class="col-two-third">
                             <div class="info">
