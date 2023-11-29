@@ -350,7 +350,25 @@ img{
     }
 }
 
+/* Banner 2 */
+.container {
+    justify-content: space-around;
+    margin: 20px;
+}
 
+.column {
+    text-align: center;
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    background: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
 
 
 

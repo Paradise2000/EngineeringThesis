@@ -95,6 +95,165 @@ img {
     font-size: 18px;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  .column {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .text-column {
+    text-align: left;
+  }
+  
+  .image-column img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .title {
+    font-size: 21px;
+    margin-top: 10px;
+  }
+  
+  .text {
+    font-size: 14px;
+  }
+  
+  .button {
+    height: 40px;
+    padding: 0px 15px;
+    background: #72bb53;
+    color: #ffffff;
+    border-color: #72bb53;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 24px;
+    font-family: "Source Sans Pro";
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  /* Second banner with three columns */
+  .section.alexa {
+    .container {
+      .column {
+        flex: 1;
+        padding: 20px;
+        box-sizing: border-box;
+  
+        &:first-child {
+          img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+          }
+        }
+      }
+    }
+  }
+  
+  /* Third banner with two columns */
+  .section.alexa {
+    .container {
+      .column {
+        flex: 1;
+        padding: 20px;
+        box-sizing: border-box;
+        text-align: left;
+  
+        &:first-child {
+          img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+          }
+        }
+      }
+    }
+  }
+  
+  /* Fourth banner - adjusting existing styles */
+  .banner-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px;
+  
+    .banner-text {
+      flex: 1;
+      text-align: left;
+  
+      .title {
+        font-size: 21px;
+        margin-top: 10px;
+      }
+  
+      .text {
+        font-size: 14px;
+      }
+    }
+  
+    .banner-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+  }
+  
+/*PRZYCISKI*/
+.button {
+    /*width: 148px;*/
+    height: 40px;
+    padding: 0px 15px 0px 15px;
+    background: #72bb53;
+    color: #ffffff;
+    border-color: #72bb53;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 24px 24px 24px 24px;
+    font-family: "Source Sans Pro";
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .button2 {
+    /*width: 148px;*/
+    background: none;
+    color: #72bb53;
+    border-color: #72bb53;
+  }
+  
+  /*OBRAZY*/
+  img {
+    max-width: 100%; /* Obrazek nie będzie większy niż jego oryginalny rozmiar */
+    height: auto; /* Zachowanie proporcji */
+    object-fit: cover; /* Obrazek zostanie przycięty, ale zachowa proporcje */
+  }
+  
+  .icon {
+    width: 20px;
+    height: 20px;
+    padding: 0 3px 0 3px;
+    /*background: #72bb53;*/
+  }
+   
 /* Font styles (assuming you have a mixin for this) */
 .title {
     @include font($ssp, 40px, bold, $titlegray);
