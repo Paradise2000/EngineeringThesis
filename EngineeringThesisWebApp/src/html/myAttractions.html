@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+
+    <script src="../../node_modules/jquery/dist/jquery.js"></script>
+    
+    <link rel="stylesheet" href="/css/index.css">
+
+
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"></script>
+    <script src="https://pagination.js.org/dist/2.6.0/pagination.min.js"></script>
+    <link rel="stylesheet" href="https://pagination.js.org/dist/2.6.0/pagination.css" />
+
+  </head>
+  <body>
+
+    <div id="menu"></div>
+
+    <main>
+     
+        <div class="banner" style="background-image: url('../images/map.PNG');">
+            <h1 class="title center-text">Moje atrakcje</h1>
+            <p class="text">Czegoś brakuje? Dodaj swoje miejsca.<br>Wcześniej upewnij się, że ktoś inny już tego nie zrobił.</p>
+            <div>
+                <input type="button" class="button margin" value="+ Nowa atrakcja" onclick="window.location.href='./createAttraction.html'">
+                <input type="button" class="button button2 margin" value="Wyszukaj" onclick="window.location.href='#wyszukaj'">
+            </div>
+        </div>
+
+        <section id="wyszukaj">
+            <div class="row-column">
+                <input id="city" type="search" class="text-input margin" placeholder="miejscowość">
+                <select id="categories" class="text-input margin" placeholder="kategoria">
+                    <option value="no_option">Wybierz opcję</option>
+                </select>
+                <!--
+                <input type="time" class="text-input margin"><br>
+                <input type="number" class="text-input margin" id="cost" name="cost" placeholder="koszt atrakcji" min="0.00" max="10000.00" step="0.01"/><br>
+                -->
+                <input id="name" type="search" class="text-input margin" placeholder="Szukaj po nazwie">
+                <input id="filter" type="submit" class="button margin" value="Szukaj">
+            </div>
+        </section>
+
+        <section class="attraction-container">
+            <div id="data-container"></div>
+        </section>
+        <br>
+        <div id="pagination-container"></div>
+        
+    </main>
+
+    <script type="module" src="../script/getUserAttractions.js"></script>
+
+  </body>
+
+  <script type="module">
+    import { isUserLogged } from "../../services/authService.js";
+
+    if(isUserLogged() == true) {
+        $("#menu").load("menu_logged.html");
+      } else {
+        $("#menu").load("menu_unlogged.html");
+      }
+  </script>
+</html>
