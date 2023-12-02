@@ -376,6 +376,11 @@ section {
   border-color: #72bb53;
 }
 
+.red {
+  background: #c80424;
+  border-color: #c80424;
+}
+
 /*OBRAZY*/
 img {
   max-width: 100%; /* Obrazek nie będzie większy niż jego oryginalny rozmiar */
