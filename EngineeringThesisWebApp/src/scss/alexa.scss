@@ -1,3 +1,5 @@
+@import "_variables";
+@import "_mixins";
 /* Common styles */
 body {
     font-family: Arial, sans-serif;
@@ -9,7 +11,7 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 20px;
+    margin: 0 20px;
 }
 
 /* Banner 1 */
@@ -74,6 +76,23 @@ img {
     height: auto;
     border-radius: 10px;
 }
+/* Dodaj te style do swojego arkusza stylów CSS (czyli pliku alexa.css) */
+
+/* Styl dla kontenera ikony */
+.column img {
+    display: block; /* Zapewnia, żeby element był blokowy, co ułatwi dodanie tła */
+    margin: 0 auto; /* Odstęp od góry i dołu, a także wycentrowanie ikony */
+    background-color: #76b35c; /* Kolor tła - zielony */
+    padding: 10px; /* Odstęp wokół ikony */
+    border-radius: 10px; /* Zaokrąglenie rogów */
+}
+
+/* Popraw styl dla tytułu i tekstu */
+.title,
+.text {
+    text-align: center; /* Centrowanie tekstu pod ikoną */
+}
+
 
 /* Banner 4 */
 .banner {
@@ -242,7 +261,7 @@ body {
   
   /*OBRAZY*/
   img {
-    max-width: 100%; /* Obrazek nie będzie większy niż jego oryginalny rozmiar */
+    max-width: 30%; /* Obrazek nie będzie większy niż jego oryginalny rozmiar */
     height: auto; /* Zachowanie proporcji */
     object-fit: cover; /* Obrazek zostanie przycięty, ale zachowa proporcje */
   }
@@ -278,4 +297,10 @@ body {
 
 ::placeholder {
     @include font($formfont, 14px, normal, $bordertext);
+}
+/* Add this to your existing styles */
+.small-image {
+    max-width: 50px; /* Adjust the value as needed */
+    height: auto;
+    border-radius: 10px; /* Optional: Add border radius */
 }
