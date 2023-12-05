@@ -21,5 +21,6 @@
         public GetCommentDto UserComment { get; set; }
         public List<string> ImagePaths { get; set; }
         public string MainImagePath { get; set; }
+        public bool isUserAttracion { get; set; }
     }
 }

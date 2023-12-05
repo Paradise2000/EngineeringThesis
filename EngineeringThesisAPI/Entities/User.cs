@@ -10,5 +10,6 @@
 
         public ICollection<Attraction> Attractions { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<TripAttraction> TripAttractions { get; set; }
     }
 }

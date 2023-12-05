@@ -6,18 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Website</title>
 
-    <script src="../../node_modules/jquery/dist/jquery.js"></script>
-    
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="../../node_modules/leaflet/dist/leaflet.css"/>
 
-
-    <script
-    src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-    crossorigin="anonymous"></script>
-    <script src="https://pagination.js.org/dist/2.6.0/pagination.min.js"></script>
-    <link rel="stylesheet" href="https://pagination.js.org/dist/2.6.0/pagination.css" />
-
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/leaflet/dist/leaflet.js"></script>
   </head>
   <body>
 
@@ -37,12 +30,13 @@
         <section>
             <div class="row-column">
                 <h1 class="title24 margin">Łączny czas trwania atrakcji: </h1>
-                <h2 class="text21">10h</h1>
+                <h2 class="text21" id="totalTime"></h1>
             </div>
             <div class="row-column">
                 <h1 class="title24 margin">Łączny koszt wszystkich atrakcji: </h1>
-                <h2 class="text21">50zł</h1>
+                <h2 class="text21" id="totalPrice"></h1>
             </div>
+            <div id="map" style="height: 500px; width: 70%;"></div>
         </section>
 
         <section id="travel-plan" class="attraction-container">

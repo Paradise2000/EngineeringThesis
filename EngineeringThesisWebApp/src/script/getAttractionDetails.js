@@ -18,6 +18,20 @@ fetch(`https://localhost:7002/api/attraction/getAttraction?id=${urlParams.get('i
     })
     .then(response => response.json())
     .then(dataFromAPI => {
+        if(dataFromAPI.isUserAttracion == true) {
+            $('#editDelete').append(`
+            <input type="button" class="button margin" value="Edytuj" id="edit">
+            <input type="button" class="button red margin" value="Usuń atrakcję" id="delete">`);
+
+            $('#edit').on('click', function() {
+                window.location.href = `http://127.0.0.1:5500/src/html/updateAttraction.html?id=${urlParams.get('id')}`;
+            });
+
+            $('#delete').on('click', function() {
+                //do zrobienia
+            });
+        }
+
         $('#city').html(dataFromAPI.city);
         $('#duration').html(getHour(dataFromAPI.duration) + 'h');
         $('#price').html(dataFromAPI.price + 'zł');
