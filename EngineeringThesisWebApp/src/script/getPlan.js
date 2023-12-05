@@ -1,47 +1,58 @@
-import { isUserLogged } from "../../services/authService.js";
+import { isUserLogged, getJWTtoken } from "../../services/authService.js";
 import { getHour } from "../../services/functionService.js";
 
-var InitialdataSource = 'https://localhost:7002/api/attraction/getAttractions';
-var paginationOptions = {
-    dataSource: InitialdataSource,
-    locator: 'items',
-    totalNumberLocator: function (response) {
-        return response.totalPages * 5;
-    },
-    alias: {
-        pageNumber: 'pageIndex',
-        pageSize: 'pageSize'
-    },
-    pageSize: 5,
-    callback: function(data, pagination) {
-        $('#data-container').empty();
+var token;
+token = getJWTtoken();
 
-        data.forEach(function(item) {
-            let newAttraction = `
-                <div class="container attraction-container">
-                    <div onclick="window.location.href='getAttractionDetails.html?id=${item.id}'" class="attraction" style="cursor: pointer;">
-                        <div class="col-one-third">
-                            <img class="attraction-img" src="https://localhost:7002/api/file/download/${item.mainImagePath}"/>
+var map = L.map('map').setView([52, 19], 5);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+await fetch(`https://localhost:7002/api/attraction/getAttractionPlan`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    }
+  })
+.then(response => response.json())
+.then(dataFromAPI => {
+    dataFromAPI.attractions.forEach(function(item) {
+        let newAttraction = `
+            <div class="container attraction-container">
+                <div onclick="if (!event.target.matches('input')) window.location.href='getAttractionDetails.html?id=${item.id}'" class="attraction" style="cursor: pointer;">
+                    <div class="col-one-third">
+                        <img class="attraction-img" src="https://localhost:7002/api/file/download/${item.mainImagePath}"/>
+                    </div>
+                    <div class="col-two-third">
+                        <div class="info">
+                            <div class="info element-info"><img src="../images/marker.png" class="icon"><p>${item.city}</p></div>
+                            <div class="info element-info"><img src="../images/stopwatch.png" class="icon"><p>${getHour(item.duration)}h</p></div>
+                            <div class="info element-info"><img src="../images/piggy-bank.png" class="icon"><p>${item.price}zł</p></div>
+                            <div><input type="submit" class="category" value="${item.categoryName}"></div>
+                            <div><input type="button" class="button red margin" data-group="delete" data-id="${item.id}" value="Usuń z planu" ></div>
                         </div>
-                        <div class="col-two-third">
-                            <div class="info">
-                                <div class="info element-info"><img src="../images/marker.png" class="icon"><p>${item.city}</p></div>
-                                <div class="info element-info"><img src="../images/stopwatch.png" class="icon"><p>${getHour(item.duration)}h</p></div>
-                                <div class="info element-info"><img src="../images/piggy-bank.png" class="icon"><p>${item.price}zł</p></div>
-                                <div><input type="submit" class="category" value="${item.categoryName}"></div>
-                                <div><input type="button" class="button red margin" value="Usuń z planu" ></div>
-                            </div>
-                            <h3>${item.name}</h3><br>
-                            <p>${item.description}</p>
-                        </div>
+                        <h3>${item.name}</h3><br>
+                        <p>${item.description}</p>
                     </div>
                 </div>
-                `;
+            </div>
+            `;
 
-        $('#data-container').append(newAttraction);
-        });
-    }
-};
+    $('#data-container').append(newAttraction);
+    });
+
+    dataFromAPI.locationSummary.forEach(function(attraction) {
+        var marker = L.marker([attraction.coordinateX, attraction.coordinateY]).addTo(map);
+    
+        marker.bindPopup(`<b>${attraction.name}</b>`);
+    }); 
+
+    $('#totalTime').html(getHour(dataFromAPI.totalTime) + "h");
+    $('#totalPrice').html(dataFromAPI.totalPrice + "zł");
+})
 
 if(isUserLogged() == true) {
     $("#menu").load("menu_logged.html");
@@ -49,37 +60,19 @@ if(isUserLogged() == true) {
     $("#menu").load("menu_unlogged.html");
 }
 
-$('#pagination-container').pagination(paginationOptions);
+$("input").on('click', async function() {
+    var dataGroup = $(this).data('group');
+    var dataId = $(this).data('id');
 
-$('#filter').on('click', function() {
-    
-    const params = new URLSearchParams();
-
-    if($('#city').val() != '') {
-        params.append('City', $('#city').val());
-    }
-
-    if($('#categories').val() != 'no_option') {
-        params.append('CategoryId', $('#categories').find(':selected').attr('id'));
-    }
-
-    if($('#name').val() != '') {
-        params.append('Name', $('#name').val());
-    }
-
-    paginationOptions.dataSource = InitialdataSource + '?' + params;
-
-    $('#pagination-container').pagination('destroy');
-    $('#data-container').empty();
-
-    $('#pagination-container').pagination(paginationOptions);
-});
-
-fetch('https://localhost:7002/api/attraction/getCategories')
-    .then(response => response.json())
-    .then(dataFromAPI => {
-        var select = $('#categories');
-        $.each(dataFromAPI, function (index, item) {
-            select.append('<option value="' + item.name + '" id="' + item.id + '">' + item.name + '</option>');
+    if(dataGroup == 'delete') {
+        console.log(dataId);
+        await fetch(`https://localhost:7002/api/attraction/deleteAttractionFromPlan/${dataId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        }
         });
-    })
+        location.reload();
+    }
+});

@@ -4,6 +4,7 @@ using EngineeringThesisAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EngineeringThesisAPI.Migrations
 {
     [DbContext(typeof(EngineeringThesisDbContext))]
-    partial class EngineeringThesisDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231202173250_TripAttraction")]
+    partial class TripAttraction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -211,7 +214,7 @@ namespace EngineeringThesisAPI.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TripAttractions");
+                    b.ToTable("TripAttraction");
                 });
 
             modelBuilder.Entity("EngineeringThesisAPI.Entities.User", b =>

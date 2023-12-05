@@ -58,9 +58,17 @@ export function getDate(date) {
 }
 
 export function getHour(hour) {
-    const [hours, minutes] = hour.split(":").map(Number);
+    const parts = hour.split(":").map(Number);
 
-    return `${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes}`;
+    if(!hour.includes(".")) {
+        const [hours, minutes] = parts;
+        return `${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes}`;
+    }
+
+    const days = parseInt(hour.split('.')[0]);
+    const [hours, minutes] = hour.split('.')[1].split(":").map(Number);
+    const totalHours = days * 24 + hours;
+    return `${totalHours < 10 ? "0" + totalHours : totalHours}:${minutes < 10 ? "0" + minutes : minutes}`;
 }
 
 export function opinionForm(number) {

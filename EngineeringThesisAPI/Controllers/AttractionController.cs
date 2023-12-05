@@ -181,6 +181,19 @@ namespace EngineeringThesisAPI.Controllers
             return Ok(paginatedList);
         }
 
+        [HttpGet("getUserAttractions")]
+        [Authorize]
+        public ActionResult<List<GetAttractionsDto>> GetUserAttractions()
+        {
+            var attractions =
+                _context.Attractions
+                .Include(r => r.Category)
+                .Include(r => r.Photos)
+                .Where(r => r.UserId == _userIdProvider.GetUserId());
+
+            return Ok(_mapper.Map<List<GetAttractionsDto>>(attractions));
+        }
+
         [HttpGet("getAttraction")]
         public ActionResult<GetAttractionDto> GetAttraction(int id)
         {
@@ -191,6 +204,7 @@ namespace EngineeringThesisAPI.Controllers
                 .FirstOrDefault(r => r.Id == id);          
 
             var result = _mapper.Map<GetAttractionDto>(attraction);
+            result.isUserAttracion = false;
 
             if(_userIdProvider.IsUserLogged())
             {
@@ -199,6 +213,11 @@ namespace EngineeringThesisAPI.Controllers
                 if (userComment != null)
                 {
                     result.UserComment = _mapper.Map<GetCommentDto>(userComment);
+                }
+
+                if(attraction.UserId == _userIdProvider.GetUserId())
+                {
+                    result.isUserAttracion = true;
                 }
             }
 
@@ -282,6 +301,72 @@ namespace EngineeringThesisAPI.Controllers
             _context.SaveChanges();
 
             return Ok();
+        }
+
+        [Authorize]
+        [HttpPost("addAttractionToPlan/{AttractionId}")]
+        public IActionResult AddAttractionToPlan(int AttractionId)
+        {
+            var attraction = _context.Attractions.FirstOrDefault(r => r.Id == AttractionId);
+
+            if (attraction != null)
+            {
+                var user = _context.Users
+                    .Include(r => r.TripAttractions)
+                    .FirstOrDefault(r => r.Id == _userIdProvider.GetUserId());
+
+                if(user.TripAttractions.FirstOrDefault(r => r.AttractionId == attraction.Id) != null)
+                {
+                    return BadRequest("Attraction already added");
+                }
+
+                user.TripAttractions.Add(new TripAttraction { UserId = user.Id, AttractionId = attraction.Id });
+
+                _context.SaveChanges();
+
+                return Ok();
+            }
+            else
+            {
+                return BadRequest("Attraction not found");
+            }
+        }
+
+        [Authorize]
+        [HttpDelete("deleteAttractionFromPlan/{AttractionId}")]
+        public IActionResult DeleteAttractionFromPlan(int AttractionId)
+        {
+            var attraction = _context.TripAttractions.FirstOrDefault(r => r.UserId == _userIdProvider.GetUserId() && r.AttractionId == AttractionId);
+
+            if (attraction == null)
+            {
+                return BadRequest("Attraction or user not found");
+            }
+
+            _context.TripAttractions.Remove(attraction);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpGet("getAttractionPlan")]
+        public IActionResult GetAttractionPlan()
+        {
+            var attractions = _context.TripAttractions
+                .Where(r => r.UserId == _userIdProvider.GetUserId())
+                .Include(r => r.Attraction.Category)
+                .Include(r => r.Attraction.Photos);
+
+            var dto = new GetAttractionPlanDto
+            {
+                attractions = _mapper.Map<List<GetAttractionsDto>>(attractions.Select(r => r.Attraction)),
+                locationSummary = _mapper.Map<List<LocationSummaryDto>>(attractions.Select(r => r.Attraction)),
+                totalTime = attractions.Select(r => r.Attraction.Duration).AsEnumerable().Aggregate(TimeSpan.Zero, (currentSum, duration) => currentSum + duration),
+                totalPrice = attractions.Select(r => r.Attraction.Price).Sum(),
+            };
+
+            return Ok(dto);
         }
     }
 }

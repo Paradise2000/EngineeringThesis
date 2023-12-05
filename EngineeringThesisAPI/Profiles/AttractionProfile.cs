@@ -30,6 +30,8 @@ namespace EngineeringThesisAPI.Profiles
                 .ForMember(a => a.NumberOf1StarReviews, b => b.MapFrom(c => c.Comments != null ? c.Comments.Count(r => r.Rating == 1) : 0))
                 .ForMember(a => a.ImagePaths, b => b.MapFrom(c => c.Photos.Select(r => r.FileName)))
                 .ForMember(a => a.MainImagePath, b => b.MapFrom(c => c.Photos.FirstOrDefault(r => r.Id == c.MainPhotoId).FileName));
+            CreateMap<Attraction, LocationSummaryDto>()
+                .ForMember(a => a.AttractionId, b => b.MapFrom(c => c.Id));
         }
     }
 }
