@@ -13,9 +13,19 @@ header::after{
 .menu{
  width: 80vW;
  margin: 0 auto;
+
+
 }
 
 .logo{
+    display: block;
+    width: 225px;
+    height: auto; /* Zachowanie proporcji */
+    float: left;
+}
+
+.logo2{
+    display: none;
     width: 225px;
     height: auto; /* Zachowanie proporcji */
     float: left;
@@ -23,6 +33,7 @@ header::after{
 
 nav{
     float:right;
+    display: flex;
 }
 
 nav ul{
@@ -35,6 +46,7 @@ nav ul{
 
 nav li{
     display: inline-block;
+    //display: flex;
     padding-top: 15px;
 }
 
@@ -56,6 +68,8 @@ nav a {
     color: $titlegray;
     font-size: 16px;
     text-decoration: none;
+    cursor: pointer;
+
 }
 
 .menu-icon {
@@ -63,30 +77,29 @@ nav a {
 	height: 30px;
     padding: 0 0 0 70px;
     vertical-align: middle;
+    cursor: pointer;
+
 
 }
 
-.info-menu{
-        //float:right;
-        display: flex;
-        flex-wrap: row;
-        padding: 0;
-        margin: 0;
-        align-items: center;
-        //display: inline-block;
-        padding-top: 15px;
-        display: none;
 
-}
-
-.info-menu .menu-icon{
-    display: none;
-}
-
+/*
 .hamburger {
-    display: none; /* Domyślnie ukryty na większych ekranach */
+    display: none;  Domyślnie ukryty na większych ekranach 
     cursor: pointer;
     width: 21.6px;
+    padding: 0;
+
+}*/
+
+.hamburger-menu{
+    display:none;
+    
+}
+
+.full-menu{
+    display:block;
+
 }
 
 @media screen and (max-width: 1124px) {
@@ -104,39 +117,111 @@ nav a {
 
 @media screen and (max-width: 924px) {
     .menu {
-        width: 80vW;
-        overflow: hidden;
-    }
-
-    .info-menu {
-        display: block;
-    }
-
-    .hamburger {
-        display: block;
-    }
-
-    .info-menu .menu-icon{
-        display: block;
-    }
-
-    nav {
-        display: none;
         width: 100%;
-        text-align: center;
+        overflow: hidden;
+        display: inline-flex;
+        vertical-align: middle;
+        justify-content: space-between;
+
     }
 
-    nav ul {
-        flex-direction: column;
-        padding-top: 15px;
+    .hamburger-menu{
+        display:flex;
+        justify-content: end;
+        align-content: center;
+        padding-left: 10px;
     }
 
-    nav li {
+    .full-menu{
+        display:none;
+    
+    }
+
+    .menu-icon{
+        //width: 25px;
+        //height: 25px;
+        width: 10vW;
+        height: 10vW;
+        max-width: 25px;
+        max-height: 25px;
+        padding: 0 15px 0 0;
+    }
+
+    .logo{
+        display: none;
+    }
+
+    .logo2{
         display: block;
-        padding: 10px 0;
+        padding-left: 2.5vW;
+        width: 50vW;
+        max-width: 150px;
     }
 
-    nav.active {
-        display: flex;
+    .hamburger-menu{
+
+        nav{
+            padding-right: 0;
+        }
+
+        li{
+            padding-top: 0;
+        }
     }
+
+
+
+//Rozwinięty hamburger
+
+    .full-menu{
+        width: 100%;
+    }
+
+    .full-menu{
+
+
+        nav{
+            display: flex;
+            width: 100%;
+            background-color: $green1;
+            justify-content: center;
+            padding: 0;
+        }
+        
+        nav ul{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        nav li{
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            padding: 15px 0 15px 0;
+            border-top: 100vW thin solid $bordergreen;
+            border-bottom: thin solid $bordergreen;
+
+        }
+        
+        
+        nav ul li:not(:last-child):not(:nth-last-child(2))::after {
+            display: none;
+        }
+        
+        
+        nav a {
+            color: $white;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+    }
+
+
 }
