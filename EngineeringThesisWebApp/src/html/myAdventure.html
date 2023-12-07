@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="../../node_modules/leaflet/dist/leaflet.css"/>
+
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/leaflet/dist/leaflet.js"></script>
+  </head>
+  <body>
+
+    <div id="menu"></div>
+
+    <main>
+     
+        <div class="banner" style="background-image: url('../images/map.PNG');">
+            <h1 class="title center-text">Mój plan wycieczki</h1>
+            <p class="text">Stwórz swój własny plan wycieczki<br>dostosowany do Twoich potrzeb i zainteresowań.</p>
+            <div>
+                <input type="button" class="button margin" value="Szukaj atrakcji" onclick="window.location.href='./getAttractions.html'">
+                <input type="button" class="button button2 margin" value="Przejdź do planu" onclick="window.location.href='#travel-plan'">
+            </div>
+        </div>
+
+        <section>
+            <div class="row-column">
+                <h1 class="title24 margin">Łączny czas trwania atrakcji: </h1>
+                <h2 class="text21" id="totalTime"></h1>
+            </div>
+            <div class="row-column">
+                <h1 class="title24 margin">Łączny koszt wszystkich atrakcji: </h1>
+                <h2 class="text21" id="totalPrice"></h1>
+            </div>
+            <div id="map" style="height: 500px; width: 70%;"></div>
+        </section>
+
+        <section id="travel-plan" class="attraction-container">
+            <div id="data-container"></div>
+        </section>
+        <br>
+        <div id="pagination-container"></div>
+        
+    </main>
+
+    <script type="module" src="../script/getPlan.js"></script>
+
+  </body>
+
+  <script type="module">
+    import { isUserLogged } from "../../services/authService.js";
+
+    if(isUserLogged() == true) {
+        $("#menu").load("menu_logged.html");
+      } else {
+        $("#menu").load("menu_unlogged.html");
+      }
+  </script>
+</html>

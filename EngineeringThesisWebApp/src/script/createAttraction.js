@@ -6,29 +6,25 @@ const PostAttractionEndpoint = 'https://localhost:7002/api/attraction/create';
 var PhotosPaths = [];
 var MainPhotoName;
 
-document.addEventListener("DOMContentLoaded", async function() {
+if(isUserLogged() == true) {
+    $("#menu").load("menu_logged.html");
+} else {
+    window.location.href = "login.html";
+}
+token = getJWTtoken();
 
-    if(await isUserLogged() === true) {
-        $("#menu").load("menu_zal.html");
-    } else {
-        window.location.href = "logowanie.html";
+fetch('https://localhost:7002/api/attraction/getCategories', {
+    headers: {
+        'Authorization': 'Bearer ' + token
     }
-
-    token = getJWTtoken();
-
-    fetch('https://localhost:7002/api/attraction/getCategories', {
-        headers: {
-            'Authorization': 'Bearer ' + token
-        }
-    })
-    .then(response => response.json())
-    .then(dataFromAPI => {
-        var select = $('#categories');
-        $.each(dataFromAPI, function (index, item) {
-            select.append('<option value="' + item.name + '" id="' + item.id + '">' + item.name + '</option>');
-        });
-    })
-});
+})
+.then(response => response.json())
+.then(dataFromAPI => {
+    var select = $('#categories');
+    $.each(dataFromAPI, function (index, item) {
+        select.append('<option value="' + item.name + '" id="' + item.id + '">' + item.name + '</option>');
+    });
+})
 
 var map = L.map('map').setView([52, 19], 5);
 
@@ -53,82 +49,69 @@ function onMapClick(e) {
 
 map.on('click', onMapClick);
 
-const CityField = document.getElementById('city');
-const CityError = document.getElementById('cityError');
-const NameField = document.getElementById('name');
-const NameError = document.getElementById('nameError');
-const DescriptionField = document.getElementById('description');
-const DescriptionError = document.getElementById('descriptionError');
-
-const MapError = document.getElementById('mapError');
-
-document.getElementById('form').addEventListener('submit', function(e) {
+$("#form").on('submit', function(e) {
     e.preventDefault();
 
     let isValid = true;
 
-    if(CityField.value.length < 3) {
-        CityError.innerHTML = "Miasto musi mieć długość conajmniej 3 znaków";
+    if($("#city").val().length < 3) {
+        $("#cityError").html("Miasto musi mieć długość conajmniej 3 znaków");
         isValid = false;
     } else {
-        CityError.innerHTML = "";
+        $("#cityError").html("");
     }
 
-    if(NameField.value.length < 3) {
-        NameError.innerHTML = "Nazwa atrakcji musi mieć długość conajmniej 3 znaków";
+    if($("#name").val().length < 3) {
+        $("#nameError").html("Nazwa atrakcji musi mieć długość conajmniej 3 znaków");
         isValid = false;
     } else {
-        NameError.innerHTML = "";
+        $("#nameError").html("");
     }
 
-    if(DescriptionField.value.length < 10) {
-        DescriptionError.textContent = "Atrakcja musi mieć opis mający przynajmniej 10 znaków";
+    if($("#description").val().length < 10) {
+        $("#descriptionError").text("Atrakcja musi mieć opis mający przynajmniej 10 znaków");
         isValid = false;
     } else {
-        DescriptionError.textContent = "";
+        $("#descriptionError").text("");
     }
 
     if(lat == null || lng == null) {
-        MapError.textContent = "Wskaż lokalizacje atrakcji na mapie";
+        $("#mapError").text("Wybierz zdjęcie główne");
         isValid = false;
     } else {
-        MapError.textContent = "";
+        $("#mapError").text("");
     }
 
     if(MainPhotoName == null) {
-        MainPhotoError.textContent = "Wybierz zdjęcie główne";
+        $("#MainPhotoError").text("Wybierz zdjęcie główne");
         isValid = false;
     } else {
-        MapError.textContent = "";
+        $("#MainPhotoError").text("");
     }
 
     if(isValid) {
-        const jsonData = JSON.stringify({
-            city: document.getElementById('city').value,
-            duration: document.getElementById('duration').value + ":00",
-            price: parseFloat(document.getElementById('price').value),
-            categoryId: parseFloat($('#categories').find(':selected').attr('id')),
-            name: document.getElementById('name').value,
-            description: document.getElementById('description').value,
-            coordinateX: parseFloat(lat),
-            coordinateY: parseFloat(lng),
-            coordinateZ: parseFloat(16),
-            imagesPaths: PhotosPaths,
-            mainImagePath: MainPhotoName
-        });
-
         fetch(PostAttractionEndpoint, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: jsonData
+        body: JSON.stringify({
+            city: $("#city").val(),
+            duration: $("#duration").val() + ":00",
+            price: parseFloat($("#price").val()),
+            categoryId: parseFloat($('#categories').find(':selected').attr('id')),
+            name: $("#name").val(),
+            description: $("#description").val(),
+            coordinateX: parseFloat(lat),
+            coordinateY: parseFloat(lng),
+            coordinateZ: parseFloat(16),
+            imagesPaths: PhotosPaths,
+            mainImagePath: MainPhotoName
+        })
         })
         .then(data => console.log(data))
-        .catch(error => console.log(error))
-
-        console.log(JSON.parse(jsonData));
+        .catch(error => console.log(error));
     }
     
   });

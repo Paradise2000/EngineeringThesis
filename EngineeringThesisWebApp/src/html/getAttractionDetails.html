@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/slider.css">
+    <link rel="stylesheet" href="../../node_modules/leaflet/dist/leaflet.css"/>
+
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/leaflet/dist/leaflet.js"></script>
+
+    <script src="https://pagination.js.org/dist/2.6.0/pagination.min.js"></script>
+    <link rel="stylesheet" href="https://pagination.js.org/dist/2.6.0/pagination.css" />
+</head>
+
+<body>
+    <div id="menu"></div>
+    <main>
+        <section>
+            <div class="container attraction-container">
+                <div class="attraction no-border column">
+                    <div class="column">
+                        <div class="info" style="margin-bottom: 10px;">
+                            <div class="info element-info"><img src="../images/marker.png" class="icon">
+                                <p id="city"></p>
+                            </div>
+                            <div class="info element-info"><img src="../images/stopwatch.png" class="icon">
+                                <p id="duration"></p>
+                            </div>
+                            <div class="info element-info"><img src="../images/piggy-bank.png" class="icon">
+                                <p id="price"></p>
+                            </div>
+                            <div><input type="submit" class="category" id="category" value=""></div>
+                            <div class="align-right" id="editDelete">
+                            </div>
+                        </div>
+
+                        <div class="info">
+                            <h1 class="title35" id="title"></h1>
+                            <div class="stars" id="avgReview">
+                            </div>
+                            <div class="align-right">
+                                <input type="button" class="button margin" value="+ Dodaj do swojego planu">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slideshow container -->
+                    <div class="slideshow-container" id="slideshow">
+
+            
+                        <!-- Next and previous buttons -->
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    </div>
+
+                    <h1 class="title24">Opis</h1>
+                    <p class="text14" id="Description"></p>
+
+                    <h1 class="title24">Miejsce i okolica</h1>
+
+                    <div id="map" style="height: 500px; width: 100%;"></div>
+
+                </div>
+
+
+                <div class="attraction column nonborder">
+                    <div class="row-column" style="margin-bottom: 20px;">
+                        <div class="col-two-third" id="reviewSum" style="gap: 10px;">
+
+                        </div>
+                        <div class="col-one-third">
+                            <div class="add-opinion" id="opinion" style="margin-top: 10px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="commentSection" style="display: none;">
+                        <!-- Tutaj dodaj zawartość sekcji komentarzy -->
+                        <h2 class="title21">Dodaj komentarz</h2>
+                        <form id="commentForm">
+                            <div id="commentRating"></div>
+                            <div id="ratingError" style="color: red;"></div>
+                            <textarea id="comment" name="comment" class="comment-area"></textarea>
+                            <input type="submit" class="button margin" value="Dodaj komentarz">
+                        </form>
+                    </div>
+
+                    <div id="useropinion-container">
+
+                    </div>
+                    <div id="data-container">
+
+                    </div>
+                    <div id="pagination-container"></div>
+
+                </div>
+            </div>
+
+
+        </section>
+    </main>
+
+    <script src="../script/stars.js"></script>
+    <script type="module" src="../script/getAttractionDetails.js"></script>
+
+</body>
+
+</html>

@@ -9,8 +9,20 @@
     @include font($ssp, 40px, bold, $titlegray);
   }
 
+  .title35{
+    @include font($ssp, 35px, bold, $titlegray)
+  }
+
+  .title24{
+    @include font($ssp, 24px, bold, $titlegray)
+  }
+
   .title21{
     @include font($ssp, 21px, bold, $titlegray);
+  }
+
+  .text21{
+    @include font($formfont, 21px, normal, $textgray)
   }
 
   .text {
@@ -18,11 +30,11 @@
   }
 
   .text14{
-    @include font($formfont, 14px, normal, $bordertext)
+    @include font($formfont, 14px, normal, $textgray)
   }
 
   .infofont{
-    @include font($info, 14, normal, $infoblack);
+    @include font($info, 14px, normal, $infoblack);
 	text-align: left;
   }
 
@@ -31,6 +43,10 @@
   }
 
   
-  
+  @media screen and (max-width: 480px){
+    .title{
+      font-size: 30px;
+    }
+}
  
 
