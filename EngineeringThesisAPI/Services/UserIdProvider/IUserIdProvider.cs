@@ -3,6 +3,5 @@
     public interface IUserIdProvider
     {
         public int GetUserId();
-        public bool IsUserLogged();
     }
 }

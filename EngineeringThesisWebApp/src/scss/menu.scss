@@ -11,13 +11,11 @@ header::after{
 }
 
 .menu{
- width: 80vW;
+ width: 80%;
  margin: 0 auto;
 }
 
 .logo{
-    width: 225px;
-    height: auto; /* Zachowanie proporcji */
     float: left;
 }
 
@@ -58,7 +56,7 @@ nav a {
     text-decoration: none;
 }
 
-.menu-icon {
+.icon {
 	width: 30px;
 	height: 30px;
     padding: 0 0 0 70px;
@@ -66,77 +64,5 @@ nav a {
 
 }
 
-.info-menu{
-        //float:right;
-        display: flex;
-        flex-wrap: row;
-        padding: 0;
-        margin: 0;
-        align-items: center;
-        //display: inline-block;
-        padding-top: 15px;
-        display: none;
-
-}
-
-.info-menu .menu-icon{
-    display: none;
-}
-
-.hamburger {
-    display: none; /* Domyślnie ukryty na większych ekranach */
-    cursor: pointer;
-    width: 21.6px;
-}
-
-@media screen and (max-width: 1124px) {
-
-    .menu{
-        width: 100%;
-       }
-
-    nav{
-        padding-right: 30px;
-    }
-
-}
 
 
-@media screen and (max-width: 924px) {
-    .menu {
-        width: 80vW;
-        overflow: hidden;
-    }
-
-    .info-menu {
-        display: block;
-    }
-
-    .hamburger {
-        display: block;
-    }
-
-    .info-menu .menu-icon{
-        display: block;
-    }
-
-    nav {
-        display: none;
-        width: 100%;
-        text-align: center;
-    }
-
-    nav ul {
-        flex-direction: column;
-        padding-top: 15px;
-    }
-
-    nav li {
-        display: block;
-        padding: 10px 0;
-    }
-
-    nav.active {
-        display: flex;
-    }
-}

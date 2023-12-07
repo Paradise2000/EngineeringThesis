@@ -193,10 +193,16 @@
   <script type="module">
     import { isUserLogged } from "../../services/authService.js";
 
-    if(isUserLogged() == true) {
-        $("#menu").load("menu_logged.html");
+    document.addEventListener("DOMContentLoaded", async function() {
+      if(await isUserLogged() === true) {
+        $("#menu").load("menu_zal.html");
       } else {
-        $("#menu").load("menu_unlogged.html");
+        $("#menu").load("menu_nzal.html");
       }
+    })
+
+
+
+    
   </script>
 </html>

@@ -135,9 +135,6 @@ namespace EngineeringThesisAPI.Migrations
                     b.Property<int>("AttractionId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -189,29 +186,6 @@ namespace EngineeringThesisAPI.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("FilePaths");
-                });
-
-            modelBuilder.Entity("EngineeringThesisAPI.Entities.TripAttraction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AttractionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AttractionId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("TripAttractions");
                 });
 
             modelBuilder.Entity("EngineeringThesisAPI.Entities.User", b =>
@@ -295,25 +269,6 @@ namespace EngineeringThesisAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("EngineeringThesisAPI.Entities.TripAttraction", b =>
-                {
-                    b.HasOne("EngineeringThesisAPI.Entities.Attraction", "Attraction")
-                        .WithMany()
-                        .HasForeignKey("AttractionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EngineeringThesisAPI.Entities.User", "User")
-                        .WithMany("TripAttractions")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Attraction");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("EngineeringThesisAPI.Entities.Attraction", b =>
                 {
                     b.Navigation("Comments");
@@ -331,8 +286,6 @@ namespace EngineeringThesisAPI.Migrations
                     b.Navigation("Attractions");
 
                     b.Navigation("Comments");
-
-                    b.Navigation("TripAttractions");
                 });
 #pragma warning restore 612, 618
         }

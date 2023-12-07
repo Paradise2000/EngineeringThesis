@@ -5,98 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Website</title>
-
     <link rel="stylesheet" href="/css/index.css">
   </head>
   <body>
     <main>
-      <div id="menu"></div>
-
-
-      <div class="banner user" style="background-image: url('../images/map.PNG');">
-        <h1 class="title center-text">Cześć Nickname! Gotowy na kolejną przygodę?</h1>
-      </div>
-
-      <section class="section2">
-        <div class="container2">
-          <h1 class="title">Co chcesz zrobić?</h1>
-          <div class="info panel">
-            <div class="col-one-third user-option" id="addAttraction">
-              <div class="info panel2">
-                <div class="icon-background"><img src="../images/add-location.png" class="icon-panel"></div>
-                <h2 class="title21">Dodaj nową atrakcję</h2>
-              </div>
-              <p class="text14">Czegoś brakuje? Dodaj swoje miejsca. Wcześniej upewnij się, że ktoś inny już tego nie zrobił.</p>
-            </div>
-  
-            <div class="col-one-third user-option" id="myAdventure">
-              <div class="info panel2">
-                <div class="icon-background"><img src="../images/travel-guide.png" class="icon-panel"></div>
-                <h2 class="title21">Moja przygoda</h2>
-              </div>
-              <p class="text14">Stwórz swój własny plan wycieczki dostosowany do Twoich możliwości i zainteresowań.</p>
-            </div>
-  
-            <div class="col-one-third user-option" id="myAttractions">
-              <div class="info panel2">
-                <div class="icon-background"><img src="../images/pin.png" class="icon-panel"></div>
-                <h2 class="title21">Moje atrakcje</h2>
-              </div>
-              <p class="text14">Przeglądaj stworzone przez siebie atrakcje. Zmieniaj jak chcesz i udostępniaj innym.</p>
-            </div>
-  
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="container2">
-          <h1 class="title">Dane użytkownika</h1>
-          <div class="info panel">
-          <div class="col-half2">
-            <div class="info"><p class="title21">Nick: </p><p class="text21">Nick Użytkownika</p></div>
-            <div class="info"><p class="title21">E-mail: </p><p class="text21">uzytkownika@email.pl</p></div>
-            <div class="info"><p class="title21">Stare hasło: </p><input type="password" class="text-input margin" placeholder="Podaj stare hasło" required></div>
-            <div class="info"><p class="title21">Nowe hasło: </p><input type="password" class="text-input margin" placeholder="Podaj nowe hasło" required></div>
-            <div class="info"><p class="title21">Powtórz nowe hasło: </p><input type="password" class="text-input margin" placeholder="Powtórz nowe hasło" required></div>
-            <input type="button" class="button margin full-width" value="Zmień hasło">
-          </div>
-          <div class="col-half2 center">
-            <img class="image" src="../images/notes.jpg" alt="Obrazek zastępczy" />
-            <input type="button" class="button margin full-width" value="+ Nowe profilowe">
-
-            
-          </div>
-          </div>
-        </div>
-
-        <hr>
-
-      </section>
+        <h1>Tu będzie panel użytkownika</h1>
 
     </main>
-
-
-
-    <script>
-      // Pobieranie elementów div o klasie user-option
-      const addAttractionDiv = document.getElementById('addAttraction');
-      const myAdventureDiv = document.getElementById('myAdventure');
-      const myAttractionsDiv = document.getElementById('myAttractions');
-  
-      // Obsługa kliknięcia dla każdego diva
-      addAttractionDiv.addEventListener('click', function() {
-        window.location.href = './createAttraction.html';
-      });
-  
-      myAdventureDiv.addEventListener('click', function() {
-        window.location.href = './myAdventure.html';
-      });
-  
-      myAttractionsDiv.addEventListener('click', function() {
-        window.location.href = './myAttractions.html';
-      });
-    </script>
-
   </body>
 </html>

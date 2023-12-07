@@ -2,7 +2,6 @@
 {
     public class GetAttractionsDto
     {
-        public int Id { get; set; }
         public string City { get; set; }
         public TimeSpan Duration { get; set; }
         public decimal Price { get; set; }

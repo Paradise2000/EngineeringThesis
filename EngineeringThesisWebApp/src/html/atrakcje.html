@@ -30,16 +30,27 @@
 
         <section id="wyszukaj">
             <div class="row-column">
-                <input id="city" type="search" class="text-input margin" placeholder="miejscowość">
-                <select id="categories" class="text-input margin" placeholder="kategoria">
-                    <option value="no_option">Wybierz opcję</option>
-                </select>
-                <!--
+                <input list="place2" class="text-input margin" placeholder="miejscowość">
+                    <datalist id="place2">
+                        <option value="lista">
+                        <option value="istniejących">
+                        <option value="miejscowości">
+                        <option value="w">
+                        <option value="bazie">
+                    </datalist>
+                <input list="categories" class="text-input margin" placeholder="kategoria">
+                    <datalist id="categories">
+                        <option value="zabytki">
+                        <option value="gastronomia">
+                        <option value="przyroda">
+                        <option value="muzeum">
+                        <option value="adrenalina">
+                        <option value="inne">
+                    </datalist>
                 <input type="time" class="text-input margin"><br>
                 <input type="number" class="text-input margin" id="cost" name="cost" placeholder="koszt atrakcji" min="0.00" max="10000.00" step="0.01"/><br>
-                -->
-                <input id="name" type="search" class="text-input margin" placeholder="Szukaj po nazwie">
-                <input id="filter" type="submit" class="button margin" value="Szukaj">
+                <input type="search" class="text-input margin" placeholder="Szukaj po nazwie">
+                <input type="submit" class="button margin" value="Szukaj">
             </div>
         </section>
 
@@ -51,7 +62,7 @@
         
     </main>
 
-    <script type="module" src="../script/getAttractions.js"></script>
+    <script type="module" src="../script/getAttraction.js"></script>
 
   </body>
 </html>

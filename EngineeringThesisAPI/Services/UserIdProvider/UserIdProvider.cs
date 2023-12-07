@@ -22,17 +22,5 @@ namespace EngineeringThesisAPI.Services.UserIdProvider
 
             return int.Parse(userIdClaim.Value);
         }
-
-        public bool IsUserLogged()
-        {
-            if(_contextAccessor.HttpContext.User.Identity.IsAuthenticated)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
     }
 }
