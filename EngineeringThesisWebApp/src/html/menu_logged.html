@@ -11,13 +11,25 @@
   <body>
     <header>
         <div class="menu">
-            <img class="logo" src="/src/images/logo.PNG">
-            <div class="info-menu">
-              <a href="./panelUzytkownika.html"><img class="menu-icon" src="/src/images/user.png"></a>
-              <div class="hamburger">&#9776;</div>
+
+            <!-- Zwinięty hamburger-->
+
+            <img class="logo2" src="/src/images/logo2.PNG">
+
+            <div class="hamburger-menu">
+            <nav>
+                <ul>
+                    <li><a href="./panelUzytkownika.html"><img class="menu-icon" src="/src/images/user.png"></a></li>
+                    <li><img class="menu-icon" id="hamburgerButton" src="/src/images/menu.png"></li>
+                </ul>
+            </nav>
             </div>
 
+            <!-- Zwykłe menu-->
 
+            <img class="logo" src="/src/images/logo.PNG">
+
+            <div class="full-menu">
             <nav>
                 <ul>
                     <li><a href="./index.html">Strona główna</a></li>
@@ -27,8 +39,22 @@
                     <li><a href="./panelUzytkownika.html"><img class="menu-icon" src="/src/images/user.png"></a></li>
                 </ul>
             </nav>
+            </div>
 
         </div>
+
+        <!-- Rozwinięty hamburger-->
+        <div id="unwrap" class="full-menu" style="display: none;">
+          <nav>
+              <ul>
+                  <li><a href="./index.html">Strona główna</a></li>
+                  <li><a href="./getAttractions.html">Atrakcje</a></li>
+                  <li><a href="./createAttraction.html">Dodaj atrakcję</a></li>
+                  <li><a id="logout2">Wyloguj się</a></li>
+              </ul>
+          </nav>
+        </div>
+
     </header>
   </body>
 
@@ -39,5 +65,15 @@
       logout("login.html");
     });
   </script>
+
+<script type="module">
+  import { logout } from "../../services/authService.js";
+
+  document.getElementById("logout2").addEventListener("click", function() {
+    logout("login.html");
+  });
+</script>
+
+<script src="../script/hamburgerMenu.js"></script>
 
 </html>
