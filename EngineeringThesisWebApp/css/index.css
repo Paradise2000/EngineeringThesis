@@ -41,6 +41,13 @@
   color: #7a7a7a;
 }
 
+.footer-text {
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  color: #cbe8ba;
+}
+
 .text14 {
   font-family: Helvetica;
   font-size: 14px;
