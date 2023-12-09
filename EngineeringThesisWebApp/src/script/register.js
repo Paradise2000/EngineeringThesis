@@ -1,3 +1,11 @@
+import { isUserLogged } from "../../services/authService.js";
+
+if(isUserLogged() == true) {
+    window.location.href = "panelUzytkownika.html";
+} else {
+    $("#menu").load("menu_unlogged.html");
+}
+
 $("#register").on('click', function() {
     
     var isValid = true;
