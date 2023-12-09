@@ -37,47 +37,32 @@ $("#register").on('click', function() {
         console.log("TEST");
 
         fetch('https://localhost:7002/api/account/register', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: jsonData
-})
-    .then(response => {
-        if (!response.ok) {
-            // Obsługa błędów dla statusu HTTP różnego niż 200
-            return response.json().then(errorData => {
-                // Przetwarzanie danych błędu
-                if (errorData.errors) {
-                    errorData.errors.forEach(element => {
-                        if (element.errorCode === "EmailAlreadyTaken") {
-                            $("#emailError").text("Ten adres email jest już zajęty");
-                        }
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: jsonData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(errorData => {
+                        if (errorData.errors) {
+                            errorData.errors.forEach(element => {
+                                if (element.errorCode === "EmailAlreadyTaken") {
+                                    $("#emailError").text("Ten adres email jest już zajęty");
+                                }
 
-                        if (element.errorCode === "NickAlreadyTaken") {
-                            $("#nickError").text("Ten nick jest już zajęty");
+                                if (element.errorCode === "NickAlreadyTaken") {
+                                    $("#nickError").text("Ten nick jest już zajęty");
+                                }
+                            });
                         }
+                        
+                        throw new Error('Błąd żądania: ' + response.status);
                     });
                 }
 
-                // Rzucenie błędu z komunikatem
-                throw new Error('Błąd żądania: ' + response.status);
+                return response.json();
             });
-        }
-
-        // Jeśli wszystko jest w porządku, przetwórz odpowiedź jako JSON
-        return response.json();
-    })
-    .then(data => {
-        // Tutaj możesz korzystać z danych w formie obiektu JSON
-        console.log(data);
-    })
-    .catch(error => {
-        // Obsługa błędów związaną z samym żądaniem lub przetwarzaniem odpowiedzi
-        console.error('Wystąpił błąd:', error);
-    });
-
     }
-
-
 });
