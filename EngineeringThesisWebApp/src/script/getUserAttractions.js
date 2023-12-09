@@ -1,8 +1,7 @@
 import { isUserLogged, getJWTtoken } from "../../services/authService.js";
 import { getHour } from "../../services/functionService.js";
 
-var token;
-token = getJWTtoken();
+var token = getJWTtoken();
 
 await fetch(`https://localhost:7002/api/attraction/getUserAttractions`, {
     method: 'GET',

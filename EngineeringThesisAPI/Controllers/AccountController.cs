@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using Azure.Core;
 using EngineeringThesisAPI.DTOs.Account;
+using EngineeringThesisAPI.DTOs.Attraction;
 using EngineeringThesisAPI.Entities;
+using EngineeringThesisAPI.Models.ValidationErrorModel;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,19 +22,28 @@ namespace EngineeringThesisAPI.Controllers
         private readonly EngineeringThesisDbContext _context;
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly AuthenticationSettings _authenticationSettings;
+        private readonly IValidator<RegisterUserDto> _validatorRegisterUserDto;
         private readonly IMapper _mapper;
 
-        public AccountController(EngineeringThesisDbContext context, IPasswordHasher<User> passwordHasher, AuthenticationSettings authenticationSettings, IMapper mapper)
+        public AccountController(EngineeringThesisDbContext context, IPasswordHasher<User> passwordHasher, AuthenticationSettings authenticationSettings, IMapper mapper, IValidator<RegisterUserDto> validatorRegisterUserDto)
         {
             _context = context;
             _passwordHasher = passwordHasher;
             _authenticationSettings = authenticationSettings;
             _mapper = mapper;
+            _validatorRegisterUserDto = validatorRegisterUserDto;
         }
 
         [HttpPost("register")]
         public IActionResult RegisterUser([FromBody]RegisterUserDto dto)
         {
+            var registerValidation = _validatorRegisterUserDto.Validate(dto);
+
+            if(!registerValidation.IsValid)
+            {
+                return BadRequest(new ValidationErrorModel<RegisterUserDto>(registerValidation));
+            }
+
             var user = _mapper.Map<User>(dto);
 
             var hashedPassword = _passwordHasher.HashPassword(user, dto.Password);

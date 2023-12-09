@@ -30,6 +30,7 @@
                 <ul>
                     <li><a href="./index.html">Strona główna</a></li>
                     <li><a href="./getAttractions.html">Atrakcje</a></li>
+                    <li><a href="./register.html">Zarejestruj się</a></li>
                     <li><a href="./login.html">Zaloguj się</a></li>
                     <li><a href="./login.html"><img src="/src/images/user(2).png" class="menu-icon"></a></li>
                 </ul>
@@ -44,6 +45,7 @@
               <ul>
                   <li><a href="./index.html">Strona główna</a></li>
                   <li><a href="./getAttractions.html">Atrakcje</a></li>
+                  <li><a href="./register.html">Zarejestruj się</a></li>
                   <li><a href="./login.html">Zaloguj się</a></li>
                 </ul>
           </nav>
@@ -51,7 +53,18 @@
 
     </header>
 
-    <script src="../script/hamburgerMenu.js"></script>
+    <script type="module">
+      const commentButton = document.getElementById('hamburgerButton');
+      const unwrapMenu = document.getElementById('unwrap');
+
+      window.addEventListener('resize', function () {
+        unwrapMenu.style.display = 'none';
+      });
+    
+      commentButton.addEventListener('click', function () {
+        unwrapMenu.style.display = unwrapMenu.style.display === 'none' ? 'block' : 'none';
+      });
+    </script>
 
   </body>
 </html>
