@@ -1,0 +1,97 @@
+@import "_variables";
+@import "_mixins";
+
+.paginationjs {
+    display: flex;
+    line-height: 1.6;
+    @include font($formfont, 14px, normal, $textgray);
+    box-sizing: initial;
+    justify-content: center;
+}
+
+.paginationjs .paginationjs-pages li.active>a {
+    height: 30px;
+    line-height: 30px;
+    background: $green1;
+    color: #fff;
+    cursor: default
+}
+
+.paginationjs .paginationjs-pages li {
+    float: left;
+    border: 1px solid $bordergray;
+    border-right: none;
+    list-style: none
+}
+
+.paginationjs .paginationjs-pages li>a {
+    min-width: 30px;
+    height: 28px;
+    line-height: 28px;
+    display: block;
+    background: #fff;
+    font-size: 14px;
+    color: $textgray;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer
+}
+
+.paginationjs .paginationjs-pages li:last-child {
+    border-right: 1px solid $bordergray;
+    border-radius: 0 3px 3px 0
+}
+
+.paginationjs .paginationjs-size-changer>select {
+    height: 28px;
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid $bordergray;
+    padding: 0;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: baseline;
+    outline: 0;
+    box-shadow: none;
+    box-sizing: initial
+}
+
+.paginationjs .paginationjs-go-input>input[type=text] {
+    width: 30px;
+    height: 28px;
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid $bordergray;
+    padding: 0;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: baseline;
+    outline: 0;
+    box-shadow: none;
+    box-sizing: initial
+}
+
+.paginationjs .paginationjs-go-button>input[type=button] {
+    min-width: 40px;
+    height: 30px;
+    line-height: 28px;
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid $bordergray;
+    text-align: center;
+    padding: 0 8px;
+    font-size: 14px;
+    vertical-align: baseline;
+    outline: 0;
+    box-shadow: none;
+    color: $textgray;
+    cursor: pointer;
+    vertical-align: middle\9
+}
+
+
+
+
+
+
+

@@ -2,6 +2,14 @@
 @import "_mixins";
 
 
+.paginationjs .paginationjs-pages li.active>a {
+    height: 30px;
+    line-height: 30px;
+    background: $green1;
+    color: #fff;
+    cursor: default
+}
+
 /*SEKCJE*/
 body{
     margin: 0;

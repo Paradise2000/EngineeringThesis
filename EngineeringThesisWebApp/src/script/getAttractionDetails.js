@@ -147,7 +147,7 @@ async function renderCommentSection(dataFromAPI) {
                     <div id="commentRatingChange" class="info stars">
                         ${getStars(dataFromAPI.userComment.rating, '<img src="../images/star.png" class="star">')}
                     </div>
-                    <p id="commentDescriptionChange" class="text14">${dataFromAPI.userComment.description}</p>
+                    <p id="commentDescriptionChange" class="main-text">${dataFromAPI.userComment.description}</p>
                 </div>`;
 
             var isCommentEditing = false;
@@ -265,7 +265,7 @@ async function handlePagination() {
                     <div class="info stars">
                         ${getStars(item.rating, '<img src="../images/star.png" class="star">')}
                     </div>
-                    <p class="text14">${item.description}</p>
+                    <p class="main-text">${item.description}</p>
                 </div>
             `);
             });
