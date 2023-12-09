@@ -34,8 +34,8 @@ await fetch(`https://localhost:7002/api/attraction/getAttractionPlan`, {
                             <div><input type="submit" class="category" value="${item.categoryName}"></div>
                             <div><input type="button" class="button red margin" data-group="delete" data-id="${item.id}" value="Usuń z planu" ></div>
                         </div>
-                        <h3>${item.name}</h3><br>
-                        <p>${item.description}</p>
+                        <h3 class="title24">${item.name}</h3><br>
+                        <p class="main-text">${item.description}</p>
                     </div>
                 </div>
             </div>

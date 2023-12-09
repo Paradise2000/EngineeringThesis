@@ -85,7 +85,7 @@ fetch(`https://localhost:7002/api/attraction/getAttraction?id=${urlParams.get('i
                     <div class="info" name="star-container">
                         ${getStars(5-index, '<img src="../images/star.png" class="star">')}
                     </div>
-                    <h1 class="title21">${element} ${form}</h1>
+                    <h1 class="titlesb21">${element} ${form}</h1>
                 </div>
             `)
         });
@@ -104,7 +104,7 @@ fetch(`https://localhost:7002/api/attraction/getAttraction?id=${urlParams.get('i
                         <div id="commentRatingChange" class="info stars">
                             ${getStars(dataFromAPI.userComment.rating, '<img src="../images/star.png" class="star">')}
                         </div>
-                        <p id="commentDescriptionChange" class="text14">${dataFromAPI.userComment.description}</p>
+                        <p id="commentDescriptionChange" class="main-text">${dataFromAPI.userComment.description}</p>
                     </div>`;
 
                 var isCommentEditing = false;
@@ -255,7 +255,7 @@ $('#pagination-container').pagination({
                 <div class="info stars">
                     ${getStars(item.rating, '<img src="../images/star.png" class="star">')}
                 </div>
-                <p class="text14">${item.description}</p>
+                <p class="main-text">${item.description}</p>
             </div>
         `);
         });

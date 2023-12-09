@@ -1,32 +1,24 @@
 @charset "UTF-8";
-.title {
-  font-family: sans-serif;
-  font-size: 40px;
-  font-weight: bold;
-  color: #444444;
+@font-face {
+  font-family: "Montserrat";
+  src: url("../src/fonts/Montserrat/static/Montserrat-Regular.ttf") format("truetype");
 }
-
-.title35 {
-  font-family: sans-serif;
-  font-size: 35px;
-  font-weight: bold;
-  color: #444444;
+@font-face {
+  font-family: "Montserrat Bold";
+  src: url("../src/fonts/Montserrat/static/Montserrat-Bold.ttf") format("truetype");
 }
-
-.title24 {
-  font-family: sans-serif;
-  font-size: 24px;
-  font-weight: bold;
-  color: #444444;
+@font-face {
+  font-family: "Montserrat SemiBold";
+  src: url("../src/fonts/Montserrat/static/Montserrat-SemiBold.ttf") format("truetype");
 }
-
-.title21 {
-  font-family: sans-serif;
-  font-size: 21px;
-  font-weight: bold;
-  color: #444444;
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("../src/fonts/Source_Sans_3/static/SourceSans3-Regular.ttf") format("truetype");
 }
-
+@font-face {
+  font-family: "Source Sans 3 Bold";
+  src: url("../src/fonts/Source_Sans_3/static/SourceSans3-Bold.ttf") format("truetype");
+}
 .text21 {
   font-family: Helvetica;
   font-size: 21px;
@@ -34,33 +26,12 @@
   color: #7a7a7a;
 }
 
-.text {
-  font-family: sans-serif;
-  font-size: 16px;
-  font-weight: normal;
-  color: #7a7a7a;
-}
-
-.footer-text {
-  font-family: sans-serif;
-  font-size: 16px;
-  font-weight: normal;
-  color: #cbe8ba;
-}
-
 .text14 {
   font-family: Helvetica;
   font-size: 14px;
   font-weight: normal;
   color: #7a7a7a;
-}
-
-.infofont {
-  font-family: "Courier New";
-  font-size: 14px;
-  font-weight: normal;
-  color: #232323;
-  text-align: left;
+  margin-top: 0;
 }
 
 ::placeholder {
@@ -68,6 +39,70 @@
   font-size: 14px;
   font-weight: normal;
   color: #c0c0c0;
+}
+
+.title {
+  font-family: "Source Sans 3 Bold";
+  font-size: 40px;
+  color: #444444;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.title35 {
+  font-family: "Montserrat Bold";
+  font-size: 35px;
+  color: #444444;
+}
+
+.title24 {
+  font-family: "Montserrat Bold";
+  font-size: 24px;
+  color: #444444;
+}
+
+.title21 {
+  font-family: "Montserrat Bold";
+  font-size: 21px;
+  color: #444444;
+}
+
+.titlesb21 {
+  font-family: "Montserrat SemiBold";
+  font-size: 21px;
+  color: #444444;
+}
+
+.text {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 16px;
+  color: #7a7a7a;
+  margin-top: 0;
+}
+
+.menu-text {
+  font-family: "Montserrat";
+  font-size: 16px;
+  color: #7a7a7a;
+}
+
+.footer-text {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 16px;
+  color: #cbe8ba;
+}
+
+.main-text {
+  font-family: "Montserrat";
+  font-size: 14px;
+  color: #7a7a7a;
+}
+
+.infofont {
+  font-family: "Montserrat";
+  font-size: 14px;
+  color: #232323;
+  text-align: left;
 }
 
 @media screen and (max-width: 480px) {
@@ -195,7 +230,7 @@ section {
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
-  font-family: "Courier New";
+  font-family: "Montserrat";
   font-size: 14;
   font-weight: normal;
   color: #232323;
@@ -338,7 +373,7 @@ section {
   border-width: 2px;
   border-style: solid;
   border-radius: 20px 20px 20px 20px;
-  font-family: "Courier New";
+  font-family: "Montserrat";
   font-size: 14;
   font-weight: normal;
   color: #232323;
@@ -359,21 +394,29 @@ section {
   text-align: center;
 }
 
+label {
+  font-family: Helvetica;
+  font-size: 14px;
+  font-weight: normal;
+  color: #7a7a7a;
+}
+
 /*PRZYCISKI*/
 .button {
   width: fit-content;
   height: 40px;
   padding: 0px 15px 0px 15px;
   background: #72bb53;
-  color: #ffffff;
   border-color: #72bb53;
   border-width: 2px;
   border-style: solid;
   border-radius: 24px 24px 24px 24px;
-  font-family: "Source Sans Pro";
-  font-weight: 600;
-  font-size: 16px;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: #ffffff;
   text-align: center;
+  text-transform: uppercase;
 }
 
 .button2 {
