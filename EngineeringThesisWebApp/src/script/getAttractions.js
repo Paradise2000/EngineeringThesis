@@ -30,8 +30,8 @@ var paginationOptions = {
                                 <div class="info element-info"><img src="../images/piggy-bank.png" class="icon"><p>${item.price}zł</p></div>
                                 <div><input type="submit" class="category" value="${item.categoryName}"></div>
                             </div>
-                            <h3>${item.name}</h3><br>
-                            <p>${item.description}</p>
+                            <h3 class="title21">${item.name}</h3><br>
+                            <p class="main-text">${item.description}</p>
                         </div>
                     </div>
                 </div>

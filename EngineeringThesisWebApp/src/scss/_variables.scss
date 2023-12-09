@@ -14,7 +14,40 @@ $infoblack:#232323;
 $white:#ffffff;
 
 //CZCIONKI
-$ssp: sans-serif;
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../src/fonts/Montserrat/static/Montserrat-Regular.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Montserrat Bold';
+    src: url('../src/fonts/Montserrat/static/Montserrat-Bold.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Montserrat SemiBold';
+    src: url('../src/fonts/Montserrat/static/Montserrat-SemiBold.ttf') format('truetype');
+  }
+
+
+  @font-face {
+    font-family: 'Source Sans 3';
+    src: url('../src/fonts/Source_Sans_3/static/SourceSans3-Regular.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Source Sans 3 Bold';
+    src: url('../src/fonts/Source_Sans_3/static/SourceSans3-Bold.ttf') format('truetype');
+  }
+
+  
+
+$ssp: 'Source Sans 3',sans-serif;
 $formfont: Helvetica;
-$info: "Courier New";
+$mont: 'Montserrat';
+$montb:'Montserrat Bold';
+$montsb:'Montserrat SemiBold';
+$ssb: 'Source Sans 3 Bold';
+
 
