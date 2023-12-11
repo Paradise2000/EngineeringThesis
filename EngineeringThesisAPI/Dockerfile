@@ -12,4 +12,4 @@ COPY --from=build /app ./
 
 EXPOSE 5000
 
-ENTRYPOINT ["dotnet", "CloudCustomers.API.dll"]
+ENTRYPOINT ["dotnet", "EngineeringThesisAPI.dll"]
