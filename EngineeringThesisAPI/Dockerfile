@@ -1,15 +1,22 @@
-# Build Stage
-FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
-WORKDIR /source
-COPY . .
-RUN dotnet restore "./EngineeringThesisAPI/EngineeringThesisAPI.csproj" --disable-parallel
-RUN dotnet publish "./EngineeringThesisAPI/EngineeringThesisAPI.csproj" -c release -o /app --no-restore
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-# Serve Stage
-FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-COPY --from=build /app ./
+EXPOSE 80
+EXPOSE 443
 
-EXPOSE 5000
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["EngineeringThesisAPI.csproj", "."]
+RUN dotnet restore "./EngineeringThesisAPI.csproj"
+COPY . .
+WORKDIR "/src/."
+RUN dotnet build "EngineeringThesisAPI.csproj" -c Release -o /app/build
 
+FROM build AS publish
+RUN dotnet publish "EngineeringThesisAPI.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "EngineeringThesisAPI.dll"]
