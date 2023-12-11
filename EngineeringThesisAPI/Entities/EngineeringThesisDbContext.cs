@@ -64,7 +64,7 @@ namespace EngineeringThesisAPI.Entities
             modelBuilder.Entity<Attraction>()
                 .HasMany(a => a.Comments)
                 .WithOne(c => c.Attraction)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

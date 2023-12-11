@@ -143,6 +143,40 @@ namespace EngineeringThesisAPI.Controllers
             return Ok();
         }
 
+        [Authorize]
+        [HttpDelete("deleteAttraction/{AttractionId}")]
+        public IActionResult DeleteAttraction(int AttractionId)
+        {
+            var attraction = _context.Attractions
+                .Include(r => r.Photos)
+                .FirstOrDefault(r => r.Id == AttractionId);
+
+            if(attraction == null)
+            {
+                return BadRequest("Attraction not found");
+            }
+
+            if(attraction.UserId != _userIdProvider.GetUserId())
+            {
+                return BadRequest("Attraction does not belong to the user");
+            }
+
+            foreach(var photo in attraction.Photos) 
+            {
+                var path = Path.Combine(_env.ContentRootPath, "FileLocalStorage", photo.FileName);
+
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+            }
+
+            _context.Remove(attraction);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
         [HttpGet("getCategories")]
         public IActionResult GetCategories()
         {
@@ -201,10 +235,12 @@ namespace EngineeringThesisAPI.Controllers
                 .Include(r => r.Category)
                 .Include(r => r.Photos)
                 .Include(r => r.Comments)
+                .Include(r => r.TripAttractions)
                 .FirstOrDefault(r => r.Id == id);          
 
             var result = _mapper.Map<GetAttractionDto>(attraction);
             result.isUserAttracion = false;
+            result.isAttractionInPlan = false;
 
             if(_userIdProvider.IsUserLogged())
             {
@@ -218,6 +254,11 @@ namespace EngineeringThesisAPI.Controllers
                 if(attraction.UserId == _userIdProvider.GetUserId())
                 {
                     result.isUserAttracion = true;
+                }
+
+                if(attraction.TripAttractions.Any(r => r.UserId == _userIdProvider.GetUserId()))
+                {
+                    result.isAttractionInPlan = true;
                 }
             }
 
@@ -245,7 +286,7 @@ namespace EngineeringThesisAPI.Controllers
 
             if(!commentValidation.IsValid)
             {
-                return BadRequest(new ValidationErrorModel<AddCommentDto>(commentValidation));
+                return BadRequest(new ValidationErrorModel(commentValidation));
             }
 
             var comment = _mapper.Map<Comment>(dto);
@@ -265,7 +306,7 @@ namespace EngineeringThesisAPI.Controllers
 
             if(!commentValidation.IsValid) 
             {
-                return BadRequest(new ValidationErrorModel<UpdateCommentDto>(commentValidation));
+                return BadRequest(new ValidationErrorModel(commentValidation));
             }
 
             var comment = _context.Comments

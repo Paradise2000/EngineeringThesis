@@ -8,7 +8,7 @@ namespace EngineeringThesisAPI.Models.ValidationErrorModel
         public string ErrorCode { get; set; }
     }
 
-    public class ValidationErrorModel<T>
+    public class ValidationErrorModel
     {
         public List<ErrorModel> Errors { get; set; }
 
@@ -22,5 +22,6 @@ namespace EngineeringThesisAPI.Models.ValidationErrorModel
                 ErrorCode= error.ErrorCode,
             }).ToList();
         }
+
     }
 }

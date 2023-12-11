@@ -61,6 +61,40 @@ async function updateComment(jsonData) {
     location.reload();
 }
 
+async function addToPlan() {
+    await fetch(`https://localhost:7002/api/attraction/addAttractionToPlan/${urlParams.get('id')}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        });
+    
+    location.reload();
+}
+
+async function deleteFromPlan() {
+    await fetch(`https://localhost:7002/api/attraction/deleteAttractionFromPlan/${urlParams.get('id')}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        });
+    
+    location.reload();
+}
+
+async function deleteAttraction() {
+    await fetch(`https://localhost:7002/api/attraction/deleteAttraction/${urlParams.get('id')}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        });
+}
+
 async function renderAttractionDetails(dataFromAPI) {
     //sprawdzenie czy użytkownik jest zalogowany
     if(dataFromAPI.isUserAttracion == true) {
@@ -68,12 +102,13 @@ async function renderAttractionDetails(dataFromAPI) {
         <input type="button" class="button margin" value="Edytuj" id="edit">
         <input type="button" class="button red margin" value="Usuń atrakcję" id="delete">`);
 
-        $('#edit').on('click', function() {
+        $('#edit').on('click', async function() {
             window.location.href = `http://127.0.0.1:5500/src/html/updateAttraction.html?id=${urlParams.get('id')}`;
         });
 
-        $('#delete').on('click', function() {
-            //do zrobienia
+        $('#delete').on('click', async function() {
+            await deleteAttraction();
+            window.location.href = `http://127.0.0.1:5500/src/html/index.html`;
         });
     }
 
@@ -85,6 +120,25 @@ async function renderAttractionDetails(dataFromAPI) {
     $('#title').html(dataFromAPI.name);
     $('#avgReview').append(getStars(dataFromAPI.avgReview));
     $('#Description').html(dataFromAPI.description);
+
+    //dodawanie do planu
+    if(isUserLogged() == true) {
+        if(dataFromAPI.isAttractionInPlan == false) {
+            $("#addToPlan").val("+ Dodaj do swojego planu");
+
+            $("#addToPlan").on('click', async function() {
+                await addToPlan();
+            });
+        } else {
+            $("#addToPlan").val("Usuń atrakcję z planu").addClass("button red margin");
+
+            $("#addToPlan").on('click', async function() {
+                await deleteFromPlan();
+            });
+        }
+    } else {
+        $("#addToPlan").val("Zaloguj się aby dodać do planu");
+    }
 
     //wyświetlenie zdjęć
     dataFromAPI.imagePaths.forEach(function(path, index) {

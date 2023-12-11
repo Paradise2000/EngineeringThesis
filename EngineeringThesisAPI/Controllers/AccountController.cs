@@ -41,7 +41,7 @@ namespace EngineeringThesisAPI.Controllers
 
             if(!registerValidation.IsValid)
             {
-                return BadRequest(new ValidationErrorModel<RegisterUserDto>(registerValidation));
+                return BadRequest(new ValidationErrorModel(registerValidation));
             }
 
             var user = _mapper.Map<User>(dto);
