@@ -74,6 +74,17 @@
   });
 </script>
 
-<script src="../script/hamburgerMenu.js"></script>
+<script type="module">
+  const commentButton = document.getElementById('hamburgerButton');
+  const unwrapMenu = document.getElementById('unwrap');
+
+  window.addEventListener('resize', function () {
+      unwrapMenu.style.display = 'none';
+  });
+
+  commentButton.addEventListener('click', function () {
+      unwrapMenu.style.display = unwrapMenu.style.display === 'none' ? 'block' : 'none';
+  });
+</script>
 
 </html>

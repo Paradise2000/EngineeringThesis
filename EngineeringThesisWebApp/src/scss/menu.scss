@@ -1,4 +1,6 @@
 @import "_variables";
+@import "_mixins";
+
 
 header{
     background-color: $white;
@@ -65,8 +67,7 @@ nav ul li:not(:last-child):not(:nth-last-child(2))::after {
 
 
 nav a {
-    color: $titlegray;
-    font-size: 16px;
+    @include font('Montserrat', 14px, normal, $textgray);
     text-decoration: none;
     cursor: pointer;
 

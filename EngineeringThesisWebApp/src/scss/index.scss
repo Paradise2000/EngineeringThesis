@@ -2,6 +2,14 @@
 @import "_mixins";
 
 
+.paginationjs .paginationjs-pages li.active>a {
+    height: 30px;
+    line-height: 30px;
+    background: $green1;
+    color: #fff;
+    cursor: default
+}
+
 /*SEKCJE*/
 body{
     margin: 0;
@@ -130,7 +138,7 @@ section{
     align-items: center;
     gap:10px;
 
-    @include font($info, 14, normal, $infoblack);
+    @include font($mont, 14, normal, $infoblack);
 	text-align: left;
 }
 
@@ -290,7 +298,7 @@ section{
 	border-style: solid;
 	border-radius: 20px 20px 20px 20px;
 	
-    @include font($info, 14, normal, $infoblack);
+    @include font($mont, 14, normal, $infoblack);
 }
 
 .align-right{
@@ -314,6 +322,12 @@ section{
     text-align: center;
 }
 
+label{
+    //@include font2($mont, 14px, $infoblack);
+    @include font($formfont, 14px, normal, $textgray)
+
+}
+
 
 
 
@@ -324,23 +338,26 @@ section{
     width: fit-content;
 	height: 40px;
 	padding: 0px 15px 0px 15px;
-	background: #72bb53;
-	color: #ffffff;
-	border-color: #72bb53;
+	background: $green1;
+	//color: #ffffff;
+	border-color: $green1;
 	border-width: 2px;
 	border-style: solid;
 	border-radius: 24px 24px 24px 24px;
-	font-family: "Source Sans Pro";
-	font-weight: 600;
-	font-size: 16px;
+	//font-family: "Source Sans Pro";
+	//font-weight: 600;
+	//font-size: 16px;
+    @include font($ssp, 14px, 800, $white);
+
 	text-align: center;
+    text-transform: uppercase;
 }
 
 .button2 {
 	/*width: 148px;*/
 	background: none;
-	color: #72bb53;
-	border-color: #72bb53;
+	color: $green1;
+	border-color: $green1;
 }
 
 .red{

@@ -5,42 +5,71 @@
     color: $color;
   }
   
-  .title {
-    @include font($ssp, 40px, bold, $titlegray);
-  }
-
-  .title35{
-    @include font($ssp, 35px, bold, $titlegray)
-  }
-
-  .title24{
-    @include font($ssp, 24px, bold, $titlegray)
-  }
-
-  .title21{
-    @include font($ssp, 21px, bold, $titlegray);
-  }
-
   .text21{
-    @include font($formfont, 21px, normal, $textgray)
-  }
-
-  .text {
-    @include font($ssp, 16px, normal, $textgray);
+    @include font($formfont, 21px, normal, $textgray);
   }
 
   .text14{
-    @include font($formfont, 14px, normal, $textgray)
-  }
-
-  .infofont{
-    @include font($info, 14px, normal, $infoblack);
-	text-align: left;
+    @include font($formfont, 14px, normal, $textgray);
+    margin-top:0;
   }
 
   ::placeholder{
-    @include font($formfont, 14px, normal, $bordertext)
+    @include font($formfont, 14px, normal, $bordertext);
   }
+
+
+
+
+  @mixin font2($font, $size, $color) {
+    font-family: $font;
+    font-size: $size;
+    color: $color;
+  }
+
+  .title {
+    @include font2($ssb, 40px, $titlegray);
+    margin-top:15px;
+    margin-bottom:15px;
+  }
+
+  .title35{
+    @include font2($montb, 35px, $titlegray);
+  }
+
+  .title24{
+    @include font2($montb, 24px, $titlegray);
+  }
+
+  .title21{
+    @include font2($montb, 21px, $titlegray);
+  }
+
+  .titlesb21{
+    @include font2($montsb, 21px, $titlegray);
+  }
+
+  .text {
+    @include font2($ssp, 16px, $textgray);
+    margin-top:0;
+  }
+
+  .menu-text {
+    @include font2($mont, 16px, $textgray);
+  }
+
+  .footer-text {
+    @include font2($ssp, 16px, $footfont);
+  }
+  .main-text{
+    @include font2($mont, 14px, $textgray);
+  }
+
+  .infofont{
+    @include font2($mont, 14px, $infoblack);
+	text-align: left;
+  }
+
 
   
   @media screen and (max-width: 480px){
