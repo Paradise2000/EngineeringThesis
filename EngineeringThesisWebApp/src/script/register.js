@@ -1,4 +1,5 @@
 import { isUserLogged } from "../../services/authService.js";
+import { API_BASE_URL } from "../../services/functionService.js";
 
 if(isUserLogged() == true) {
     window.location.href = "panelUzytkownika.html";
@@ -45,7 +46,7 @@ $("#register").on('click', function() {
 
         console.log("TEST");
 
-        fetch('https://localhost:7002/api/account/register', {
+        fetch(`${API_BASE_URL}/api/account/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

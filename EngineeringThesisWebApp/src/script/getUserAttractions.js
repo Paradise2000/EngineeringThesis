@@ -1,9 +1,9 @@
 import { isUserLogged, getJWTtoken } from "../../services/authService.js";
-import { getHour } from "../../services/functionService.js";
+import { API_BASE_URL, getHour } from "../../services/functionService.js";
 
 var token = getJWTtoken();
 
-await fetch(`https://localhost:7002/api/attraction/getUserAttractions`, {
+await fetch(`${API_BASE_URL}/api/attraction/getUserAttractions`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ await fetch(`https://localhost:7002/api/attraction/getUserAttractions`, {
             <div class="container attraction-container">
                 <div onclick="if (!event.target.matches('input')) window.location.href='getAttractionDetails.html?id=${item.id}'" class="attraction" style="cursor: pointer;">
                     <div class="col-one-third">
-                        <img class="attraction-img" src="https://localhost:7002/api/file/download/${item.mainImagePath}"/>
+                        <img class="attraction-img" src="${API_BASE_URL}/api/file/download/${item.mainImagePath}"/>
                     </div>
                     <div class="col-two-third">
                         <div class="info">

@@ -1,5 +1,5 @@
 import { isUserLogged, getJWTtoken } from "../../services/authService.js";
-import {getStars, generateStarRating, getDate, opinionForm, getHour} from "../../services/functionService.js"
+import {API_BASE_URL ,getStars, generateStarRating, getDate, opinionForm, getHour} from "../../services/functionService.js"
 
 var token = getJWTtoken();
 const urlParams = new URLSearchParams(window.location.search);
@@ -12,7 +12,7 @@ if(isUserLogged() == true) {
 $("#footer").load("footer.html");
 
 async function getAttraction() {
-    const response = await fetch(`https://localhost:7002/api/attraction/getAttraction?id=${urlParams.get('id')}`, {
+    const response = await fetch(`${API_BASE_URL}/api/attraction/getAttraction?id=${urlParams.get('id')}`, {
         headers: {
             'Authorization': 'Bearer ' + token
         }
@@ -25,7 +25,7 @@ async function getAttraction() {
 }
 
 async function addComment(jsonData) {
-    await fetch('https://localhost:7002/api/attraction/addComment', {
+    await fetch(`${API_BASE_URL}/api/attraction/addComment`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ async function addComment(jsonData) {
 }
 
 async function deleteComment() {
-    await fetch(`https://localhost:7002/api/attraction/deleteComment/${urlParams.get('id')}`, {
+    await fetch(`${API_BASE_URL}/api/attraction/deleteComment/${urlParams.get('id')}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ async function deleteComment() {
 }
 
 async function updateComment(jsonData) {
-    await fetch('https://localhost:7002/api/attraction/updateComment', {
+    await fetch(`${API_BASE_URL}/api/attraction/updateComment`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ async function updateComment(jsonData) {
 }
 
 async function addToPlan() {
-    await fetch(`https://localhost:7002/api/attraction/addAttractionToPlan/${urlParams.get('id')}`, {
+    await fetch(`${API_BASE_URL}/api/attraction/addAttractionToPlan/${urlParams.get('id')}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ async function addToPlan() {
 }
 
 async function deleteFromPlan() {
-    await fetch(`https://localhost:7002/api/attraction/deleteAttractionFromPlan/${urlParams.get('id')}`, {
+    await fetch(`${API_BASE_URL}/api/attraction/deleteAttractionFromPlan/${urlParams.get('id')}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ async function deleteFromPlan() {
 }
 
 async function deleteAttraction() {
-    await fetch(`https://localhost:7002/api/attraction/deleteAttraction/${urlParams.get('id')}`, {
+    await fetch(`${API_BASE_URL}/api/attraction/deleteAttraction/${urlParams.get('id')}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -146,7 +146,7 @@ async function renderAttractionDetails(dataFromAPI) {
         $('#slideshow').append(
             `<div class="mySlides fade">
             <div class="numbertext"> ${index+1} / ${dataFromAPI.imagePaths.length}</div>
-            <img src="https://localhost:7002/api/file/download/${path}" style="width:100%">
+            <img src="${API_BASE_URL}/api/file/download/${path}" style="width:100%">
             </div>`
         );
     });
@@ -296,7 +296,7 @@ async function renderCommentSection(dataFromAPI) {
 
 async function handlePagination() {
     $('#pagination-container').pagination({
-        dataSource: `https://localhost:7002/api/attraction/getComment?attractionId=${urlParams.get('id')}`,
+        dataSource: `${API_BASE_URL}/api/attraction/getComment?attractionId=${urlParams.get('id')}`,
         locator: 'items',
         totalNumberLocator: function (response) {
             return response.totalPages * 5;

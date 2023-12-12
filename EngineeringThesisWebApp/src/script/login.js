@@ -1,5 +1,6 @@
 import Cookies from "../../node_modules/js-cookie/dist/js.cookie.min.mjs";
 import { isUserLogged } from "../../services/authService.js";
+import { API_BASE_URL } from "../../services/functionService.js";
 
 if(isUserLogged() == true) {
     window.location.href = "panelUzytkownika.html";
@@ -8,7 +9,7 @@ if(isUserLogged() == true) {
 }
 $("#footer").load("footer.html");
 
-var LoginEndpoint = "https://localhost:7002/api/account/login";
+var LoginEndpoint = `${API_BASE_URL}/api/account/login`;
 
 const EmailField = document.getElementById('email');
 const PasswordField = document.getElementById('password');
