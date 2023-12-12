@@ -18,6 +18,7 @@ if(isUserLogged() == true) {
 } else {
     window.location.href = "login.html";
 }
+$("#footer").load("footer.html");
 
 async function getAttraction() {
     const response = await fetch(`https://localhost:7002/api/attraction/getAttraction?id=${urlParams.get('id')}`);
@@ -247,6 +248,8 @@ async function RenderPost() {
                 imagesPaths: ImagesToPost,
                 mainImagePath: MainPhotoName
             }));
+
+            window.location.href = `getAttractionDetails.html?id=${urlParams.get('id')}`;
         }
         
     });

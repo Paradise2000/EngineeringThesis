@@ -47,6 +47,7 @@ if(isUserLogged() == true) {
   } else {
     $("#menu").load("menu_unlogged.html");
 }
+$("#footer").load("footer.html");
 
 $('#pagination-container').pagination(paginationOptions);
 

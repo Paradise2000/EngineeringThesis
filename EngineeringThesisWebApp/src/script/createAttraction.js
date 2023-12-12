@@ -12,6 +12,7 @@ if(isUserLogged() == true) {
 } else {
     window.location.href = "login.html";
 }
+$("#footer").load("footer.html");
 
 async function CreateAttraction() {
     await RenderData();
@@ -119,6 +120,8 @@ async function RenderPostAttraction() {
                 imagesPaths: PhotosPaths,
                 mainImagePath: MainPhotoName
             }));
+
+            window.location.href = `getAttractions.html`;
         }
         
     });

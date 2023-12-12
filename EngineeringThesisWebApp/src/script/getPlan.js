@@ -59,6 +59,7 @@ if(isUserLogged() == true) {
   } else {
     $("#menu").load("menu_unlogged.html");
 }
+$("#footer").load("footer.html");
 
 $("input").on('click', async function() {
     var dataGroup = $(this).data('group');

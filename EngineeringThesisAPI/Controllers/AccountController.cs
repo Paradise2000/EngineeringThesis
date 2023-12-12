@@ -4,6 +4,7 @@ using EngineeringThesisAPI.DTOs.Account;
 using EngineeringThesisAPI.DTOs.Attraction;
 using EngineeringThesisAPI.Entities;
 using EngineeringThesisAPI.Models.ValidationErrorModel;
+using EngineeringThesisAPI.Services.UserIdProvider;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -23,15 +24,19 @@ namespace EngineeringThesisAPI.Controllers
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly AuthenticationSettings _authenticationSettings;
         private readonly IValidator<RegisterUserDto> _validatorRegisterUserDto;
+        private readonly IValidator<ChangePasswordDto> _validatorChangePasswordDto;
         private readonly IMapper _mapper;
+        private readonly IUserIdProvider _userIdProvider;
 
-        public AccountController(EngineeringThesisDbContext context, IPasswordHasher<User> passwordHasher, AuthenticationSettings authenticationSettings, IMapper mapper, IValidator<RegisterUserDto> validatorRegisterUserDto)
+        public AccountController(EngineeringThesisDbContext context, IPasswordHasher<User> passwordHasher, AuthenticationSettings authenticationSettings, IMapper mapper, IValidator<RegisterUserDto> validatorRegisterUserDto, IUserIdProvider userIdProvider, IValidator<ChangePasswordDto> validatorChangePasswordDto)
         {
             _context = context;
             _passwordHasher = passwordHasher;
             _authenticationSettings = authenticationSettings;
             _mapper = mapper;
             _validatorRegisterUserDto = validatorRegisterUserDto;
+            _userIdProvider = userIdProvider;
+            _validatorChangePasswordDto = validatorChangePasswordDto;
         }
 
         [HttpPost("register")]
@@ -90,6 +95,42 @@ namespace EngineeringThesisAPI.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
             return Ok(tokenHandler.WriteToken(token));
 
+        }
+
+        [HttpGet("getUserData")]
+        [Authorize]
+        public ActionResult<GetUserDataDto> GetUserData()
+        {
+            var user = _context.Users.FirstOrDefault(r => r.Id == _userIdProvider.GetUserId());
+
+            if(user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            var dto = _mapper.Map<GetUserDataDto>(user);
+
+            return dto;
+        }
+
+        [HttpPut("setNewPassword")]
+        [Authorize]
+        public IActionResult SetNewPassword([FromBody]ChangePasswordDto dto)
+        {
+            var passwordValidation = _validatorChangePasswordDto.Validate(dto);
+
+            if (!passwordValidation.IsValid)
+            {
+                return BadRequest(new ValidationErrorModel(passwordValidation));
+            }
+
+            var user = _context.Users.First(r => r.Id == _userIdProvider.GetUserId());
+
+            user.Password = _passwordHasher.HashPassword(user, dto.NewPassword);
+
+            _context.SaveChanges();
+
+            return Ok();
         }
 
         [HttpGet("isUserLogged")]

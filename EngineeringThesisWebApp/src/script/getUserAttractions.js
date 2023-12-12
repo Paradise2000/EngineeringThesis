@@ -42,3 +42,4 @@ if(isUserLogged() == true) {
   } else {
     $("#menu").load("menu_unlogged.html");
 }
+$("#footer").load("footer.html");

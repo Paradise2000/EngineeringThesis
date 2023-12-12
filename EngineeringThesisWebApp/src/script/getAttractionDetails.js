@@ -9,6 +9,7 @@ if(isUserLogged() == true) {
   } else {
     $("#menu").load("menu_unlogged.html");
 }
+$("#footer").load("footer.html");
 
 async function getAttraction() {
     const response = await fetch(`https://localhost:7002/api/attraction/getAttraction?id=${urlParams.get('id')}`, {

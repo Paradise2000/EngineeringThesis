@@ -5,6 +5,7 @@ if(isUserLogged() == true) {
 } else {
     $("#menu").load("menu_unlogged.html");
 }
+$("#footer").load("footer.html");
 
 $("#register").on('click', function() {
     

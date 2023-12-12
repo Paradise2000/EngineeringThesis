@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Website</title>
 
+    <script src="../../node_modules/jquery/dist/jquery.js"></script>
+
     <link rel="stylesheet" href="/css/index.css">
   </head>
   <body>
@@ -61,12 +63,14 @@
             <div class="info"><p class="title21">Powtórz nowe hasło: </p><input type="password" class="text-input margin" placeholder="Powtórz nowe hasło" required></div>
             <input type="button" class="button margin full-width" value="Zmień hasło">
           </div>
+          <!--
           <div class="col-half2 center">
             <img class="image" src="../images/notes.jpg" alt="Obrazek zastępczy" />
             <input type="button" class="button margin full-width" value="+ Nowe profilowe">
 
             
           </div>
+          -->
           </div>
         </div>
 
@@ -76,27 +80,9 @@
 
     </main>
 
+    <div id="footer"></div>
 
-
-    <script>
-      // Pobieranie elementów div o klasie user-option
-      const addAttractionDiv = document.getElementById('addAttraction');
-      const myAdventureDiv = document.getElementById('myAdventure');
-      const myAttractionsDiv = document.getElementById('myAttractions');
-  
-      // Obsługa kliknięcia dla każdego diva
-      addAttractionDiv.addEventListener('click', function() {
-        window.location.href = './createAttraction.html';
-      });
-  
-      myAdventureDiv.addEventListener('click', function() {
-        window.location.href = './myAdventure.html';
-      });
-  
-      myAttractionsDiv.addEventListener('click', function() {
-        window.location.href = './myAttractions.html';
-      });
-    </script>
+    <script type="module" src="../script/userPanel.js"></script>
 
   </body>
 </html>
