@@ -1,5 +1,5 @@
 import { isUserLogged, getJWTtoken } from "../../services/authService.js";
-import { getHour } from "../../services/functionService.js";
+import {API_BASE_URL, getHour } from "../../services/functionService.js";
 
 var token;
 token = getJWTtoken();
@@ -10,7 +10,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-await fetch(`https://localhost:7002/api/attraction/getAttractionPlan`, {
+await fetch(`${API_BASE_URL}/api/attraction/getAttractionPlan`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ await fetch(`https://localhost:7002/api/attraction/getAttractionPlan`, {
             <div class="container attraction-container">
                 <div onclick="if (!event.target.matches('input')) window.location.href='getAttractionDetails.html?id=${item.id}'" class="attraction" style="cursor: pointer;">
                     <div class="col-one-third">
-                        <img class="attraction-img" src="https://localhost:7002/api/file/download/${item.mainImagePath}"/>
+                        <img class="attraction-img" src="${API_BASE_URL}/api/file/download/${item.mainImagePath}"/>
                     </div>
                     <div class="col-two-third">
                         <div class="info">
@@ -59,6 +59,7 @@ if(isUserLogged() == true) {
   } else {
     $("#menu").load("menu_unlogged.html");
 }
+$("#footer").load("footer.html");
 
 $("input").on('click', async function() {
     var dataGroup = $(this).data('group');
@@ -66,7 +67,7 @@ $("input").on('click', async function() {
 
     if(dataGroup == 'delete') {
         console.log(dataId);
-        await fetch(`https://localhost:7002/api/attraction/deleteAttractionFromPlan/${dataId}`, {
+        await fetch(`${API_BASE_URL}/api/attraction/deleteAttractionFromPlan/${dataId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

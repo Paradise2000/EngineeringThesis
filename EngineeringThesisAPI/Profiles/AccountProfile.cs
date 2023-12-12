@@ -13,6 +13,7 @@ namespace EngineeringThesisAPI.Profiles
                 .ForMember(a => a.Email, b => b.MapFrom(c => c.Email))
                 .ForMember(a => a.Password, b => b.MapFrom(c => c.Password))
                 .ForMember(a => a.Enabled, b => b.MapFrom(c => true));
+            CreateMap<User, GetUserDataDto>();
         }
     }
 }

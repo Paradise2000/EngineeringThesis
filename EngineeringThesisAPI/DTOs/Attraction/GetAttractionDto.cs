@@ -22,5 +22,6 @@
         public List<string> ImagePaths { get; set; }
         public string MainImagePath { get; set; }
         public bool isUserAttracion { get; set; }
+        public bool isAttractionInPlan { get; set; }
     }
 }

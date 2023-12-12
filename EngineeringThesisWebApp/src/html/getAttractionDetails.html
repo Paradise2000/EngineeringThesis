@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="/css/slider.css">
     <link rel="stylesheet" href="../../node_modules/leaflet/dist/leaflet.css"/>
 
-    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/jquery/dist/jquery.js"></script>
     <script src="../../node_modules/leaflet/dist/leaflet.js"></script>
 
-    <script src="https://pagination.js.org/dist/2.6.0/pagination.min.js"></script>
-    <link rel="stylesheet" href="https://pagination.js.org/dist/2.6.0/pagination.css" />
+    <script src="../../node_modules/paginationjs/dist/pagination.js"></script>
+
+    <link rel="stylesheet" href="../../node_modules/paginationjs/dist/pagination.css" />
     <link rel="stylesheet" href="../../css/pagination.css" />
 </head>
 
@@ -45,7 +46,7 @@
                             <div class="stars" id="avgReview">
                             </div>
                             <div class="align-right">
-                                <input type="button" class="button margin" value="+ Dodaj do swojego planu">
+                                <input type="button" class="button margin" id="addToPlan">
                             </div>
                         </div>
                     </div>
@@ -105,6 +106,8 @@
 
         </section>
     </main>
+
+    <div id="footer"></div>
 
     <script type="module" src="../script/getAttractionDetails.js"></script>
 </body>

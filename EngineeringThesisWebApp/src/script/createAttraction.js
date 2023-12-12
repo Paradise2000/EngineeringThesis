@@ -1,4 +1,5 @@
 import { isUserLogged, getJWTtoken } from "../../services/authService.js";
+import { API_BASE_URL } from "../../services/functionService.js";
 
 var token = getJWTtoken();
 var PhotosPaths = [];
@@ -12,6 +13,7 @@ if(isUserLogged() == true) {
 } else {
     window.location.href = "login.html";
 }
+$("#footer").load("footer.html");
 
 async function CreateAttraction() {
     await RenderData();
@@ -20,13 +22,13 @@ async function CreateAttraction() {
 }
 
 async function getCategories() {
-    const response = await fetch('https://localhost:7002/api/attraction/getCategories');
+    const response = await fetch(`${API_BASE_URL}/api/attraction/getCategories`);
 
     return await response.json();
 }
 
 async function PostAtraction(jsonData) {
-    await fetch(`https://localhost:7002/api/attraction/create`, {
+    await fetch(`${API_BASE_URL}/api/attraction/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -119,6 +121,8 @@ async function RenderPostAttraction() {
                 imagesPaths: PhotosPaths,
                 mainImagePath: MainPhotoName
             }));
+
+            window.location.href = `getAttractions.html`;
         }
         
     });
@@ -164,7 +168,7 @@ async function RenderDropzone() {
                 MainPhotoName = null;
             }
     
-            fetch(`https://localhost:7002/api/File/delete/${file.newFileName}`, {
+            fetch(`${API_BASE_URL}/api/File/delete/${file.newFileName}`, {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json',

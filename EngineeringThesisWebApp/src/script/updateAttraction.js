@@ -1,5 +1,5 @@
 import { isUserLogged, getJWTtoken } from "../../services/authService.js";
-import {getHour} from "../../services/functionService.js"
+import { API_BASE_URL ,getHour} from "../../services/functionService.js"
 
 var APIdata;
 var ImagesToDelete = [];
@@ -18,9 +18,10 @@ if(isUserLogged() == true) {
 } else {
     window.location.href = "login.html";
 }
+$("#footer").load("footer.html");
 
 async function getAttraction() {
-    const response = await fetch(`https://localhost:7002/api/attraction/getAttraction?id=${urlParams.get('id')}`);
+    const response = await fetch(`${API_BASE_URL}/api/attraction/getAttraction?id=${urlParams.get('id')}`);
     APIdata = await response.json();
 
     await RenderAttractionData();
@@ -29,13 +30,13 @@ async function getAttraction() {
 }
 
 async function getCategories() {
-    const response = await fetch('https://localhost:7002/api/attraction/getCategories');
+    const response = await fetch(`${API_BASE_URL}/api/attraction/getCategories`);
 
     return await response.json();
 }
 
 async function updateAttraction(jsonData) {
-    await fetch("https://localhost:7002/api/attraction/updateAttraction", {
+    await fetch(`${API_BASE_URL}/api/attraction/updateAttraction`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -94,7 +95,7 @@ async function RenderDropzone() {
                 var mockFile = {name: path, size: 12345, accepted: true};
     
                 this.emit("addedfile", mockFile);
-                this.emit("thumbnail", mockFile, `https://localhost:7002/api/file/download/${path}`);
+                this.emit("thumbnail", mockFile, `${API_BASE_URL}/api/file/download/${path}`);
                 this.emit("complete", mockFile);
                 this.files.push(mockFile);
     
@@ -163,7 +164,7 @@ async function RenderDropzone() {
                     MainPhotoName = null;
                 }
         
-                fetch(`https://localhost:7002/api/File/delete/${file.newFileName}`, {
+                fetch(`${API_BASE_URL}/api/File/delete/${file.newFileName}`, {
                   method: 'DELETE',
                   headers: {
                     'Content-Type': 'application/json',
@@ -247,6 +248,8 @@ async function RenderPost() {
                 imagesPaths: ImagesToPost,
                 mainImagePath: MainPhotoName
             }));
+
+            window.location.href = `getAttractionDetails.html?id=${urlParams.get('id')}`;
         }
         
     });

@@ -1,7 +1,7 @@
 import { isUserLogged } from "../../services/authService.js";
-import { getHour } from "../../services/functionService.js";
+import { API_BASE_URL ,getHour } from "../../services/functionService.js";
 
-var InitialdataSource = 'https://localhost:7002/api/attraction/getAttractions';
+var InitialdataSource = `${API_BASE_URL}/api/attraction/getAttractions`;
 var paginationOptions = {
     dataSource: InitialdataSource,
     locator: 'items',
@@ -21,7 +21,7 @@ var paginationOptions = {
                 <div class="container attraction-container">
                     <div onclick="window.location.href='getAttractionDetails.html?id=${item.id}'" class="attraction" style="cursor: pointer;">
                         <div class="col-one-third">
-                            <img class="attraction-img" src="https://localhost:7002/api/file/download/${item.mainImagePath}"/>
+                            <img class="attraction-img" src="${API_BASE_URL}/api/file/download/${item.mainImagePath}"/>
                         </div>
                         <div class="col-two-third">
                             <div class="info">
@@ -47,6 +47,7 @@ if(isUserLogged() == true) {
   } else {
     $("#menu").load("menu_unlogged.html");
 }
+$("#footer").load("footer.html");
 
 $('#pagination-container').pagination(paginationOptions);
 
@@ -74,7 +75,7 @@ $('#filter').on('click', function() {
     $('#pagination-container').pagination(paginationOptions);
 });
 
-fetch('https://localhost:7002/api/attraction/getCategories')
+fetch(`${API_BASE_URL}/api/attraction/getCategories`)
     .then(response => response.json())
     .then(dataFromAPI => {
         var select = $('#categories');

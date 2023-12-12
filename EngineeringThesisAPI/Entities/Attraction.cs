@@ -22,6 +22,6 @@
 
         public ICollection<Comment> Comments { get; set; }
         public ICollection<FilePath> Photos { get; set; }
-
+        public ICollection<TripAttraction> TripAttractions { get; set; }
     }
 }

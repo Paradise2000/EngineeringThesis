@@ -1,3 +1,5 @@
+export const API_BASE_URL = 'https://localhost:7002';
+
 export function getStars(number, code) {
     var stars = '';
     for(var i=0; i < number-1; i++) {
