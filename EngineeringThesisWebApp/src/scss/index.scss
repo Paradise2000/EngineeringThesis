@@ -2,12 +2,15 @@
 @import "_mixins";
 
 
-.paginationjs .paginationjs-pages li.active>a {
-    height: 30px;
-    line-height: 30px;
-    background: $green1;
-    color: #fff;
-    cursor: default
+.text-crop {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 7;
+}
+
+.visible{
+    display:none;
 }
 
 /*SEKCJE*/
@@ -638,13 +641,14 @@ hr{
     .attraction{
         flex-direction: column;
         width:auto;
-        border-left: none;
-        border-right: none;
+        border:none;
     }
 
     
     
-    
+    .visible{
+        display: block;
+    }
 
     img{
         height: auto; /* Obrazek nie będzie większy niż jego oryginalny rozmiar */

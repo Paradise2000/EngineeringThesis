@@ -27,9 +27,10 @@ await fetch(`${API_BASE_URL}/api/attraction/getUserAttractions`, {
                             <div><input type="submit" class="category" value="${item.categoryName}"></div>
                         </div>
                         <h3 class="title21">${item.name}</h3><br>
-                        <p class="main-text">${item.description}</p>
+                        <div class="text-crop"><p class="main-text">${item.description}</p></div>
                     </div>
                 </div>
+                <hr class="visible">
             </div>
             `;
 
