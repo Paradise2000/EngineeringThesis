@@ -16,7 +16,7 @@
 
 
       <div class="banner user" style="background-image: url('../images/map.PNG');">
-        <h1 class="title center-text">Cześć Nickname! Gotowy na kolejną przygodę?</h1>
+        <h1 class="title center-text" id="titleNick"></h1>
       </div>
 
       <section class="section2">
@@ -56,12 +56,14 @@
           <h1 class="title">Dane użytkownika</h1>
           <div class="info panel">
           <div class="col-half2">
-            <div class="info"><p class="title21">Nick: </p><p class="text21">Nick Użytkownika</p></div>
-            <div class="info"><p class="title21">E-mail: </p><p class="text21">uzytkownika@email.pl</p></div>
-            <div class="info"><p class="title21">Stare hasło: </p><input type="password" class="text-input margin" placeholder="Podaj stare hasło" required></div>
-            <div class="info"><p class="title21">Nowe hasło: </p><input type="password" class="text-input margin" placeholder="Podaj nowe hasło" required></div>
-            <div class="info"><p class="title21">Powtórz nowe hasło: </p><input type="password" class="text-input margin" placeholder="Powtórz nowe hasło" required></div>
-            <input type="button" class="button margin full-width" value="Zmień hasło">
+            <div class="info"><p class="title21">Nick: </p><p class="text21" id="nickName"></p></div>
+            <div class="info"><p class="title21">E-mail: </p><p class="text21" id="email"></p></div>
+            <div class="info"><p class="title21">Stare hasło: </p><input type="password" id="currentPassword" class="text-input margin" placeholder="Podaj stare hasło" required></div>
+            <div class="info" id="message1"></div>
+            <div class="info"><p class="title21">Nowe hasło: </p><input type="password" id="newPassword" class="text-input margin" placeholder="Podaj nowe hasło" required></div>
+            <div class="info"><p class="title21">Powtórz nowe hasło: </p><input type="password" id="retypedNewPassword" class="text-input margin" placeholder="Powtórz nowe hasło" required></div>
+            <div class="info" id="message2"></div>
+            <input type="button" class="button margin full-width" id="changePassword" value="Zmień hasło">
           </div>
           <!--
           <div class="col-half2 center">
