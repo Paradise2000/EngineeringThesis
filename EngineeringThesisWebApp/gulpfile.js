@@ -1,7 +1,6 @@
 const { src, dest, watch, series } = require('gulp')
 const sass = require('gulp-sass')(require('sass'))
 const replace = require('gulp-replace');
-const exec = require('gulp-exec');
 
 function buildStyles() {
     return src('src/scss/*.scss')
@@ -15,15 +14,9 @@ function replaceApiBaseUrl() {
         .pipe(dest('services'));
 }
 
-function installDependencies() {
-    return src('.')
-        .pipe(exec('npm install'))
-        .pipe(exec.reporter());
-}
-
 function watchTask() {
     watch(['src/scss/*.scss'], buildStyles)
 }
 
 exports.default = series(buildStyles, watchTask)
-exports.deployApp = series(installDependencies, buildStyles, replaceApiBaseUrl)
+exports.deployApp = series(buildStyles, replaceApiBaseUrl)
