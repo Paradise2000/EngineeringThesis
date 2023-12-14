@@ -72,6 +72,8 @@ $("#register").on('click', function() {
                     });
                 }
 
+                window.location.href = "login.html";
+
                 return response.json();
             });
     }
