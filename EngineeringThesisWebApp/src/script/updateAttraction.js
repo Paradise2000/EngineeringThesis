@@ -85,6 +85,7 @@ async function RenderAttractionData() {
 async function RenderDropzone() {
     Dropzone.autoDiscover = false;
     const myDropzone = new Dropzone("#my-awesome-dropzone", {
+        url: `${API_BASE_URL}/api/File/upload`,
         paramName: "file",
         maxFilesize: 5,
         addRemoveLinks: true,
