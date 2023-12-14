@@ -5,29 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Website</title>
-    <link rel="stylesheet" href="../css/createAttraction.css">
-    <link rel="stylesheet" href="../css/index.css"/>
+    <link rel="stylesheet" href="./css/createAttraction.css">
+    <link rel="stylesheet" href="./css/index.css"/>
 
-    <script src="../JSPackages/leaflet.js"></script>
-    <script src="../JSPackages/dropzone-min.js"></script>
-    <script src="../JSPackages/jquery-3.7.1.min.js"></script>
+    <script src="./JSPackages/leaflet.js"></script>
+    <script src="./JSPackages/dropzone-min.js"></script>
+    <script src="./JSPackages/jquery-3.7.1.min.js"></script>
 
-    <link rel="stylesheet" href="../JSPackages/leaflet.css"/>
-    <link rel="stylesheet" href="../JSPackages/dropzone.css"/>
+    <link rel="stylesheet" href="./JSPackages/leaflet.css"/>
+    <link rel="stylesheet" href="./JSPackages/dropzone.css"/>
   </head>
   <body>
 
     <div id="menu"></div>
 
-
     <div  class="attraction-form form-container">
 
-    <h1 class="title">Edytuj atrakcję</h1>
+    <h1 class="title">Dodaj nową atrakcję</h1>
         <form id="form">
           <div class="flex-container1">
             <div>
               <label for="city">Miejscowość</label><br>
-              <input class="text-input" type="text" id="city" name="city">
+              <input class="text-input" type="text" id="city" name="city" placeholder="Miejscowość">
               <div class="error" id="cityError" style="color: red;"></div>
   
               <label for="name">Nazwa atrakcji</label><br>
@@ -54,31 +53,25 @@
 
           <div class="flex-container2">
             <div>
-              <div class="dropzone" id="my-awesome-dropzone">
-                <style>
-                    .dz-image img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
-                </style>
-              </div>
+              <div class="dropzone" id="my-awesome-dropzone"></div>
               <div class="error" id="MainPhotoError" style="color: red;"></div>
             </div>      
           </div>
+          
 
           <div class="flex-container2">
             <div>
+              <h2 class="title24">Zaznacz atrakcję na mapie</h2>
               <div class="map" id="map"></div><br>
               <div id="mapError" style="color: red;"></div><br>
-              <div style="display:flex; justify-content: right;"><input class="button" type="submit" value="Zaktualizuj atrakcję" ></div>
+              <div style="display:flex; justify-content: right;"><input class="button" type="submit" value="Utwórz atrakcję" ></div>
             </div>  
           </div>
         </form>
-    </div>
+      </div>
 
-    <div id="footer"></div>
+      <div id="footer"></div>
 
-    <script type="module" src="../script/updateAttraction.js"></script>
+      <script type="module" src="./script/createAttraction.js"></script>
   </body>
 </html>
