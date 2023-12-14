@@ -1,5 +1,5 @@
-import { isUserLogged } from "./services/authService.js";
-import { API_BASE_URL } from "./services/functionService.js";
+import { isUserLogged } from "../services/authService.js";
+import { API_BASE_URL } from "../services/functionService.js";
 
 if(isUserLogged() == true) {
     window.location.href = "panelUzytkownika.html";
