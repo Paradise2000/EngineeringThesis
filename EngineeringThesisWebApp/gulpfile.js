@@ -9,9 +9,9 @@ function buildStyles() {
 }
 
 function replaceApiBaseUrl() {
-    return src('services/functionService.js')
+    return src('src/services/functionService.js')
         .pipe(replace(/export const API_BASE_URL = '.*?';/, `export const API_BASE_URL = 'https://engineeringthesisletstravel.azurewebsites.net';`))
-        .pipe(dest('services'));
+        .pipe(dest('src/services'));
 }
 
 function watchTask() {
