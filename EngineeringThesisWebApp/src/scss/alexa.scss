@@ -17,16 +17,6 @@ body {
   font-family: "Poppins";
 }
 
-.navigation {
-  height: $nav-height;
-  background: $nav-background;
-}
-
-.nav-container {
-  max-width: $content-width;
-  margin: 0 auto;
-}
-
 .brand {
   position: absolute;
   padding-left: 20px;
@@ -40,64 +30,6 @@ body {
   a:visited {
     color: $main-web-color;
     text-decoration: none;
-  }
-}
-
-nav {
-  float: right;
-  padding-top: 3px;
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    li {
-      float: left;
-      position: relative;
-      .right-border {
-        border-right: 3px solid $main-web-color;
-        border-radius: 2px;
-      }
-      a {
-        display: block;
-        padding: 10px 20px 0 20px;
-        line-height: 50px;
-        background: $nav-background;
-        color: $nav-font-color;
-        text-decoration: none;
-
-        &::before {
-          transition: 300ms;
-          height: 5px;
-          content: "";
-          position: absolute;
-          background-color: $link-hover-color;
-          width: 0%;
-          bottom: 0px;
-        }
-        &:hover {
-          position: relative;
-          top: -3px;
-        }
-        // &:hover::before{
-        //   width: 70%;
-        // }
-        // &:not(:only-child):after {
-        //   padding-left: 4px;
-        //   content: '';
-        // }
-      } // Dropdown list
-      ul li {
-        min-width: 190px;
-        a {
-          padding: 15px;
-          line-height: 20px;
-        }
-      }
-    }
-    .user-dropdown {
-      font-size: 25px;
-      color: $main-web-color;
-    }
   }
 }
 

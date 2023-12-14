@@ -6,38 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/alexa.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    
     <title>Web Page</title>
 </head>
 
 <body>
-    <section class="navigation">
-        <div class="nav-container">
-            <div class="brand">
-                <a href="#!">
-                    <img src="./Content/logo2.PNG">
-                </a>
-            </div>
-            <nav>
-                <div class="nav-mobile">
-                    <a id="nav-toggle" href="#!"><span></span></a>
-                </div>
-                <ul class="nav-list">
-                    <li><a href="#!" class="right-border">Strona Główna</a></li>
-                    <li><a href="#!" class="right-border">Atrakcje</a></li>
-                    <li><a href="#!" class="right-border">Zainspiruj się</a></li>
-                    <li><a href="#!" class="right-border">Moje wycieczki</a></li>
-                    <li>
-                        <a href="#!" class="user-dropdown"><i class="bi bi-person-circle"></i></a>
-                        <ul class="nav-dropdown">
-                            <li><a href="#!">Atrakcje</a></li>
-                            <li><a href="#!">Zainspiruj się</a></li>
-                            <li><a href="#!">Moje Wycieczki</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </section>
+
+    <div id="menu"></div>
+
     <main>
         <div class="row">
             <div class="grid-item flex-center">
@@ -150,19 +127,21 @@
         <img src="./Content/map.PNG" class="img-section3" >
     </div>
 
-    <footer>
-        <div class="flex-center pt-30 text-center">
-            <div class="line1"></div>
-            <div class="pt-30">
-                ul. Powstańców Wielkopolskich 5, 61-895, Poznań, Wielkopolska Poland
-            </div>
-            <div>
-                © 2023 Let's Travel. All rights reserved.
-            </div>
-        </div>
-    </footer>
-    <script src="./Script/Script.js"></script>
+    <div id="footer"></div>
+
 </body>
+
+    <script type="module">
+        import { isUserLogged } from "../../services/authService.js";
+
+        $("#footer").load("footer.html");
+
+        if(isUserLogged() == true) {
+            $("#menu").load("menu_logged.html");
+        } else {
+            $("#menu").load("menu_unlogged.html");
+        }
+  </script>
 
 </html>
 

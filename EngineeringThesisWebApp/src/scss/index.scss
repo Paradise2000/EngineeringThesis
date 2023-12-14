@@ -138,7 +138,7 @@ section{
     align-items: center;
     gap:10px;
 
-   
+    @include font($mont, 14, normal, $infoblack);
 	text-align: left;
 }
 
@@ -298,7 +298,7 @@ section{
 	border-style: solid;
 	border-radius: 20px 20px 20px 20px;
 	
-   
+    @include font($mont, 14, normal, $infoblack);
 }
 
 .align-right{
@@ -322,6 +322,11 @@ section{
     text-align: center;
 }
 
+label{
+    //@include font2($mont, 14px, $infoblack);
+    @include font($formfont, 14px, normal, $textgray)
+
+}
 
 
 
@@ -342,7 +347,8 @@ section{
 	//font-family: "Source Sans Pro";
 	//font-weight: 600;
 	//font-size: 16px;
-  
+    @include font($ssp, 14px, 800, $white);
+
 	text-align: center;
     text-transform: uppercase;
 }
@@ -707,14 +713,3 @@ hr{
 
     
 }
-
-
-
-
-
-
-
-
-
-
-
