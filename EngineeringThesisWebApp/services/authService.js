@@ -1,4 +1,4 @@
-import Cookies from "../node_modules/js-cookie/dist/js.cookie.min.mjs";
+import Cookies from "../JSPackages/js.cookie.min.mjs";
 
 export const getJWTtoken = () => {
     return Cookies.get('TokenJWT');
