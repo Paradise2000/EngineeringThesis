@@ -88,7 +88,6 @@ namespace EngineeringThesisAPI.Controllers
         }
 
         [HttpGet("download/{id}")]
-        [Authorize]
         public async Task<IActionResult> Download(string id)
         {
             var path = Path.Combine(_env.ContentRootPath, "FileLocalStorage", id);
