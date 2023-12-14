@@ -1,90 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Website</title>
-
-    <script src="../../node_modules/jquery/dist/jquery.js"></script>
-    
-    <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/alexa.css">
-  </head>
-  <body>
-    <div id="menu"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <title>Web Page</title>
+</head>
 
-    <section class="alexa">
-        <div class="container">
-            <!-- Kolumna z tekstem i przyciskami -->
-            <div class="column text-column">
-                <div class="title title21">Z nami stworzysz niezapomniane wrażenia</div>
-                <div class="text text14">Witaj w serwisie, który pozwoli Ci odkryć niezwukłe atrakcje i zakątki pięknych miast.<br> Jesteśmy tu, abyś mógł stworzyć swój własny, unikalny plan zwiedzania,<br> dostosowany do Twoich zainteresowań i preferencji.</div>
-              
-                <a href="atrakcje.html" class="button">Stwórz Plan</a>
-                <a href="przykład" class="button">Co Jeszcze</a>
-    
-    
-                <!-- <button class="button"> Stwórz Plan</button> 
-                <button class="button">Co Jeszcze</button> -->
+<body>
+    <section class="navigation">
+        <div class="nav-container">
+            <div class="brand">
+                <a href="#!">
+                    <img src="./Content/logo2.PNG">
+                </a>
             </div>
-            <!-- Kolumna z obrazkiem -->
-            <div class="column image-column">
-                <img src="/src/images/iph.png" alt="Your Image">
-            </div>
-    
-         
+            <nav>
+                <div class="nav-mobile">
+                    <a id="nav-toggle" href="#!"><span></span></a>
+                </div>
+                <ul class="nav-list">
+                    <li><a href="#!" class="right-border">Strona Główna</a></li>
+                    <li><a href="#!" class="right-border">Atrakcje</a></li>
+                    <li><a href="#!" class="right-border">Zainspiruj się</a></li>
+                    <li><a href="#!" class="right-border">Moje wycieczki</a></li>
+                    <li>
+                        <a href="#!" class="user-dropdown"><i class="bi bi-person-circle"></i></a>
+                        <ul class="nav-dropdown">
+                            <li><a href="#!">Atrakcje</a></li>
+                            <li><a href="#!">Zainspiruj się</a></li>
+                            <li><a href="#!">Moje Wycieczki</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </section>
-
-    <section class="alexa">
-        <div class="container">
-            <!-- Pierwsza kolumna -->
-            <div class="column">
-                <img src="/src/images/celebration (1).png" alt="Zdjęcie 1">
-                <div class="title title21">Twój świat, Twoje atrakcje</div>
-                <div class="text text14">Znajdź coś dla siebie w naszej bazie atrakcji. Czegoś brakuje? Dodaj swoje miejsca.</div>
+    <main>
+        <div class="row">
+            <div class="grid-item flex-center">
+                <div class="section-1">
+                    <div class="bold text-left big-font">
+                        <div>
+                            Z nami stworzysz
+                        </div>
+                        <div>
+                            niezapomniane wrazenia
+                        </div>
+                    </div>
+                    <p>
+                        Witaj w serwisie, który pozwoli Ci odkryć niezwykłe atrakcje i zakątki pięknych miast. Jesteśmy
+                        tu, byś mógł stworzyć swój własny, unikatowy plan zwiedzania, dostosowany do Twoich
+                        zainteresowań i preferencji.
+                    </p>
+                    <div class="p-10 text-left">
+                        <a href="">
+                            <button class="section-1-btn1 bold">STWÓRZ PLAN</button>
+                        </a>
+                        <a href="">
+                            <button class="section-1-btn2 bold">CO JESZCZE?</button>
+                        </a>
+                    </div>
+                </div>
             </div>
-
-            <!-- Druga kolumna -->
-            <div class="column">
-                <img src="/src/images/person-standing.png" alt="Zdjęcie 2">
-                <div class="title title21">Ty tu rządzisz</div>
-                <div class="text text14">Stwórz swój własny plan wycieczki dostosowany do Twoich możliwości i zainteresowań. </div>
-            </div>
-
-            <!-- Trzecia kolumna -->
-            <div class="column">
-                <img src="/src/images/idea-exchange.png" alt="Zdjęcie 3">
-                <div class="title title21">Dziel się z innymi</div>
-                <div class="text text14">Chcesz? Podziel się z nami swoim planem. Możesz też czerpać inspirację od innych.</div>
+            <div class="grid-item flex-center">
+                <!-- <img src="./Content/half.png" style="width: 40%;"> -->
+                <img src="./Content/mobile.png" style="width: 40%;">
             </div>
         </div>
-    </section>
-
-    <div class="container">
-        <!-- Kolumna z tekstem -->
-        <div class="column text-column">
-            <h2>Wszystko to z pasji do podróżowania.</h2>
-            <p>Serwis został stworzony orzez podróżników dla podróżników. Z doświadczenia wiemy, że często planowanie podróży może być męczące i wymaga odwiedzenia wielu stron internetowych czy wertowania przewodników.<br> Naszą ideą jest ułatwienie tego procesu tak, by sprawiał on przyjemność. Jednocześnie pragniemy, by pasja podróżowania rozbudziła się w naszych użytkownikach, dlatego zachęcami by inspirować się nawzajem, dzieląc się swoimi planami.</p>
+    </main>
+    <div class="flex-center-row pt-30">
+        <div class="pl-10 pb-10 text-center" style="width: 18rem;">
+            <div class=" card-icon">
+                <span class="">
+                    🎉
+                </span>
+            </div>
+            <div class="bold card-font-Main">Twój świat, Twoje atrakcje</div>
+            <div class="card-font-p">Znajdź coś dla siebie w naszej bazie atrakcji. Czegoś brakuje? Dodaj swoje miejsca.
+            </div>
         </div>
-    
-        <!-- Kolumna z obrazem -->
-        <div class="column image-column">
-            <img src="/src/images/map (1).png"Zdjęcie banera> 
-           
+
+        <div class="pl-10 pb-10 text-center" style="width: 18rem;">
+            <div class=" card-icon">
+                <span class="">
+                    &#x1F6D1;
+                </span>
+            </div>
+            <div class="bold card-font-Main">Ty tu rządzisz</div>
+            <div class="card-font-p">Stwórz swój własny plan wycieczki dostosowany do Twoich możliwości i zainteresowań.
+            </div>
+        </div>
+
+        <div class="pl-10 pb-10 text-center" style="width: 18rem;">
+            <div class=" card-icon">
+                <span class="">
+                    &#x1F30F;
+                </span>
+            </div>
+            <div class="bold card-font-Main">Dziel się z innymi</div>
+            <div class="card-font-p">Chcesz? Podziel się z swoim planem. Możesz też czerpać inspirację od innych.</div>
+        </div>
+    </div>
+    <div class="flex-center pt-50">
+        <div class="row section-3">
+            <div class="grid-item flex-center">
+                <div class="big-font bold text-left ">
+                    Wszystko to z pasji do podróżowania
+                </div>
+        
+                <div class="text-left gray" style="padding: 5px;">
+                    Serwis został stworzony przez podróżników dla podróżników. Z doświadczenia wiemy, że często
+                    planowanie podróży może być męczące i wymaga odwiedzenia wielu stron internetowych czy wertowania
+                    przewodników.
+                    <br>
+                    <br>
+                    Naszą ideą jest ułatwienie tego procesu tak, by sprawiał on przyjemność. Jednocześnie pragniemy, by
+                    pasja podróżowania rozbudziła się w naszych uzytkownikach, dlatego zachęcamy by Inspirować się
+                    nawzajem dielac się swoimi planan
+                </div>
+            </div>
+            <div class="grid-item flex-center pt-30" style="background-color: transparent;">
+                <img src="./Content/image.PNG" class="img-section3" style="border-radius: 15px;" >
+            </div>
+        </div>
+    </div>
+    <div class="flex-center">
+        <div class="text-center gray" style="max-width: 800px;">
+            "Planowanie podróży to jak komponowanie symfonii. Wybierasz różne dźwięki i elementy, aby stworzyć harmonię i piękno. Każdy szczegół ma znaczenie, tworząc niepowtarzalne doświadczenie."
         </div>
     </div>
 
-  </body>
+    <div class="flex-center pt-30">
+        <div class="line"></div>
+    </div>
 
-  <script type="module">
-    import { isUserLogged } from "../../services/authService.js";
+    <div class="text-center pt-30">
+        <img src="./Content/haechan.jpg" class="img-section5" >
+    </div>
+    <div class="text-center gray">Autor Nieznany</div>
 
-    if(isUserLogged() == true) {
-        $("#menu").load("menu_logged.html");
-      } else {
-        $("#menu").load("menu_unlogged.html");
-      }
-  </script>
+    <div class="pt-30 flex-center">
+        <div class="text-center bold" style="font-size: 40px;">Jakie miasta z nami zwiedzisz?</div>
+        <div class="text-center gray" style="max-width: 750px;">Nasza baza ciągle się rozrasta. Nie ma tu jeszcze Twojego miasta? A może znasz jakieś fajne miejsca? Pomóż nam dodając nowe atrakcje, edit quo minus id quod m, omnis est, omnis dolor repellendus.</div>
+    </div>
+    <div class="text-center pt-30">
+        <img src="./Content/map.PNG" class="img-section3" >
+    </div>
+
+    <footer>
+        <div class="flex-center pt-30 text-center">
+            <div class="line1"></div>
+            <div class="pt-30">
+                ul. Powstańców Wielkopolskich 5, 61-895, Poznań, Wielkopolska Poland
+            </div>
+            <div>
+                © 2023 Let's Travel. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <script src="./Script/Script.js"></script>
+</body>
+
 </html>
+
+
