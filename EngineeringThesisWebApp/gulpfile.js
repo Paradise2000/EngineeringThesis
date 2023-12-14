@@ -5,7 +5,7 @@ const replace = require('gulp-replace');
 function buildStyles() {
     return src('src/scss/*.scss')
         .pipe(sass())
-        .pipe(dest('css'))
+        .pipe(dest('src/css'))
 }
 
 function replaceApiBaseUrl() {
