@@ -1,4 +1,4 @@
-import Cookies from "../../node_modules/js-cookie/dist/js.cookie.min.mjs";
+import Cookies from "../../JSPackages/js.cookie.min.mjs";
 import { isUserLogged } from "../../services/authService.js";
 import { API_BASE_URL } from "../../services/functionService.js";
 
