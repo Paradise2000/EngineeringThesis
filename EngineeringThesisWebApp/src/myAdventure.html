@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Website</title>
 
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="../../node_modules/leaflet/dist/leaflet.css"/>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./JSPackages/leaflet.css"/>
 
-    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="../../node_modules/leaflet/dist/leaflet.js"></script>
+    <script src="./JSPackages/jquery-3.7.1.min.js"></script>
+    <script src="./JSPackages/leaflet.js"></script>
   </head>
   <body>
 
@@ -18,7 +18,7 @@
 
     <main>
      
-        <div class="banner" style="background-image: url('../images/map.PNG');">
+        <div class="banner" style="background-image: url('./images/map.PNG');">
             <h1 class="title center-text">Mój plan wycieczki</h1>
             <p class="text">Stwórz swój własny plan wycieczki<br>dostosowany do Twoich potrzeb i zainteresowań.</p>
             <div>
@@ -50,12 +50,12 @@
 
     <div id="footer"></div>
 
-    <script type="module" src="../script/getPlan.js"></script>
+    <script type="module" src="./script/getPlan.js"></script>
 
   </body>
 
   <script type="module">
-    import { isUserLogged } from "../../services/authService.js";
+    import { isUserLogged } from "./services/authService.js";
 
     if(isUserLogged() == true) {
         $("#menu").load("menu_logged.html");

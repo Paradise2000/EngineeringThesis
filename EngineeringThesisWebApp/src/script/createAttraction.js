@@ -1,5 +1,5 @@
-import { isUserLogged, getJWTtoken } from "../../services/authService.js";
-import { API_BASE_URL } from "../../services/functionService.js";
+import { isUserLogged, getJWTtoken } from "../services/authService.js";
+import { API_BASE_URL } from "../services/functionService.js";
 
 var token = getJWTtoken();
 var PhotosPaths = [];
@@ -131,6 +131,7 @@ async function RenderPostAttraction() {
 async function RenderDropzone() {
     Dropzone.autoDiscover = false;
     const myDropzone = new Dropzone("#my-awesome-dropzone", {
+        url: `${API_BASE_URL}/api/File/upload`,
         paramName: "file",
         maxFilesize: 5,
         addRemoveLinks: true,

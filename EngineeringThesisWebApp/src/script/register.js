@@ -1,5 +1,5 @@
-import { isUserLogged } from "../../services/authService.js";
-import { API_BASE_URL } from "../../services/functionService.js";
+import { isUserLogged } from "../services/authService.js";
+import { API_BASE_URL } from "../services/functionService.js";
 
 if(isUserLogged() == true) {
     window.location.href = "panelUzytkownika.html";
@@ -71,6 +71,8 @@ $("#register").on('click', function() {
                         throw new Error('Błąd żądania: ' + response.status);
                     });
                 }
+
+                window.location.href = "login.html";
 
                 return response.json();
             });

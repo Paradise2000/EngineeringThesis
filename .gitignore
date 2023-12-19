@@ -2,7 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=csharp,aspnetcore,sass,react,node
 
 EngineeringThesisAPI/FileLocalStorage/*
-EngineeringThesisWebApp/css/
+EngineeringThesisWebApp/src/css/
 
 ### ASPNETCore ###
 ## Ignore Visual Studio temporary files, build results, and

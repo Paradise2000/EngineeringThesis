@@ -5,38 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My Website</title>
-    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="./css/menu.css">
 
   </head>
   <body>
     <header>
+        <div class="title21" style="text-align: center;">
+          Ta strona jest fikcyjna i dotyczy projektu studenckiego!
+        </div>
         <div class="menu">
 
             <!-- Zwinięty hamburger-->
 
-            <img class="logo2" src="/src/images/logo2.PNG">
+            <img class="logo2" src="./images/logo2.PNG">
 
             <div class="hamburger-menu">
             <nav>
                 <ul>
-                    <li><a href="./panelUzytkownika.html"><img class="menu-icon" src="/src/images/user.png"></a></li>
-                    <li><img class="menu-icon" id="hamburgerButton" src="/src/images/menu.png"></li>
+                    <li><a href="./panelUzytkownika.html"><img class="menu-icon" src="./images/user.png"></a></li>
+                    <li><img class="menu-icon" id="hamburgerButton" src="./images/menu.png"></li>
                 </ul>
             </nav>
             </div>
 
             <!-- Zwykłe menu-->
 
-            <img class="logo" src="/src/images/logo.PNG">
+            <img class="logo" src="./images/logo.PNG">
 
             <div class="full-menu">
             <nav>
                 <ul>
                     <li><a href="./index.html">Strona główna</a></li>
                     <li><a href="./getAttractions.html">Atrakcje</a></li>
-                    <li><a href="./createAttraction.html">Dodaj atrakcję</a></li>
+                    <li><a href="./myAdventure.html">Moja przygoda</a></li>
                     <li><a id="logout">Wyloguj się</a></li>
-                    <li><a href="./panelUzytkownika.html"><img class="menu-icon" src="/src/images/user.png"></a></li>
+                    <li><a href="./panelUzytkownika.html"><img class="menu-icon" src="./images/user.png"></a></li>
                 </ul>
             </nav>
             </div>
@@ -49,7 +52,7 @@
               <ul>
                   <li><a href="./index.html">Strona główna</a></li>
                   <li><a href="./getAttractions.html">Atrakcje</a></li>
-                  <li><a href="./createAttraction.html">Dodaj atrakcję</a></li>
+                  <li><a href="./myAdventure.html">Moja przygoda</a></li>
                   <li><a id="logout2">Wyloguj się</a></li>
               </ul>
           </nav>
@@ -59,7 +62,7 @@
   </body>
 
   <script type="module">
-    import { logout } from "../../services/authService.js";
+    import { logout } from "./services/authService.js";
 
     document.getElementById("logout").addEventListener("click", function() {
       logout("login.html");
@@ -67,7 +70,7 @@
   </script>
 
 <script type="module">
-  import { logout } from "../../services/authService.js";
+  import { logout } from "./services/authService.js";
 
   document.getElementById("logout2").addEventListener("click", function() {
     logout("login.html");

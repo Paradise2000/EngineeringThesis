@@ -1,5 +1,5 @@
-import { isUserLogged, getJWTtoken } from "../../services/authService.js";
-import {API_BASE_URL ,getStars, generateStarRating, getDate, opinionForm, getHour} from "../../services/functionService.js"
+import { isUserLogged, getJWTtoken } from "../services/authService.js";
+import {API_BASE_URL ,getStars, generateStarRating, getDate, opinionForm, getHour} from "../services/functionService.js"
 
 var token = getJWTtoken();
 const urlParams = new URLSearchParams(window.location.search);
@@ -104,12 +104,12 @@ async function renderAttractionDetails(dataFromAPI) {
         <input type="button" class="button red margin" value="Usuń atrakcję" id="delete">`);
 
         $('#edit').on('click', async function() {
-            window.location.href = `http://127.0.0.1:5500/src/html/updateAttraction.html?id=${urlParams.get('id')}`;
+            window.location.href = `updateAttraction.html?id=${urlParams.get('id')}`;
         });
 
         $('#delete').on('click', async function() {
             await deleteAttraction();
-            window.location.href = `http://127.0.0.1:5500/src/html/index.html`;
+            window.location.href = `index.html`;
         });
     }
 

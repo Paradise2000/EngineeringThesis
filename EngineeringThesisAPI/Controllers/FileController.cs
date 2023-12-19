@@ -24,6 +24,7 @@ namespace EngineeringThesisAPI.Controllers
         }
         
         [HttpPost("upload")]
+        [Authorize]
         public async Task<IActionResult> Upload(IFormFile file)
         {
             var supportedTypes = new[] { ".jpg", ".jpeg", ".png" };
@@ -56,6 +57,7 @@ namespace EngineeringThesisAPI.Controllers
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete(string id)
         {
             var path = Path.Combine(_env.ContentRootPath, "FileLocalStorage", id);

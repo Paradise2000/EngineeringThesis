@@ -1,5 +1,5 @@
-import { isUserLogged, getJWTtoken } from "../../services/authService.js";
-import {API_BASE_URL, getHour } from "../../services/functionService.js";
+import { isUserLogged, getJWTtoken } from "../services/authService.js";
+import {API_BASE_URL, getHour } from "../services/functionService.js";
 
 var token;
 token = getJWTtoken();

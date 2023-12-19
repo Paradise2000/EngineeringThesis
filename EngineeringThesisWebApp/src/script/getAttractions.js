@@ -1,5 +1,5 @@
-import { isUserLogged } from "../../services/authService.js";
-import { API_BASE_URL ,getHour } from "../../services/functionService.js";
+import { isUserLogged } from "../services/authService.js";
+import { API_BASE_URL ,getHour } from "../services/functionService.js";
 
 var InitialdataSource = `${API_BASE_URL}/api/attraction/getAttractions`;
 var paginationOptions = {
