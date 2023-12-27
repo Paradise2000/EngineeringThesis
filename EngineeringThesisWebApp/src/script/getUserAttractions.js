@@ -21,9 +21,9 @@ await fetch(`${API_BASE_URL}/api/attraction/getUserAttractions`, {
                     </div>
                     <div class="col-two-third">
                         <div class="info">
-                            <div class="info element-info"><img src="../images/marker.png" class="icon"><p>${item.city}</p></div>
-                            <div class="info element-info"><img src="../images/stopwatch.png" class="icon"><p>${getHour(item.duration)}h</p></div>
-                            <div class="info element-info"><img src="../images/piggy-bank.png" class="icon"><p>${item.price}zł</p></div>
+                            <div class="info element-info"><img src="./images/marker.png" class="icon"><p>${item.city}</p></div>
+                            <div class="info element-info"><img src="./images/stopwatch.png" class="icon"><p>${getHour(item.duration)}h</p></div>
+                            <div class="info element-info"><img src="./images/piggy-bank.png" class="icon"><p>${item.price}zł</p></div>
                             <div><input type="submit" class="category" value="${item.categoryName}"></div>
                         </div>
                         <h3 class="title21">${item.name}</h3><br>

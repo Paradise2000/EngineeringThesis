@@ -3,14 +3,14 @@ export const API_BASE_URL = 'https://localhost:7002';
 export function getStars(number, code) {
     var stars = '';
     for(var i=0; i < number-1; i++) {
-        stars += '<img src="../images/star.png" class="star">';
+        stars += '<img src="./images/star.png" class="star">';
     }
 
     if(number % 1 != 0) {
         console.log("TEST");
-        stars += `<img src="../images/star.png" style="clip-path: inset(0 ${(number % 1)*100}% 0 0" class="star">`;
+        stars += `<img src="./images/star.png" style="clip-path: inset(0 ${(number % 1)*100}% 0 0" class="star">`;
     } else {
-        stars += '<img src="../images/star.png" class="star">';
+        stars += '<img src="./images/star.png" class="star">';
     }
 
     return stars;
@@ -22,7 +22,7 @@ export function generateStarRating(containerId, defaultStars = 0) {
 
         generate: function () {
             for (var i = 1; i <= 5; i++) {
-                $('#' + containerId).append(`<img src="../images/star.png" style="filter: grayscale(1);" data-star="${i}" class="star">`);
+                $('#' + containerId).append(`<img src="./images/star.png" style="filter: grayscale(1);" data-star="${i}" class="star">`);
             }
 
             $("#" + containerId + " .star").on("click", this.handleClick.bind(this));

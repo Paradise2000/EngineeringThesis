@@ -169,7 +169,7 @@ async function renderAttractionDetails(dataFromAPI) {
             <div class="info">
             <h1 class="title21">Średnio</h1>
                 <div class="info" name="star-container">
-                    ${getStars(dataFromAPI.avgReview, '<img src="../images/star.png" class="star">')}
+                    ${getStars(dataFromAPI.avgReview, '<img src="./images/star.png" class="star">')}
                 </div>
                 <h1 class="title21">${dataFromAPI.numberOfReviews} ${opinionForm(dataFromAPI.numberOfReviews)}</h1>
             </div>
@@ -179,7 +179,7 @@ async function renderAttractionDetails(dataFromAPI) {
         $('#reviewSum').append(`
             <div class="info">
                 <div class="info" name="star-container">
-                    ${getStars(5-index, '<img src="../images/star.png" class="star">')}
+                    ${getStars(5-index, '<img src="./images/star.png" class="star">')}
                 </div>
                 <h1 class="title21">${element} ${form}</h1>
             </div>
@@ -200,7 +200,7 @@ async function renderCommentSection(dataFromAPI) {
                         <div class="align-right"><input type="submit" class="category" value="Napisano ${getDate(dataFromAPI.userComment.date)}"></div>
                     </div>
                     <div id="commentRatingChange" class="info stars">
-                        ${getStars(dataFromAPI.userComment.rating, '<img src="../images/star.png" class="star">')}
+                        ${getStars(dataFromAPI.userComment.rating, '<img src="./images/star.png" class="star">')}
                     </div>
                     <p id="commentDescriptionChange" class="main-text">${dataFromAPI.userComment.description}</p>
                 </div>`;
@@ -313,12 +313,12 @@ async function handlePagination() {
             $('#data-container').append(`
                 <div class="comment column margin">
                     <div class="info">
-                        <img src="../images/image.PNG" class="profile" alt="Obrazek zastępczy" />
+                        <img src="./images/image.PNG" class="profile" alt="Obrazek zastępczy" />
                         <h1 class="title21">${item.author}</h1>
                         <div class="align-right"><input type="submit" class="category" value="Napisano ${getDate(item.date)}"></div>
                     </div>
                     <div class="info stars">
-                        ${getStars(item.rating, '<img src="../images/star.png" class="star">')}
+                        ${getStars(item.rating, '<img src="./images/star.png" class="star">')}
                     </div>
                     <p class="main-text">${item.description}</p>
                 </div>

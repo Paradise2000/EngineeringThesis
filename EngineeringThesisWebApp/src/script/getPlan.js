@@ -28,9 +28,9 @@ await fetch(`${API_BASE_URL}/api/attraction/getAttractionPlan`, {
                     </div>
                     <div class="col-two-third">
                         <div class="info">
-                            <div class="info element-info"><img src="../images/marker.png" class="icon"><p>${item.city}</p></div>
-                            <div class="info element-info"><img src="../images/stopwatch.png" class="icon"><p>${getHour(item.duration)}h</p></div>
-                            <div class="info element-info"><img src="../images/piggy-bank.png" class="icon"><p>${item.price}zł</p></div>
+                            <div class="info element-info"><img src="./images/marker.png" class="icon"><p>${item.city}</p></div>
+                            <div class="info element-info"><img src="./images/stopwatch.png" class="icon"><p>${getHour(item.duration)}h</p></div>
+                            <div class="info element-info"><img src="./images/piggy-bank.png" class="icon"><p>${item.price}zł</p></div>
                             <div><input type="submit" class="category" value="${item.categoryName}"></div>
                             <div><input type="button" class="button red margin" data-group="delete" data-id="${item.id}" value="Usuń z planu" ></div>
                         </div>
