@@ -122,7 +122,9 @@ async function RenderPostAttraction() {
                 mainImagePath: MainPhotoName
             }));
 
-            window.location.href = `getAttractions.html`;
+            window.location.href = `success.html`;
+            //window.location.href = `getAttractions.html`;
+
         }
         
     });

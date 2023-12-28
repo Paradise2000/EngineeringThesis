@@ -249,8 +249,8 @@ async function RenderPost() {
                 imagesPaths: ImagesToPost,
                 mainImagePath: MainPhotoName
             }));
-
-            window.location.href = `getAttractionDetails.html?id=${urlParams.get('id')}`;
+            window.location.href = `success.html`;
+            //window.location.href = `getAttractionDetails.html?id=${urlParams.get('id')}`;
         }
         
     });

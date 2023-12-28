@@ -1,0 +1,21 @@
+@import "_variables";
+@import "_mixins";
+
+section{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30vH;
+}
+
+.success{
+    width: 150px;
+	height: 150px;
+    padding: 0;
+}
+
+h1{
+    text-align: center;
+}
+
