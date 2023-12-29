@@ -11,7 +11,7 @@ var lng;
 if(isUserLogged() == true) {
     $("#menu").load("menu_logged.html");
 } else {
-    window.location.href = "login.html";
+    window.location.href = `login.html?forward=${location.href.split("/").slice(-1)}`;
 }
 $("#footer").load("footer.html");
 

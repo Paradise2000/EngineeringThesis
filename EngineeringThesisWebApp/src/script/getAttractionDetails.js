@@ -119,7 +119,9 @@ async function renderAttractionDetails(dataFromAPI) {
     $('#price').html(dataFromAPI.price + 'zł');
     $('#category').val(dataFromAPI.categoryName);
     $('#title').html(dataFromAPI.name);
-    $('#avgReview').append(getStars(dataFromAPI.avgReview));
+    if(dataFromAPI.avgReview != 0) {
+        $('#avgReview').append(getStars(dataFromAPI.avgReview));
+    }
     $('#Description').html(dataFromAPI.description);
 
     //dodawanie do planu
@@ -150,7 +152,7 @@ async function renderAttractionDetails(dataFromAPI) {
             </div>`
         );
     });
-    $.getScript("../script/slider.js");
+    $.getScript("./script/slider.js");
 
     //stworzenie mapy
     var map = L.map('map').setView([dataFromAPI.coordinateX, dataFromAPI.coordinateY], dataFromAPI.coordinateZ); 
