@@ -72,7 +72,7 @@ $("#register").on('click', function() {
                     });
                 }
 
-                window.location.href = "login.html";
+                window.location.href = "success.html";
 
                 return response.json();
             });

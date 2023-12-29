@@ -4,6 +4,13 @@ import {API_BASE_URL, getHour } from "../services/functionService.js";
 var token;
 token = getJWTtoken();
 
+if(isUserLogged() == true) {
+    $("#menu").load("menu_logged.html");
+  } else {
+    window.location.href = `login.html?forward=${location.href.split("/").slice(-1)}`;
+}
+$("#footer").load("footer.html");
+
 var map = L.map('map').setView([52, 19], 5);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -54,13 +61,6 @@ await fetch(`${API_BASE_URL}/api/attraction/getAttractionPlan`, {
     $('#totalTime').html(getHour(dataFromAPI.totalTime) + "h");
     $('#totalPrice').html(dataFromAPI.totalPrice + "zł");
 })
-
-if(isUserLogged() == true) {
-    $("#menu").load("menu_logged.html");
-  } else {
-    $("#menu").load("menu_unlogged.html");
-}
-$("#footer").load("footer.html");
 
 $("input").on('click', async function() {
     var dataGroup = $(this).data('group');

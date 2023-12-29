@@ -9,6 +9,8 @@ if(isUserLogged() == true) {
 }
 $("#footer").load("footer.html");
 
+const urlParams = new URLSearchParams(window.location.search);
+
 var LoginEndpoint = `${API_BASE_URL}/api/account/login`;
 
 const EmailField = document.getElementById('email');
@@ -61,7 +63,12 @@ document.getElementById('form').addEventListener('submit', function(e) {
         })
         .then((data) => {
             Cookies.set('TokenJWT', data, { expires: 7, secure: true, sameSite: 'strict' });
-            window.location.href = "panelUzytkownika.html";
+
+            if(urlParams.get('forward') == null) {
+                window.location.href = "panelUzytkownika.html";
+            } else {
+                window.location.href = urlParams.get('forward');
+            }
         })
     }
 

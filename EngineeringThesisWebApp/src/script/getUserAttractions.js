@@ -3,6 +3,13 @@ import { API_BASE_URL, getHour } from "../services/functionService.js";
 
 var token = getJWTtoken();
 
+if(isUserLogged() == true) {
+    $("#menu").load("menu_logged.html");
+  } else {
+    window.location.href = `login.html?forward=${location.href.split("/").slice(-1)}`;
+}
+$("#footer").load("footer.html");
+
 await fetch(`${API_BASE_URL}/api/attraction/getUserAttractions`, {
     method: 'GET',
     headers: {
@@ -37,10 +44,3 @@ await fetch(`${API_BASE_URL}/api/attraction/getUserAttractions`, {
     $('#data-container').append(newAttraction);
     });
 })
-
-if(isUserLogged() == true) {
-    $("#menu").load("menu_logged.html");
-  } else {
-    $("#menu").load("menu_unlogged.html");
-}
-$("#footer").load("footer.html");
