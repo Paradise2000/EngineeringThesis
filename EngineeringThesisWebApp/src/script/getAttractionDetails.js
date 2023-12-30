@@ -109,7 +109,7 @@ async function renderAttractionDetails(dataFromAPI) {
 
         $('#delete').on('click', async function() {
             await deleteAttraction();
-            window.location.href = `index.html`;
+            window.location.href = `success.html`;
         });
     }
 
@@ -141,6 +141,9 @@ async function renderAttractionDetails(dataFromAPI) {
         }
     } else {
         $("#addToPlan").val("Zaloguj się aby dodać do planu");
+        $("#addToPlan").on('click', async function() {
+            window.location.href = `login.html`;
+        });
     }
 
     //wyświetlenie zdjęć
