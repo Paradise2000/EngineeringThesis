@@ -49,6 +49,10 @@
     @include font2($montsb, 21px, $titlegray);
   }
 
+  .titlessp21{
+    @include font2($ssp, 21px, $titlegray);
+  }
+
   .text {
     @include font2($ssp, 16px, $textgray);
     margin-top:0;
@@ -61,6 +65,7 @@
   .footer-text {
     @include font2($ssp, 16px, $footfont);
   }
+
   .main-text{
     @include font2($mont, 14px, $textgray);
   }
@@ -68,6 +73,10 @@
   .infofont{
     @include font2($mont, 14px, $infoblack);
 	text-align: left;
+  }
+
+  .footer-link {
+    @include font2($ssp, 10px, $footfont);
   }
 
 
@@ -79,3 +88,11 @@
 }
  
 
+@mixin font2($font, $size) {
+  font-family: $font;
+  font-size: $size;
+}
+
+.buttonssp16{
+  @include font2($ssp, 16px);
+}
